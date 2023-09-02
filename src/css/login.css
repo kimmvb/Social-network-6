@@ -1,7 +1,12 @@
-section {
+*{
+    padding: 0%;
+    margin: 0%;  
+}
+
+.contenedor_home {
     background-color: #E4D3C9;
+    height: 100%;
     display: grid;
-    grid-template-columns: 1fr;
     grid-template-rows: repeat(2, 150px);
 }
 
