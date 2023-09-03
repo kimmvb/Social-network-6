@@ -1,0 +1,58 @@
+
+.img_logo {
+    height: 20%;
+    
+}
+.contenedor_home {
+    background-color: #E4D3C9;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    
+}
+
+.contenedor_form{
+    display: grid;
+    justify-content: center;
+   
+}
+
+input {
+    border-radius: 12px;
+    height: 30px; 
+    border: var(--var_bordeinputoscuro);
+
+}
+label {
+    color: var(--var_colorfuente);
+    margin-top: 23PX;
+    text-align: left;
+}
+.button_login {
+    background-color: var(--var_rosa);
+    border-radius: 24px;
+    margin-top: 20px;
+    height: 30px;
+    color: white;
+    border: var(--var_bordeinputblanco);
+}
+.button_google {
+    border-radius: 12px;
+    background-color: white;
+    margin-top: 65px;
+    height: 30px;
+    color: #3C3B3F;
+    border: var(--var_bordeinputoscuro);
+}
+.crear_cuenta {
+    background-color: var(--var_amarillo);
+    border-radius: 24px;
+    height: 30px;
+    margin-top: 30px;
+    border: 1px solid var(--var_naranjo);
+}
+p {
+    margin-top: 23px;
+    font-weight: bold;
+    color: var(--var_colorfuente);   
+}

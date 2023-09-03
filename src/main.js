@@ -3,9 +3,9 @@ import error from "./component/error.js";
 import home from "./component/home.js";
 
 const routes = [
-  { path: "/", component: login },
+  { path: "/", component: home },
   { path: "/error", component: error },
-  { path: "/home", component: home },
+  { path: "/login", component: login },
 ];
 
 const defaultRoute = "/";
