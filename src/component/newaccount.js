@@ -34,4 +34,5 @@ function newAccount () {
   return section;
 }
 
+=======
 export default newAccount

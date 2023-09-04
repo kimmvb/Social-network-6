@@ -1,0 +1,42 @@
+* {
+    padding: 0%;
+    margin: 0%;
+    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+/* 
+
+Posicionamiento --> static, absolute, relative, fixed.
+Modelo de caja (Box model) --> margin, border, padding, content.
+Tipografía --> tipos, tamaños de fuente, etc.
+Estilos visuales --> box-shadow, border-radius, gradient, etc.
+Otros --> misceláneos, reglas CSS y más.
+
+*/
+
+
+:root {
+    --var_rosa: #E8868C;
+    --var_amarillo: #FFF479;
+    --var_naranjo: #F1B33C;
+    --var_colorfuente: #35285A;
+    --var_bordeinputoscuro: 1px #3C3B3F solid;
+    --var_bordeinputblanco: 1px #FFFF solid;
+    --var_blanco: #FFFFFF;
+}
+
+
+
+/*Mobile Styles*/
+
+/*small tablet styles*/
+
+@media screen and (min-width: 620px) {}
+
+/*large tablets laptop styles*/
+@media screen and (min-width: 960px) {}
+
+/*desktop styles*/
+@media screen and (min-width: 1200px) {}
