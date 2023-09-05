@@ -3,10 +3,14 @@
     margin: 0%;
     font-family: 'Lato', sans-serif;
     font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
 }
 
+body {
+    overflow-x: hidden;
+}
 
-/* 
+/*
 
 Posicionamiento --> static, absolute, relative, fixed.
 Modelo de caja (Box model) --> margin, border, padding, content.
@@ -22,18 +26,29 @@ Otros --> misceláneos, reglas CSS y más.
     --var_amarillo: #FFF479;
     --var_naranjo: #F1B33C;
     --var_colorfuente: #35285A;
-    --var_bordeinputoscuro: 1px #3C3B3F solid;
+    --var_bordeinputoscuro: 1px rgba(60, 59, 63, 0.4) solid;
     --var_bordeinputblanco: 1px #FFFF solid;
+    --var-fondoHome: rgba(241, 163, 255, 0.3);
     --var_blanco: #FFFFFF;
+    --var_font-google: rgba(60, 59, 63, 1);
+    --var_fontgeneral: #3A3A3D;
+    --var_fontmedia: 1rem;
 }
-
 
 
 /*Mobile Styles*/
 
 /*small tablet styles*/
 
-@media screen and (min-width: 620px) {}
+@media screen and (min-width: 620px) {
+
+    /* .contenedor_form ´ {
+        display: grid;
+        justify-content: center;
+    }
+ */
+
+}
 
 /*large tablets laptop styles*/
 @media screen and (min-width: 960px) {}

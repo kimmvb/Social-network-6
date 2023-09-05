@@ -1,1 +1,6 @@
-
+section {
+    background-color: rgba(241, 163, 255, 0.3);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 150px);
+}

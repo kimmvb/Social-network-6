@@ -1,7 +1,16 @@
+import styles from "./../css/new.account.module.css";
+import iconLogo from "./../asset/icons/Logo.tripify.svg";
+
 function newAccount () {
-  const section = document.createElement('section');
-  const title = document.createElement('h2');
-  const form = document.createElement('form');
+  const sectionAccount= document.createElement('section');
+  sectionAccount.className = styles.contenedor;
+
+  const logo = document.createElement("img");
+  logo.className = styles.img_logo;
+
+  const formContainer = document.createElement("form");
+  formContainer.className = styles.contenedor_form;
+ 
   const labelEmail = document.createElement('label');
   const inputEmail = document.createElement('input');
   const labelUserName = document.createElement('label');
@@ -10,29 +19,32 @@ function newAccount () {
   const inputPass = document.createElement('input');
   const labelRepeatPass = document.createElement('label');
   const inputRepeatPass = document.createElement('input');
-  const buttonNewAccount = document.createElement('button');
+
+  const btnAccount = document.createElement("button");
+  btnAccount.className = styles.btn_crear_cuenta;
+
   const linkLogin = document.createElement('p');
   const singIn = document.createElement('a');
 
-  title.textContent = 'Crear tu cuenta';
+  logo.src = iconLogo;
 
   labelEmail.textContent = 'Correo electrónico';
   labelUserName.textContent = 'Nombre de usuario'
   labelPass.textContent = 'Contraseña';
   labelRepeatPass.textContent = 'Repetir contraseña';
 
-  buttonNewAccount.textContent = 'Registrarse';
+  btnAccount.textContent = 'Crear Cuenta';
 
-  linkLogin.textContent = '¿Ya tienes una cuenta?';
-  singIn.textContent = 'Inicia sesión';
+  linkLogin.innerHTML = '¿Ya tienes una cuenta? <br>';
+  singIn.innerHTML = ' <br> Inicia sesión';
   singIn.setAttribute("href", "/");
 
-  form.append(labelEmail, inputEmail, labelUserName, inputUserName, labelPass, inputPass, labelRepeatPass, inputRepeatPass, buttonNewAccount);
+  formContainer.append(labelEmail, inputEmail, labelUserName, inputUserName, labelPass, inputPass, labelRepeatPass, inputRepeatPass, btnAccount);
   linkLogin.append(singIn)
-  section.append(title, form, linkLogin);
+  sectionAccount.append(logo, formContainer, linkLogin);
 
-  return section;
+  return sectionAccount;
 }
 
-=======
+
 export default newAccount
