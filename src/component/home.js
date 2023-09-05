@@ -1,5 +1,7 @@
 import styles from "./../css/home.module.css";
-import iconLogo from "./../asset/icons/logo.svg";
+import iconLogo from "./../asset/icons/Logo.tripify.svg";
+import iconLinea from "../asset/icons/linea.icon.svg";
+
 import { userSignin } from "../lib/firebase";
 
 function home(navigateTo) {
@@ -10,7 +12,7 @@ function home(navigateTo) {
   logo.className = styles.img_logo;
   
   const errorGoogle = document.createElement('p');
-
+  
   const formContainer = document.createElement("form");
   formContainer.className = styles.contenedor_form;
 
@@ -22,6 +24,8 @@ function home(navigateTo) {
   const buttonGoogle = document.createElement("button");
   buttonGoogle.className = styles.button_google;
   
+  const lineaIcon = document.createElement("img");
+  lineaIcon.className = styles.img_linea;
 
   const buttonLogin = document.createElement("button");
   buttonLogin.className = styles.button_login;
@@ -29,9 +33,10 @@ function home(navigateTo) {
   const forgetPass = document.createElement("p");
 
   const newAccount = document.createElement("button");
-  newAccount.className = styles.crear_cuenta;
+  newAccount.className = styles.btn_crear_cuenta;
 
   logo.src = iconLogo;
+  lineaIcon.src = iconLinea;
 
   buttonLogin.textContent = "Iniciar Sesión";
   buttonLogin.addEventListener("click", () => {
@@ -41,16 +46,31 @@ function home(navigateTo) {
   labelEmail.textContent = "Nombre de usuario o correo";
   labelPass.textContent = "Contraseña";
 
-  buttonGoogle.textContent = "Continuar con Google";
+  errorGoogle.textContent = 'Error al iniciar sesión en Google';
+  errorGoogle.style.display = "none";
+
+  
+  
   buttonGoogle.addEventListener('click', () => {
     userSignin()
       .then((user) => {
         navigateTo('/login', user);
       })
       .catch((error) => {
+        navigateTo('/');
         errorGoogle.style.display = 'block', error;
+        console.error('Error', error);
       });
   });
+/*buttonGoogle.addEventListener('click', () => {
+    userSignInGoogle()
+    .then(() => {
+      navigateTo('/login');
+    }).catch((error) => {
+      errorGoogle.style.display = 'block', error;
+    })
+  }
+  )*/
   
   forgetPass.textContent = "¿Olvidaste tu contraseña?";
 
@@ -65,6 +85,7 @@ function home(navigateTo) {
     labelPass,
     inputPass,
     buttonLogin,
+    lineaIcon,
     buttonGoogle,
     forgetPass,
     newAccount

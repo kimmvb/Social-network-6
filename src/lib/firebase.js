@@ -3,6 +3,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChang
 //import { getAnalytics } from 'firebase/analytics';
 import { getFirestore } from 'firebase/firestore';
 //import { async } from 'regenerator-runtime';
+//import { async } from 'regenerator-runtime';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -25,7 +26,7 @@ const provider = new GoogleAuthProvider(app);
 //const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-/*export const userSignin = async() => {
+export const userSignin = async() => {
     signInWithPopup(auth, provider)
     .then((result) => {
         const user = result.user;
@@ -33,40 +34,42 @@ const db = getFirestore(app);
         const errorCode = error.code;
         const errorMessage = error.message;
     })
-}*/
+}
+//export const userSignInGoogle = async() => signInWithPopup(auth, provider);
 
-export const userSignin = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      return user;
-    } catch (error) {
-      console.error('Error al iniciar sesión con Google:', error);
-    }
+/*export const userSignin = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    return user;
+  } catch (error) {
+    console.error('Error al iniciar sesión con Google:', error);
   }
-  
-/*export const userSignOut = async() => {
-    signOut(auth).then(() => {
-      navigateTo('/');
-    }).catch((error) => {
-      return error;
-    })
 }*/
 
-export const userSignOut = async () => {
+//export const signOutUser = async() => auth.signOut();
+  
+export const userSignOut = async() => {
+    signOut(auth).then(() => {
+      
+    }).catch((error) => {
+      
+    })
+}
+
+/*export const userSignOut = async () => {
   try {
     await signOut(auth);
   } catch (error) {
     console.error('Error al cerrar sesión:', error);
   }
-}
+}*/
 
-/*onAuthStateChanged(auth, (user) => {
-    if(user) {
+/*onAuthStateChanged(auth, (user, navigateTo) => {
+    if (user) {
         navigateTo('/login')
     } else {
         navigateTo('/')
     }
-})
-*/
+})*/
 

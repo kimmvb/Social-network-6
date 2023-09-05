@@ -12,7 +12,7 @@ function login (navigateTo) {
             navigateTo('/', user);
           })
           .catch((error) => {
-            alert('Error al cerrar sesión', error);
+            console.error('Error al cerrar sesión', error);
           });
     });
 
