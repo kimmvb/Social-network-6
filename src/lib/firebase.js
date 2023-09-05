@@ -4,6 +4,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChang
 import { getFirestore } from 'firebase/firestore';
 //import { async } from 'regenerator-runtime';
 //import { async } from 'regenerator-runtime';
+//import { async } from 'regenerator-runtime';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -37,6 +38,19 @@ export const userSignin = async() => {
 }
 //export const userSignInGoogle = async() => signInWithPopup(auth, provider);
 
+//export const userSignInGoogle = async() => signInWithPopup(auth, provider);
+
+/*export const userSignin = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    return user;
+  } catch (error) {
+    console.error('Error al iniciar sesión con Google:', error);
+  }
+}*/
+
+//export const signOutUser = async() => auth.signOut();
 /*export const userSignin = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
@@ -52,11 +66,15 @@ export const userSignin = async() => {
 export const userSignOut = async() => {
     signOut(auth).then(() => {
       
+      
     }).catch((error) => {
+      
       
     })
 }
 
+
+/*export const userSignOut = async () => {
 /*export const userSignOut = async () => {
   try {
     await signOut(auth);
@@ -65,11 +83,15 @@ export const userSignOut = async() => {
   }
 }*/
 
+
+/*onAuthStateChanged(auth, (user, navigateTo) => {
+    if (user) {
 /*onAuthStateChanged(auth, (user, navigateTo) => {
     if (user) {
         navigateTo('/login')
     } else {
         navigateTo('/')
     }
-})*/
+})
+*/
 

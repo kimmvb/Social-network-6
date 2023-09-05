@@ -23,4 +23,3 @@ function login (navigateTo) {
 }
 
 export default login;
-
