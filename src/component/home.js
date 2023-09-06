@@ -21,7 +21,7 @@ function home(navigateTo) {
   const labelPass = document.createElement("label");
   const inputPass = document.createElement("input");
 
-  const buttonGoogle = document.createElement("button");
+  const buttonGoogle = document.createElement("input");
   buttonGoogle.className = styles.button_google;
   
   const lineaIcon = document.createElement("img");
@@ -50,14 +50,16 @@ function home(navigateTo) {
   errorGoogle.style.display = "none";
 
   
-  
-  buttonGoogle.addEventListener('click', () => {
+  buttonGoogle.setAttribute('type', 'submit');
+  buttonGoogle.setAttribute('value', '');
+  buttonGoogle.addEventListener('click', (event) => {
+    event.preventDefault();
     userSignin()
       .then((user) => {
-        navigateTo('/login', user);
+       navigateTo('/login', user);
       })
       .catch((error) => {
-        navigateTo('/');
+        //navigateTo('/');
         errorGoogle.style.display = 'block', error;
         console.error('Error', error);
       });

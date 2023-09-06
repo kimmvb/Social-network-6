@@ -27,7 +27,7 @@ const provider = new GoogleAuthProvider(app);
 //const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-export const userSignin = async() => {
+/*export const userSignin = async() => {
     signInWithPopup(auth, provider)
     .then((result) => {
         const user = result.user;
@@ -35,12 +35,10 @@ export const userSignin = async() => {
         const errorCode = error.code;
         const errorMessage = error.message;
     })
-}
+}*/
 //export const userSignInGoogle = async() => signInWithPopup(auth, provider);
 
-//export const userSignInGoogle = async() => signInWithPopup(auth, provider);
-
-/*export const userSignin = async () => {
+export const userSignin = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
@@ -48,7 +46,7 @@ export const userSignin = async() => {
   } catch (error) {
     console.error('Error al iniciar sesión con Google:', error);
   }
-}*/
+}
 
 //export const signOutUser = async() => auth.signOut();
 /*export const userSignin = async () => {
@@ -63,7 +61,7 @@ export const userSignin = async() => {
 
 //export const signOutUser = async() => auth.signOut();
   
-export const userSignOut = async() => {
+/*export const userSignOut = async() => {
     signOut(auth).then(() => {
       
       
@@ -71,17 +69,16 @@ export const userSignOut = async() => {
       
       
     })
-}
+}*/
 
 
-/*export const userSignOut = async () => {
-/*export const userSignOut = async () => {
+export const userSignOut = async () => {
   try {
     await signOut(auth);
   } catch (error) {
     console.error('Error al cerrar sesión:', error);
   }
-}*/
+}
 
 
 /*onAuthStateChanged(auth, (user, navigateTo) => {
