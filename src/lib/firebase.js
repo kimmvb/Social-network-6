@@ -1,14 +1,8 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
-//import { getAnalytics } from 'firebase/analytics';
-import { getFirestore } from 'firebase/firestore';
-//import { async } from 'regenerator-runtime';
-//import { async } from 'regenerator-runtime';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// configuracion incial de firebase
 const firebaseConfig = {
   apiKey: 'AIzaSyACG5rW_-P4Y_Ut762pMUH4iKeMkxNAf2Q',
   authDomain: 'red-social-5d2b2.firebaseapp.com',
@@ -19,56 +13,52 @@ const firebaseConfig = {
   measurementId: 'G-K3Q4KXLZYX',
 };
 
-// Initialize Firebase
+// inicio firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider(app);
-//const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
+// funcion que ejecuta el login con google, muestra el pop up de gmail
 export const userSignin = async() => {
-    signInWithPopup(auth, provider)
-    .then((result) => {
-        const user = result.user;
-    }).catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-    })
-}
-//export const userSignInGoogle = async() => signInWithPopup(auth, provider);
-
-/*export const userSignin = async () => {
   try {
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
+    const response = await signInWithPopup(auth, provider);
+    await setDoc(doc(db, "users", response.user.email), {
+      name: response.user.displayName,
+      email: response.user.email,
+      origin: 'Google',
+      password: ''
+    });
+    return {
+      name: response.user.displayName,
+      email: response.user.email,
+      origin: 'Google',
+      password: ''
+    };;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export const userSaveData = async(name, email, password) => {
+  try {
+    const user = {
+      name: name,
+      email: email,
+      origin: 'Tripify',
+      password: password
+    };
+    await setDoc(doc(db, "users", email), user);
     return user;
   } catch (error) {
-    console.error('Error al iniciar sesión con Google:', error);
+    throw new Error(error);
   }
-}*/
-
-//export const signOutUser = async() => auth.signOut();
+}
   
 export const userSignOut = async() => {
-    signOut(auth).then(() => {
-      
-    }).catch((error) => {
-      
-    })
+  signOut(auth).then(() => {
+    
+  }).catch((error) => {
+    
+  })
 }
-
-/*export const userSignOut = async () => {
-  try {
-    await signOut(auth);
-  } catch (error) {
-    console.error('Error al cerrar sesión:', error);
-  }
-}*/
-
-/*onAuthStateChanged(auth, (user, navigateTo) => {
-    if (user) {
-        navigateTo('/login')
-    } else {
-        navigateTo('/')
-    }
-})*/

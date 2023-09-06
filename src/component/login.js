@@ -6,14 +6,12 @@ function login (navigateTo) {
     const buttonLogOut = document.createElement('button');
 
     buttonLogOut.textContent = 'Cerrar Sesión';
-    buttonLogOut.addEventListener('click', () => {
-        userSignOut()
-         .then((user) => {
-            navigateTo('/', user);
-          })
-          .catch((error) => {
-            console.error('Error al cerrar sesión', error);
-          });
+    buttonLogOut.addEventListener('click', async () => {
+      try {
+        await userSignin();
+      } catch (error) {
+        console.log(error);
+      }
     });
 
     title.textContent = 'Feed';

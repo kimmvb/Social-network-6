@@ -1,37 +1,40 @@
-.contenedor {
-    background-color: rgba(241, 163, 255, 0.3);
+.contenedor_account {
+
     text-align: center;
-    width: 100vw;
-    height: 100vh;
-    padding-bottom: 40px;
+    padding-bottom: 40px
 }
 
-.contenedor_form {
+.grilla_form {
     display: grid;
     justify-content: center;
-    grid-template-columns: minmax(70%, max-content);
+    grid-template-columns: 75%;
+
+
 }
 
+
 .img_logo {
-    height: 30%;
+    height: 25%;
     margin-top: 10px;
 }
 
-input {
+.grilla_form input {
     border-radius: 12px;
-    height: 30px;
+    height: 40px;
     width: 90%;
     border: var(--var_bordeinputoscuro);
     justify-self: center;
 }
 
-label {
+.grilla_form label {
     color: var(--var_colorfuente);
     margin-top: 23PX;
     text-align: start;
     width: 90%;
     justify-self: center;
     margin-bottom: 5px;
+    font-size: 1rem;
+    font-size: 1.4rem;
 }
 
 .btn_crear_cuenta {
@@ -43,5 +46,13 @@ label {
     font-weight: bold;
     color: var(--var_fontgeneral);
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.2rem;
+    width: 70%;
+    justify-self: center;
+}
+
+p {
+    margin-top: 23px;
+    color: var(--var_colorfuente);
+    font-size: 1.1rem;
 }

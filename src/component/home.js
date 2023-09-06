@@ -1,7 +1,7 @@
 import styles from "./../css/home.module.css";
 import iconLogo from "./../asset/icons/Logo.tripify.svg";
 import iconLinea from "../asset/icons/linea.icon.svg";
-
+import { saveUserSession } from ".//../lib/index";
 import { userSignin } from "../lib/firebase";
 
 function home(navigateTo) {
@@ -13,8 +13,9 @@ function home(navigateTo) {
   
   const errorGoogle = document.createElement('p');
   
-  const formContainer = document.createElement("form");
-  formContainer.className = styles.contenedor_form;
+  const formGrilla = document.createElement("form");
+  formGrilla.className = styles.grilla_form;
+  
 
   const labelEmail = document.createElement("label");
   const inputEmail = document.createElement("input");
@@ -48,29 +49,17 @@ function home(navigateTo) {
 
   errorGoogle.textContent = 'Error al iniciar sesión en Google';
   errorGoogle.style.display = "none";
-
   
-  
-  buttonGoogle.addEventListener('click', () => {
-    userSignin()
-      .then((user) => {
-        navigateTo('/login', user);
-      })
-      .catch((error) => {
-        navigateTo('/');
-        errorGoogle.style.display = 'block', error;
-        console.error('Error', error);
-      });
+  buttonGoogle.addEventListener('click', async (e) => {
+    e.preventDefault();
+    try {
+      const user = await userSignin();
+      saveUserSession(user);
+      navigateTo('/feed');
+    } catch (error) {
+      console.log(error);
+    }
   });
-/*buttonGoogle.addEventListener('click', () => {
-    userSignInGoogle()
-    .then(() => {
-      navigateTo('/login');
-    }).catch((error) => {
-      errorGoogle.style.display = 'block', error;
-    })
-  }
-  )*/
   
   forgetPass.textContent = "¿Olvidaste tu contraseña?";
 
@@ -79,7 +68,7 @@ function home(navigateTo) {
     navigateTo("/new_account");
   });
 
-  formContainer.append(
+  formGrilla.append(
     labelEmail,
     inputEmail,
     labelPass,
@@ -90,7 +79,7 @@ function home(navigateTo) {
     forgetPass,
     newAccount
   );
-  sectionHome.append(logo, errorGoogle, formContainer);
+  sectionHome.append(logo, errorGoogle, formGrilla);
 
   return sectionHome;
 
