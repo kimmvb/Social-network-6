@@ -48,7 +48,6 @@ function newAccount (navigateTo) {
 
   btnAccount.addEventListener('click', async (e) => {
     e.preventDefault();
-    btnAccount.disabled = true;
     
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     const passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -61,23 +60,25 @@ function newAccount (navigateTo) {
       && inputRepeatPass.value.trim() !== '') {
         
         // Validar el formato del correo electrónico
-        if (!emailPattern.test(inputEmail.value.trim())) {
+        if (!emailPattern.test(inputEmail.value)) {
           alert('Por favor, ingresa un correo electrónico válido.');
-          
-          return;
+           return;
         }
   
         // Validar el nombre de usuario
-        if (!userNamePattern.test(inputUserName.value.trim())) {
+        if (!userNamePattern.test(inputUserName.value)) {
           alert('El nombre de usuario debe tener entre 1 y 12 caracteres alfanuméricos.');
-          
           return;
         }
   
         // Validar la contraseña
-        if (!passwordPattern.test(inputPass.value.trim())) {
+        if (!passwordPattern.test(inputPass.value)) {
           alert('La contraseña debe contener al menos 8 caracteres, 1 mayúscula y 1 número.');
-          
+          return;
+        }
+
+        if (inputPass.value !== inputRepeatPass.value) {
+          alert('Las contraseñas deben coincidir.');
           return;
         }
   
@@ -85,7 +86,9 @@ function newAccount (navigateTo) {
         const user = await userSaveData(inputUserName.value, inputEmail.value, inputPass.value);
         saveUserSession(user);
         navigateTo('/feed');
-    } 
+    } else {
+      alert('Los campos son obligatorios.');
+    }
   });
   
 
