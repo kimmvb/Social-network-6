@@ -1,5 +1,5 @@
 import home from './component/home.js';
-import login from './component/login.js';
+// import login from './component/login.js';
 import error from './component/error.js';
 import newAccount from './component/newaccount.js';
 import feed from './component/feed.js';
@@ -7,7 +7,7 @@ import feed from './component/feed.js';
 const routes = [
   { path: '/', component: home },
   { path: '/error', component: error },
-  { path: '/login', component: login },
+  // { path: '/login', component: login },
   { path: '/new_account', component: newAccount },
   { path: '/feed', component: feed },
 ];

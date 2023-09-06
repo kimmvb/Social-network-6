@@ -2,7 +2,7 @@ import styles from "./../css/feed.module.css";
 import iconLogo from "./../asset/icons/Logo.tripify.svg";
 import { userSession } from "./../lib/index";
 
-function feed() {
+function feed(navigateTo) {
   const sectionFeed = document.createElement("section");
   sectionFeed.className = styles.contenedor_feed;
 
@@ -12,10 +12,9 @@ function feed() {
 
   console.log(userSession);
 
-  const p = document.createElement('p');
-  p.innerHTML = 'Bienvenido ' + userSession.name;
 
-  sectionFeed.append(logo, p);
+
+  sectionFeed.append(logo);
 
   return sectionFeed;
 

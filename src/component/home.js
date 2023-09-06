@@ -41,7 +41,7 @@ function home(navigateTo) {
 
   buttonLogin.textContent = "Iniciar Sesión";
   buttonLogin.addEventListener("click", () => {
-    navigateTo("/login");
+    navigateTo("/feed");
   });
 
   labelEmail.textContent = "Nombre de usuario o correo";
