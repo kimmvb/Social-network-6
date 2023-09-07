@@ -1,6 +1,6 @@
 import styles from "./../css/new.account.module.css";
 import iconLogo from "./../asset/icons/Logo.tripify.svg";
-import { userSaveData } from "./../lib/firebase";
+import { signUpAndSaveData } from "./../lib/firebase";
 import { saveUserSession } from ".//../lib/index";
 
 function newAccount (navigateTo) {
@@ -50,14 +50,25 @@ function newAccount (navigateTo) {
     e.preventDefault();
     btnAccount.disabled = true;
     if (
-      inputEmail.value.trim() !== '' 
-      && inputUserName.value.trim() !== '' 
-      && inputPass.value.trim() !== '' 
-      && inputRepeatPass.value.trim() !== '') {
-        const user = await userSaveData(inputUserName.value, inputEmail.value, inputPass.value);
+      inputEmail.value.trim() !== '' &&
+      inputUserName.value.trim() !== '' &&
+      inputPass.value.trim() !== '' &&
+      inputRepeatPass.value.trim() !== ''
+    ) {
+      try {
+        // Utiliza signUpAndSaveData para crear el usuario y guardar datos adicionales
+        const user = await signUpAndSaveData(inputUserName.value, inputEmail.value, inputPass.value);
+  
+        // Resto de tu lógica, como guardar la sesión y navegar
         saveUserSession(user);
         navigateTo('/feed');
-      } 
+      } catch (error) {
+        // Maneja errores, por ejemplo, mostrando un mensaje de error al usuario
+        console.error('Error al crear usuario y guardar datos:', error);
+        // Habilita nuevamente el botón para permitir que el usuario intente de nuevo
+        btnAccount.disabled = false;
+      }
+    } 
   });
 
   formGrilla.append(labelEmail, inputEmail, labelUserName, inputUserName, labelPass, inputPass, labelRepeatPass, inputRepeatPass, btnAccount);

@@ -77,8 +77,10 @@
     font-weight: bold;
 }
 
-p {
+
+a  {
     margin-top: 23px;
     color: var(--var_colorfuente);
     font-size: 1.1rem;
 }
+
