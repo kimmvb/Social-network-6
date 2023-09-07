@@ -84,7 +84,6 @@ function newAccount (navigateTo) {
   
         // Utiliza signUpAndSaveData para crear el usuario y guardar datos adicionales
         const user = await signUpAndSaveData(inputUserName.value, inputEmail.value, inputPass.value);
-        
         saveUserSession(user);
         navigateTo('/feed');
     } else {
