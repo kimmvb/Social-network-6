@@ -100,5 +100,22 @@ export const userSignOut = async() => {
 }
 
 export const reseatEmail = async(email) => {
+  //const configuracion = { url: "http://localhost:3000/", };
   return sendPasswordResetEmail(auth, email);
 }
+
+
+/*export function reseatEmail(email) {
+  if (email) {
+    console.log(email);
+    const configuracion = { url: "http://localhost:3000/", };
+    sendPasswordResetEmail(auth, email, configuracion).then(() => {
+      console.log("Email de restablecimiento de contraseña enviado con éxito");
+    })
+      .catch((error) => {
+        console.error(`Error al enviar el correo de restablecimiento de contraseña: ${error}`);
+      });
+  } else {
+    console.error("Favor de ingresar un correo electrónico");
+  }
+} */

@@ -3,4 +3,4 @@ export let userSession;
 export const saveUserSession = (user) => {
   userSession = user;
 };
-console.log(userSession)
+

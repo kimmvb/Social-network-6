@@ -47,11 +47,10 @@ function home(navigateTo) {
     const password = inputPass.value;
     try {
       const userData = await signInWithFirestore(email, password);
-      navigateTo('/feed');
       saveUserSession(userData);
-      console.log(userData);
       console.log('Usuario autenticado:', email);
       console.log('Nombre del usuario:', userData.name);
+      navigateTo('/feed');
     } catch (error) {
       errorLogin.style.display = "block";
       const cleanForm = document.getElementById('form_login');

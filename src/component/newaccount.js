@@ -58,10 +58,10 @@ function newAccount (navigateTo) {
       try {
         // Utiliza signUpAndSaveData para crear el usuario y guardar datos adicionales
         const user = await signUpAndSaveData(inputUserName.value, inputEmail.value, inputPass.value);
-  
         // Resto de tu lógica, como guardar la sesión y navegar
         saveUserSession(user);
         navigateTo('/feed');
+        console.log(user);
       } catch (error) {
         // Maneja errores, por ejemplo, mostrando un mensaje de error al usuario
         console.error('Error al crear usuario y guardar datos:', error);
