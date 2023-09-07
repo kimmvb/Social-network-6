@@ -1,6 +1,6 @@
 import styles from "./../css/new.account.module.css";
 import iconLogo from "./../asset/icons/Logo.tripify.svg";
-import { userSaveData } from "./../lib/firebase";
+import { signUpAndSaveData } from "./../lib/firebase";
 import { saveUserSession } from ".//../lib/index";
 
 function newAccount (navigateTo) {
@@ -82,8 +82,9 @@ function newAccount (navigateTo) {
           return;
         }
   
-        // Resto del código para registrar al usuario y navegar a '/feed'
-        const user = await userSaveData(inputUserName.value, inputEmail.value, inputPass.value);
+        // Utiliza signUpAndSaveData para crear el usuario y guardar datos adicionales
+        const user = await signUpAndSaveData(inputUserName.value, inputEmail.value, inputPass.value);
+        
         saveUserSession(user);
         navigateTo('/feed');
     } else {

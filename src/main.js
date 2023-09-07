@@ -1,15 +1,15 @@
 import home from './component/home.js';
-// import login from './component/login.js';
 import error from './component/error.js';
 import newAccount from './component/newaccount.js';
 import feed from './component/feed.js';
+import forgetpassword from './component/forgetpassword.js';
 
 const routes = [
   { path: '/', component: home },
   { path: '/error', component: error },
-  // { path: '/login', component: login },
-  { path: '/new_account', component: newAccount },
   { path: '/feed', component: feed },
+  { path: '/new_account', component: newAccount },
+  { path: '/forgetpassword', component: forgetpassword }
 ];
 
 const defaultRoute = '/';
