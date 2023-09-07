@@ -48,28 +48,50 @@ function newAccount (navigateTo) {
 
   btnAccount.addEventListener('click', async (e) => {
     e.preventDefault();
-    btnAccount.disabled = true;
+    
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+    const userNamePattern = /^[a-zA-Z0-9]{1,12}$/;
+  
     if (
-      inputEmail.value.trim() !== '' &&
-      inputUserName.value.trim() !== '' &&
-      inputPass.value.trim() !== '' &&
-      inputRepeatPass.value.trim() !== ''
-    ) {
-      try {
+      inputEmail.value.trim() !== '' 
+      && inputUserName.value.trim() !== '' 
+      && inputPass.value.trim() !== '' 
+      && inputRepeatPass.value.trim() !== '') {
+        
+        // Validar el formato del correo electrónico
+        if (!emailPattern.test(inputEmail.value)) {
+          alert('Por favor, ingresa un correo electrónico válido.');
+           return;
+        }
+  
+        // Validar el nombre de usuario
+        if (!userNamePattern.test(inputUserName.value)) {
+          alert('El nombre de usuario debe tener entre 1 y 12 caracteres alfanuméricos.');
+          return;
+        }
+  
+        // Validar la contraseña
+        if (!passwordPattern.test(inputPass.value)) {
+          alert('La contraseña debe contener al menos 8 caracteres, 1 mayúscula y 1 número.');
+          return;
+        }
+
+        if (inputPass.value !== inputRepeatPass.value) {
+          alert('Las contraseñas deben coincidir.');
+          return;
+        }
+  
         // Utiliza signUpAndSaveData para crear el usuario y guardar datos adicionales
         const user = await signUpAndSaveData(inputUserName.value, inputEmail.value, inputPass.value);
-  
-        // Resto de tu lógica, como guardar la sesión y navegar
+        
         saveUserSession(user);
         navigateTo('/feed');
-      } catch (error) {
-        // Maneja errores, por ejemplo, mostrando un mensaje de error al usuario
-        console.error('Error al crear usuario y guardar datos:', error);
-        // Habilita nuevamente el botón para permitir que el usuario intente de nuevo
-        btnAccount.disabled = false;
-      }
-    } 
+    } else {
+      alert('Los campos son obligatorios.');
+    }
   });
+  
 
   formGrilla.append(labelEmail, inputEmail, labelUserName, inputUserName, labelPass, inputPass, labelRepeatPass, inputRepeatPass, btnAccount);
   linkLogin.append(singIn)
