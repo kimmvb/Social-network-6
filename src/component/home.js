@@ -46,10 +46,8 @@ function home(navigateTo) {
     const email = inputEmail.value;
     const password = inputPass.value;
     try {
-      const userData = await signInWithFirestore(email, password);
+      const userData = await signInWithFirestore(email, password); 
       saveUserSession(userData);
-      console.log('Usuario autenticado:', email);
-      console.log('Nombre del usuario:', userData.name);
       navigateTo('/feed');
     } catch (error) {
       errorLogin.style.display = "block";
@@ -59,7 +57,7 @@ function home(navigateTo) {
     }
   });
 
-
+  
   labelEmail.textContent = "Nombre de usuario o correo";
   labelPass.textContent = "Contraseña";
   inputPass.setAttribute('type', 'password');

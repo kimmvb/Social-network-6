@@ -83,9 +83,12 @@ function newAccount (navigateTo) {
         }
   
         // Utiliza signUpAndSaveData para crear el usuario y guardar datos adicionales
-        const user = await signUpAndSaveData(inputUserName.value, inputEmail.value, inputPass.value);
-        saveUserSession(user);
-        navigateTo('/feed');
+        signUpAndSaveData(inputUserName.value, inputEmail.value, inputPass.value).then(user => {
+          saveUserSession(user);
+          navigateTo('/feed');
+        }, () => {
+          alert('No se ha podido crear el usuario');
+        });
     } else {
       alert('Los campos son obligatorios.');
     }
