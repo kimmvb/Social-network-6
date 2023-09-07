@@ -9,7 +9,7 @@ const routes = [
   { path: '/error', component: error },
   { path: '/feed', component: feed },
   { path: '/new_account', component: newAccount },
-  { path: '/forgetpassword', component: forgetpassword}
+  { path: '/forgetpassword', component: forgetpassword }
 ];
 
 const defaultRoute = '/';

@@ -24,9 +24,6 @@ function feed(navigateTo) {
 
   console.log(userSession);
 
-  const p = document.createElement('p');
-  p.innerHTML = 'Bienvenido ' + userSession.name;
-
   sectionFeed.append(logo, p, buttonLogOut);
 
   return sectionFeed;
