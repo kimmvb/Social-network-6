@@ -87,7 +87,7 @@ function newAccount (navigateTo) {
           saveUserSession(user);
           navigateTo('/feed');
         }, () => {
-          alert('No se ha podido crear el usuario');
+          
         });
     } else {
       alert('Los campos son obligatorios.');

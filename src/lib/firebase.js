@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+
 import { 
   getAuth, 
   GoogleAuthProvider, 
@@ -8,7 +9,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword 
 } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, setDoc, doc } from 'firebase/firestore';
 
 // configuracion incial de firebase
 const firebaseConfig = {
@@ -62,6 +63,7 @@ export const signUpAndSaveData = async (name, email, password) => {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
     return user;
+
   } catch (error) {
     throw new Error(error);
   }

@@ -24,7 +24,7 @@ function feed(navigateTo) {
 
   console.log(userSession);
 
-  sectionFeed.append(logo, p, buttonLogOut);
+  sectionFeed.append(logo, buttonLogOut);
 
   return sectionFeed;
 
