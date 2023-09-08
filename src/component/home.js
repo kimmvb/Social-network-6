@@ -2,7 +2,7 @@ import styles from "./../css/home.module.css";
 import iconLogo from "./../asset/icons/Logo.tripify.svg";
 import iconLinea from "../asset/icons/linea.icon.svg";
 import { saveUserSession } from ".//../lib/index";
-import { userSignin, signInWithFirestore } from "../lib/firebase";
+import { singInWithGoogle, signInWithEmail } from "../lib/firebase";
 
 function home(navigateTo) {
   const sectionHome = document.createElement("section");
@@ -12,6 +12,12 @@ function home(navigateTo) {
   logo.className = styles.img_logo;
   
   const errorLogin = document.createElement('p');
+  errorLogin.setAttribute('id','incorrect_user');
+  errorLogin.style.fontWeight = 'bolder';
+  errorLogin.style.color = '#E8868C';
+  errorLogin.textContent = 'Usuario o contraseña incorrectos';
+  errorLogin.style.display = "none";
+  
   
   const formGrilla = document.createElement("form");
   formGrilla.className = styles.grilla_form;
@@ -46,32 +52,28 @@ function home(navigateTo) {
     const email = inputEmail.value;
     const password = inputPass.value;
     try {
-      const userData = await signInWithFirestore(email, password); 
-      saveUserSession(userData);
+      const userData = await signInWithEmail(email, password); 
+      console.log('User signed in');
+      //saveUserSession(userData);
       navigateTo('/feed');
     } catch (error) {
       errorLogin.style.display = "block";
+      console.error('Error al iniciar sesión:', error.message);
       const cleanForm = document.getElementById('form_login');
       cleanForm.reset();
-      console.error('Error al iniciar sesión:', error.message);
     }
   });
 
-  
+
   labelEmail.textContent = "Nombre de usuario o correo";
   labelPass.textContent = "Contraseña";
   inputPass.setAttribute('type', 'password');
 
-  errorLogin.setAttribute('id','incorrect_user');
-  errorLogin.style.fontWeight = 'bolder';
-  errorLogin.style.color = '#E8868C';
-  errorLogin.textContent = 'Usuario o contraseña incorrectos';
-  errorLogin.style.display = "none";
   
   buttonGoogle.addEventListener('click', async (e) => {
     e.preventDefault();
     try {
-      const user = await userSignin();
+      const user = await singInWithGoogle();
       console.log(saveUserSession(user));
       navigateTo('/feed');
     } catch (error) {

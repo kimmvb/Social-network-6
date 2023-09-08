@@ -8,8 +8,6 @@
     display: grid;
     justify-content: center;
     grid-template-columns: 75%;
-
-
 }
 
 
@@ -51,7 +49,7 @@
     justify-self: center;
 }
 
-p {
+.back_home {
     margin-top: 23px;
     color: var(--var_colorfuente);
     font-size: 1.1rem;
