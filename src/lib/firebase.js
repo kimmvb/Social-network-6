@@ -28,48 +28,52 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider(app);
 const db = getFirestore(app);
 
-export const signInWithFirestore = async (email, password) => {
+export const signInWithEmail = async ( email, password) => {
   try {
     const user = await signInWithEmailAndPassword(auth, email, password);
     console.log(user);
   } catch (error) {
-    throw error;
+    throw new Error(error);
   }
 };
 
 // funcion que ejecuta el login con google, muestra el pop up de gmail
-export const userSignin = async() => {
+export const singInWithGoogle = async() => {
   try {
     const response = await signInWithPopup(auth, provider);
-    await setDoc(doc(db, "users", response.user.email), {
+    await setDoc(doc(db, "users", response.user.uid), {
       name: response.user.displayName,
       email: response.user.email,
       origin: 'Google',
-      password: ''
     });
     return {
       name: response.user.displayName,
       email: response.user.email,
       origin: 'Google',
-      password: ''
-    };;
+    };
   } catch (error) {
     throw new Error(error);
   }
 }
 
-export const signUpAndSaveData = async (name, email, password) => {
+export const createAccount = async (name, email, password) => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-    return user;
-
+    const response = await createUserWithEmailAndPassword(auth, email, password);
+    const user = response.user;
+    await setDoc(doc(db, "users", user.uid), {
+      name: name,
+      email: email,
+      origin: 'Tripify',
+    });
+    return {
+      name: name,
+      email: email,
+      origin: 'Tripify',
+    };
   } catch (error) {
     throw new Error(error);
   }
 };
-
-
   
 export const userSignOut = async() => {
   signOut(auth).then(() => {

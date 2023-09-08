@@ -1,7 +1,6 @@
 import styles from "./../css/new.account.module.css";
 import iconLogo from "./../asset/icons/Logo.tripify.svg";
-import { signUpAndSaveData } from "./../lib/firebase";
-import { saveUserSession } from ".//../lib/index";
+import { createAccount } from "./../lib/firebase";
 
 function newAccount (navigateTo) {
   const sectionAccount= document.createElement('section');
@@ -9,7 +8,6 @@ function newAccount (navigateTo) {
 
   const logo = document.createElement("img");
   logo.className = styles.img_logo;
-
 
   const formGrilla = document.createElement("form");
   formGrilla.className = styles.grilla_form;
@@ -31,6 +29,8 @@ function newAccount (navigateTo) {
   btnAccount.className = styles.btn_crear_cuenta;
 
   const linkLogin = document.createElement('p');
+  linkLogin.className = styles.back_home;
+
   const singIn = document.createElement('a');
 
   logo.src = iconLogo;
@@ -81,19 +81,24 @@ function newAccount (navigateTo) {
           alert('Las contraseñas deben coincidir.');
           return;
         }
-  
         // Utiliza signUpAndSaveData para crear el usuario y guardar datos adicionales
-        signUpAndSaveData(inputUserName.value, inputEmail.value, inputPass.value).then(user => {
-          saveUserSession(user);
-          navigateTo('/feed');
-        }, () => {
-          
-        });
+        try {
+          const user = await createAccount(inputUserName.value, inputEmail.value, inputPass.value);
+          //console.log(saveUserSession(user));
+          console.log('Usuario creado:', user)
+          navigateTo('/');
+        } catch (error) {
+          console.error('Error al crear usuario y guardar datos:', error);
+          alert('No se ha podido crear el usuario' + error.message);
+        };
+          //signUpAndSaveData(inputUserName.value, inputEmail.value, inputPass.value).then(user => {
+          //navigateTo('/');
+         //() => {
+          //alert('No se ha podido crear el usuario');});
     } else {
       alert('Los campos son obligatorios.');
     }
   });
-  
 
   formGrilla.append(labelEmail, inputEmail, labelUserName, inputUserName, labelPass, inputPass, labelRepeatPass, inputRepeatPass, btnAccount);
   linkLogin.append(singIn)

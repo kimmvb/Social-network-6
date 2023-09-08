@@ -1,6 +1,6 @@
 import styles from "./../css/feed.module.css";
 import iconLogo from "./../asset/icons/Logo.tripify.svg";
-import { userSession } from "./../lib/index";
+//import { userSession } from "./../lib/index";
 import { userSignOut } from "../lib/firebase";
 
 function feed(navigateTo) {
@@ -22,7 +22,7 @@ function feed(navigateTo) {
       }
     });
 
-  console.log(userSession);
+  //console.log(userSession);
 
   sectionFeed.append(logo, buttonLogOut);
 
