@@ -1,18 +1,18 @@
-/* import { btnAccount } from '../src/component/newaccount';
-import { createAccount } from '../src/lib/firebase';
+import { newAccount } from '../src/component/newaccount';
+// import { createAccount } from '../src/lib/firebase';
 
 jest.mock('../src/lib/firebase', () => ({
   createAccount: jest.fn(),
 }));
 
 describe('Botón de Crear Cuenta', () => {
-  let btnAccount;
+  // let btnAccount;
   let inputEmail;
   let inputUserName;
   let inputPass;
   let inputRepeatPass;
 
-  beforeEach((navigateTo) => {
+  beforeEach(() => {
     // Configurar elementos del DOM simulados antes de cada prueba
     document.body.innerHTML = `
         <button id="createAccountButton">Crear Cuenta</button>
@@ -23,7 +23,7 @@ describe('Botón de Crear Cuenta', () => {
       `;
 
     // Asignar elementos del DOM a las variables
-    btnAccount = document.getElementById('createAccountButton');
+    // btnAccount = document.getElementById('createAccountButton');
     inputEmail = document.getElementById('inputEmail');
     inputUserName = document.getElementById('inputUserName');
     inputPass = document.getElementById('inputPass');
@@ -49,9 +49,11 @@ describe('Botón de Crear Cuenta', () => {
     btnAccount.click();
 
     // Verificar que el mock de createAccount se llamó con los datos correctos
-    expect(require('../src/lib/firebase').createAccount).toHaveBeenCalledWith('usuario123',
-    'usuario@ejemplo.com',
-    'Password1');
+    expect(require('../src/lib/firebase').createAccount).toHaveBeenCalledWith(
+      'usuario123',
+      'usuario@ejemplo.com',
+      'Password1',
+    );
 
     // Verificar que el mock de navigateTo se llamó con la ruta correcta
     // expect(navigateTo('/')).toHaveBeenCalledWith('/');
@@ -61,4 +63,4 @@ describe('Botón de Crear Cuenta', () => {
   });
 
   // Escribe pruebas similares para otros casos, como validaciones de campos y manejo de errores
-}); */
+});
