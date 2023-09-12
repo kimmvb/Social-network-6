@@ -21,12 +21,14 @@ function home(navigateTo) {
 
   const formGrilla = document.createElement('form');
   formGrilla.className = styles.grilla_form;
-  formGrilla.setAttribute('id', 'form_login');
-
-  const labelEmail = document.createElement('label');
-  const inputEmail = document.createElement('input');
-  const labelPass = document.createElement('label');
-  const inputPass = document.createElement('input');
+  formGrilla.setAttribute('id', 'form_login')
+  
+  const labelEmail = document.createElement("label");
+  const inputEmail = document.createElement("input");
+  inputEmail.type = 'email';
+  const labelPass = document.createElement("label");
+  const inputPass = document.createElement("input");
+  inputPass.type = 'password';
 
   const buttonGoogle = document.createElement('button');
   buttonGoogle.className = styles.button_google;

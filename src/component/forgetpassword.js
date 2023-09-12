@@ -36,6 +36,14 @@ function forgetPass(navigateTo) {
   const email = document.createElement('input');
   email.className = styles.reset_password_email;
   email.setAttribute('id', 'email');
+    const formEmail = document.createElement('form');
+    formEmail.className = styles.reset_password_form;
+    formEmail.setAttribute('id','input_reset_password');
+    
+    const email = document.createElement('input');
+    email.type = 'email';
+    email.className = styles.reset_password_email;
+    email.setAttribute('id','email');
 
   const buttonSendEmail = document.createElement('button');
   buttonSendEmail.className = styles.reset_password_button;
