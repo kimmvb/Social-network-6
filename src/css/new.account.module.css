@@ -1,7 +1,7 @@
 .contenedor_account {
-
     text-align: center;
-    padding-bottom: 40px
+    padding-bottom: 40px;
+    background-color: rgba(241, 163, 255, 0.3);
 }
 
 .grilla_form {

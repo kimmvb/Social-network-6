@@ -25,8 +25,10 @@ function home(navigateTo) {
 
   const labelEmail = document.createElement('label');
   const inputEmail = document.createElement('input');
+  inputEmail.type = 'email';
   const labelPass = document.createElement('label');
   const inputPass = document.createElement('input');
+  inputPass.type = 'password';
 
   const buttonGoogle = document.createElement('button');
   buttonGoogle.className = styles.button_google;
@@ -52,8 +54,9 @@ function home(navigateTo) {
     const email = inputEmail.value;
     const password = inputPass.value;
     try {
+      // eslint-disable-next-line no-unused-vars
       const userData = await signInWithEmail(email, password);
-      console.log('User signed in:', userData.email);
+      console.log('User signed in');
       navigateTo('/feed');
     } catch (error) {
       errorLogin.style.display = 'block';
