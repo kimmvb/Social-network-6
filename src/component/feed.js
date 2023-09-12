@@ -53,7 +53,7 @@ function feed(navigateTo) {
 
   sectionFeed.innerHTML = divFeed;
 
-  return sectionFeed;sssssssssssss
+  return sectionFeed;
 }
 
 export default feed;
