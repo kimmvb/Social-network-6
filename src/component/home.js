@@ -25,8 +25,10 @@ function home(navigateTo) {
 
   const labelEmail = document.createElement('label');
   const inputEmail = document.createElement('input');
+  inputEmail.type = 'email';
   const labelPass = document.createElement('label');
   const inputPass = document.createElement('input');
+  inputPass.type = 'password';
 
   const buttonGoogle = document.createElement('button');
   buttonGoogle.className = styles.button_google;

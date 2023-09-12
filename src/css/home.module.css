@@ -4,9 +4,9 @@
 }
 
 .contenedor_home {
-
     text-align: center;
     padding-bottom: 40px;
+    background-color: rgba(241, 163, 255, 0.3);
 }
 
 .grilla_form {
@@ -78,9 +78,8 @@
 }
 
 
-a  {
+a {
     margin-top: 23px;
     color: var(--var_colorfuente);
     font-size: 1.1rem;
 }
-
