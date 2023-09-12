@@ -52,8 +52,9 @@ function home(navigateTo) {
     const email = inputEmail.value;
     const password = inputPass.value;
     try {
+      // eslint-disable-next-line no-unused-vars
       const userData = await signInWithEmail(email, password);
-      console.log('User signed in:', userData.email);
+      console.log('User signed in');
       navigateTo('/feed');
     } catch (error) {
       errorLogin.style.display = 'block';
