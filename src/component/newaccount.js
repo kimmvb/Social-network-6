@@ -1,16 +1,14 @@
-import styles from '../css/new.account.module.css';
-import iconLogo from '../asset/icons/Logo.tripify.svg';
 import { createAccount } from '../lib/firebase';
 
 export function newAccount(navigateTo) {
   const sectionAccount = document.createElement('section');
-  sectionAccount.className = styles.contenedor_account;
+  sectionAccount.classList.add('contenedor_account');
 
   const logo = document.createElement('img');
-  logo.className = styles.img_logo;
+  logo.classList.add('img_logo');
 
   const formGrilla = document.createElement('form');
-  formGrilla.className = styles.grilla_form;
+  formGrilla.classList.add('grilla_form');
 
   const labelEmail = document.createElement('label');
   const inputEmail = document.createElement('input');
@@ -26,14 +24,14 @@ export function newAccount(navigateTo) {
   inputRepeatPass.type = 'password';
 
   const btnAccount = document.createElement('button');
-  btnAccount.className = styles.btn_crear_cuenta;
+  btnAccount.classList.add('btn_crear_cuenta');
 
   const linkLogin = document.createElement('p');
-  linkLogin.className = styles.back_home;
+  linkLogin.classList.add('back_home');
 
   const singIn = document.createElement('a');
 
-  logo.src = iconLogo;
+  logo.src = '../asset/icons/Logo.tripify.svg';
 
   labelEmail.textContent = 'Correo electrónico';
   labelUserName.textContent = 'Nombre de usuario';
@@ -58,21 +56,18 @@ export function newAccount(navigateTo) {
       && inputUserName.value.trim() !== ''
       && inputPass.value.trim() !== ''
       && inputRepeatPass.value.trim() !== '') {
-      // Validar el formato del correo electrónico
       if (!emailPattern.test(inputEmail.value)) {
         // eslint-disable-next-line no-alert
         alert('Por favor, ingresa un correo electrónico válido.');
         return;
       }
 
-      // Validar el nombre de usuario
       if (!userNamePattern.test(inputUserName.value)) {
         // eslint-disable-next-line no-alert
         alert('El nombre de usuario debe tener entre 1 y 12 caracteres alfanuméricos.');
         return;
       }
 
-      // Validar la contraseña
       if (!passwordPattern.test(inputPass.value)) {
         // eslint-disable-next-line no-alert
         alert('La contraseña debe contener al menos 8 caracteres, 1 mayúscula y 1 número.');
@@ -84,23 +79,14 @@ export function newAccount(navigateTo) {
         alert('Las contraseñas deben coincidir.');
         return;
       }
-      // Utiliza signUpAndSaveData para crear el usuario y guardar datos adicionales
+
       try {
-        const user = await createAccount(inputUserName.value, inputEmail.value, inputPass.value);
-        // console.log(saveUserSession(user));
-        // eslint-disable-next-line no-console
-        console.log('Usuario creado:', user);
+        await createAccount(inputUserName.value, inputEmail.value, inputPass.value);
         navigateTo('/');
       } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Error al crear usuario y guardar datos:', error);
         // eslint-disable-next-line no-alert
-        alert(`No se ha podido crear el usuario${error.message}`);
+        alert(`No se ha podido crear el usuario ${error.message}`);
       }
-      // signUpAndSaveData(inputUserName.value, inputEmail.value, inputPass.value).then(user => {
-      // navigateTo('/');
-      // () => {
-      // alert('No se ha podido crear el usuario');});
     } else {
       // eslint-disable-next-line no-alert
       alert('Los campos son obligatorios.');

@@ -1,16 +1,11 @@
-/* eslint-disable no-console */
-import styles from '../css/home.module.css';
-import iconLogo from '../asset/icons/Logo.tripify.svg';
-import iconLinea from '../asset/icons/linea.icon.svg';
-// import { saveUserSession } from '../lib/index';
 import { singInWithGoogle, signInWithEmail } from '../lib/firebase';
 
 function home(navigateTo) {
   const sectionHome = document.createElement('section');
-  sectionHome.className = styles.contenedor_home;
+  sectionHome.classList.add('contenedor_home');
 
   const logo = document.createElement('img');
-  logo.className = styles.img_logo;
+  logo.classList.add('img_logo');
 
   const errorLogin = document.createElement('p');
   errorLogin.setAttribute('id', 'incorrect_user');
@@ -20,7 +15,7 @@ function home(navigateTo) {
   errorLogin.style.display = 'none';
 
   const formGrilla = document.createElement('form');
-  formGrilla.className = styles.grilla_form;
+  formGrilla.classList.add('grilla_form');
   formGrilla.setAttribute('id', 'form_login');
 
   const labelEmail = document.createElement('label');
@@ -31,21 +26,21 @@ function home(navigateTo) {
   inputPass.type = 'password';
 
   const buttonGoogle = document.createElement('button');
-  buttonGoogle.className = styles.button_google;
+  buttonGoogle.classList.add('button_google');
 
   const lineaIcon = document.createElement('img');
-  lineaIcon.className = styles.img_linea;
+  lineaIcon.classList.add('img_linea');
 
   const buttonLogin = document.createElement('button');
-  buttonLogin.className = styles.button_login;
+  buttonLogin.classList.add('button_login');
 
   const forgetPass = document.createElement('a');
 
   const newAccount = document.createElement('button');
-  newAccount.className = styles.btn_crear_cuenta;
+  newAccount.classList.add('btn_crear_cuenta');
 
-  logo.src = iconLogo;
-  lineaIcon.src = iconLinea;
+  logo.src = '../asset/icons/Logo.tripify.svg';
+  lineaIcon.src = '../asset/icons/linea.icon.svg';
 
   buttonLogin.textContent = 'Iniciar Sesión';
   buttonLogin.setAttribute('type', 'submit');
@@ -54,13 +49,10 @@ function home(navigateTo) {
     const email = inputEmail.value;
     const password = inputPass.value;
     try {
-      // eslint-disable-next-line no-unused-vars
-      const userData = await signInWithEmail(email, password);
-      console.log('User signed in');
+      await signInWithEmail(email, password);
       navigateTo('/feed');
     } catch (error) {
       errorLogin.style.display = 'block';
-      console.error('Error al iniciar sesión:', error.message);
       const cleanForm = document.getElementById('form_login');
       cleanForm.reset();
     }
@@ -73,12 +65,10 @@ function home(navigateTo) {
   buttonGoogle.addEventListener('click', async (e) => {
     e.preventDefault();
     try {
-      const user = await singInWithGoogle();
-      console.log(user);
+      await singInWithGoogle();
       navigateTo('/feed');
     } catch (error) {
       errorLogin.style.display = 'block';
-      console.log(error);
     }
   });
 
