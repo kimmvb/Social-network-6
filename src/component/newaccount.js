@@ -1,8 +1,8 @@
 import { createAccount } from '../lib/firebase';
 
-export function newAccount(navigateTo) {
+function newAccount(navigateTo) {
   const sectionAccount = document.createElement('section');
-  sectionAccount.classList.add('contenedor_account');
+  sectionAccount.classList.add('container_account');
 
   const logo = document.createElement('img');
   logo.classList.add('img_logo');
@@ -42,14 +42,18 @@ export function newAccount(navigateTo) {
 
   linkLogin.innerHTML = '¿Ya tienes una cuenta? <br>';
   singIn.innerHTML = ' <br> Inicia sesión';
-  singIn.setAttribute('href', '/');
+  singIn.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigateTo('/');
+  });
+  singIn.setAttribute('href', '');
 
   btnAccount.addEventListener('click', async (e) => {
     e.preventDefault();
 
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     const passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-    const userNamePattern = /^[a-zA-Z0-9]{1,12}$/;
+    const userNamePattern = /^[a-zA-Z0-9]{3,12}$/;
 
     if (
       inputEmail.value.trim() !== ''
@@ -64,7 +68,7 @@ export function newAccount(navigateTo) {
 
       if (!userNamePattern.test(inputUserName.value)) {
         // eslint-disable-next-line no-alert
-        alert('El nombre de usuario debe tener entre 1 y 12 caracteres alfanuméricos.');
+        alert('El nombre de usuario debe tener entre 3 y 12 caracteres alfanuméricos.');
         return;
       }
 
@@ -81,7 +85,8 @@ export function newAccount(navigateTo) {
       }
 
       try {
-        await createAccount(inputUserName.value, inputEmail.value, inputPass.value);
+        // await createAccount(inputUserName.value, inputEmail.value, inputPass.value);
+        console.log(await createAccount(inputUserName.value, inputEmail.value, inputPass.value));
         navigateTo('/');
       } catch (error) {
         // eslint-disable-next-line no-alert
@@ -110,4 +115,4 @@ export function newAccount(navigateTo) {
   return sectionAccount;
 }
 
-// export default newAccount;
+export default newAccount;

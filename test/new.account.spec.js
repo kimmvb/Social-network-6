@@ -1,47 +1,160 @@
-// newAccount.test.js
+import newAccount from '../src/component/newaccount';
 
-// Importa la función que deseamos probar desde newAccount.js
-// Importa la función createUserWithEmailAndPassword y setDoc de Firebase (simularemos Firebase)
-import { createAccount } from '../src/lib/firebase';
-import { newAccount } from '../src/component/newaccount.js';
-// Mockear la función createUserWithEmailAndPassword y setDoc para simular Firebase
-/* test('should create a new account', async () => {
-const register =
-});
-*/
-jest.mock('../src/lib/firebase', () => ({
-  createAccount: jest.fn(),
-}));
+describe('Create new account', () => {
+  it('should be a function', () => {
+    expect(typeof newAccount).toBe('function');
+  });
+  it('should return a HTML element', () => {
+    expect(newAccount()).toBeInstanceOf(HTMLElement);
+  });
+  it('should return a section element with a class name called "container_account"', () => {
+    expect(newAccount().className).toBe('container_account');
+  });
+  it('should navigate to "/" when click "¿Olvidaste tu contraseña"', () => {
+    const navigateTo = jest.fn();
+    const section = newAccount(navigateTo);
+    const singIn = section.querySelector('a');
+    singIn.click();
+    expect(navigateTo).toHaveBeenCalledWith('/');
+  });
+  it('should execute "createAccount" with username, email, and password as arguments when click "Crear cuenta"', () => {
+    const alert = window.alert;
+    window.alert = () => {};
+    const navigateTo = jest.fn();
+    const section = newAccount(navigateTo);
+    const btnAccount = section.querySelector('.btn_crear_cuenta');
+    const createAccount = jest.fn();
+    btnAccount.addEventListener('click', () => {
+      createAccount('userName', 'usuario@example.com', 'Pass1234');
+    });
+    btnAccount.click();
+    expect(createAccount).toHaveBeenCalledWith('userName', 'usuario@example.com', 'Pass1234');
+    window.alert = alert;
+  });
+  it('should show an error alerts due to invalid email', () => {
+    const alert = window.alert;
+    window.alert = () => {};
+    const createAccount = jest.fn();
+    const navigateTo = jest.fn();
+    const section = newAccount(navigateTo);
+    const inputEmail = section.querySelector('[type="email"]');
+    const inputUserName = section.querySelector('[type="text"]');
+    const inputPass = section.querySelector('[type="password"]');
+    const inputRepeatPass = section.querySelectorAll('[type="password"]')[1];
+    const btnAccount = section.querySelector('.btn_crear_cuenta');
 
-const mockNavigateTo = jest.fn();
+    const alertSpy = jest.spyOn(window, 'alert');
 
-describe('Botón de Crear Cuenta', () => {
-  it('debería llamar a createAccount al hacer clic en el botón', async () => {
-    // Crear un elemento HTML simulado para el botón
-    const btnAccount = document.createElement('button');
+    inputEmail.value = 'usuario@example'; // Correo inválido
+    inputUserName.value = 'user123';
+    inputPass.value = 'Pass123456';
+    inputRepeatPass.value = 'Pass123456';
 
-    // Llamar a la función `newAccount` con el botón y la función `navigateTo`
-    const sectionAccount = newAccount(mockNavigateTo);
-
-    // Agregar el botón al DOM simulado
-    sectionAccount.appendChild(btnAccount);
-
-    // Simular datos válidos en los campos (puedes agregar campos simulados si es necesario)
-
-    // Simular una llamada exitosa a `createAccount`
-    createAccount.mockResolvedValue({ name: 'Usuario', email: 'usuario@example.com' });
-
-    // Disparar un evento clic en el botón
     btnAccount.click();
 
-    // Verificar que `createAccount` se llamó con los datos correctos
-    expect(createAccount).toHaveBeenCalledWith('nombreDeUsuario', 'usuario@example.com', 'contraseña'); // Ajusta los valores según tu caso
+    expect(createAccount).not.toHaveBeenCalled();
 
-    // Verificar que `navigateTo` se llamó después de la creación del usuario
-    expect(mockNavigateTo).toHaveBeenCalledWith('/');
+    expect(navigateTo).not.toHaveBeenCalled();
 
-    // Verificar que no se mostraron alertas de error
-    // (puedes agregar esto si manejas alertas en tu código)
-    expect(window.alert).not.toHaveBeenCalled();
+    expect(alertSpy).toHaveBeenCalledTimes(1);
+
+    alertSpy.mockRestore();
+    window.alert = alert;
+  });
+  it('should show an error alerts due to invalid username', () => {
+    const alert = window.alert;
+    window.alert = () => {};
+    const createAccount = jest.fn();
+    const navigateTo = jest.fn();
+    const section = newAccount(navigateTo);
+    const inputEmail = section.querySelector('[type="email"]');
+    const inputUserName = section.querySelector('[type="text"]');
+    const inputPass = section.querySelector('[type="password"]');
+    const inputRepeatPass = section.querySelectorAll('[type="password"]')[1];
+    const btnAccount = section.querySelector('.btn_crear_cuenta');
+
+    const alertSpy = jest.spyOn(window, 'alert');
+
+    inputEmail.value = 'usuario@example.com';
+    inputUserName.value = 'u'; // Username inválido
+    inputPass.value = 'Pass123456';
+    inputRepeatPass.value = 'Pass123456';
+
+    btnAccount.click();
+
+    expect(createAccount).not.toHaveBeenCalled();
+
+    expect(navigateTo).not.toHaveBeenCalled();
+
+    expect(alertSpy).toHaveBeenCalledTimes(1);
+
+    alertSpy.mockRestore();
+    window.alert = alert;
+  });
+  it('should show an error alerts due to invalid password', () => {
+    const alert = window.alert;
+    window.alert = () => {};
+    const createAccount = jest.fn();
+    const navigateTo = jest.fn();
+    const section = newAccount(navigateTo);
+    const inputEmail = section.querySelector('[type="email"]');
+    const inputUserName = section.querySelector('[type="text"]');
+    const inputPass = section.querySelector('[type="password"]');
+    const inputRepeatPass = section.querySelectorAll('[type="password"]')[1];
+    const btnAccount = section.querySelector('.btn_crear_cuenta');
+
+    const alertSpy = jest.spyOn(window, 'alert');
+
+    inputEmail.value = 'usuario@example.com';
+    inputUserName.value = 'user123';
+    inputPass.value = 'pass'; // Contraseña inválida
+    inputRepeatPass.value = 'pass';
+
+    btnAccount.click();
+
+    expect(createAccount).not.toHaveBeenCalled();
+
+    expect(navigateTo).not.toHaveBeenCalled();
+
+    expect(alertSpy).toHaveBeenCalledTimes(1);
+
+    alertSpy.mockRestore();
+    window.alert = alert;
+  });
+  it('should show an error alerts due to invalid repeated password', () => {
+    const alert = window.alert;
+    window.alert = () => {};
+    const createAccount = jest.fn();
+    const navigateTo = jest.fn();
+    const section = newAccount(navigateTo);
+    const inputEmail = section.querySelector('[type="email"]');
+    const inputUserName = section.querySelector('[type="text"]');
+    const inputPass = section.querySelector('[type="password"]');
+    const inputRepeatPass = section.querySelectorAll('[type="password"]')[1];
+    const btnAccount = section.querySelector('.btn_crear_cuenta');
+
+    const alertSpy = jest.spyOn(window, 'alert');
+
+    // Simula valores inválidos en los campos de entrada
+    inputEmail.value = 'usuario@example.com';
+    inputUserName.value = 'user123';
+    inputPass.value = 'Pass12345';
+    inputRepeatPass.value = 'Pass123456'; // Contraseña diferente
+
+    // Dispara un evento clic en el botón
+    btnAccount.click();
+
+    // Verificar que no se llamó a `createAccount`
+    expect(createAccount).not.toHaveBeenCalled();
+
+    // Verificar que `navigateTo` no se llamó
+    expect(navigateTo).not.toHaveBeenCalled();
+
+    // Verificar que se mostraron alertas de error
+    expect(alertSpy).toHaveBeenCalledTimes(1);
+
+    // Limpia el espía
+    alertSpy.mockRestore();
+    window.alert = alert;
   });
 });
