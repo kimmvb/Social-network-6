@@ -1,7 +1,7 @@
 import { userSignOut } from '../lib/firebase';
 
 function feed(navigateTo) {
-  document.body.classList.remove('section_home');
+  document.body.classList.add('no-bg');
   const sectionFeed = document.createElement('section');
   sectionFeed.classList.add('feed_section');
 
