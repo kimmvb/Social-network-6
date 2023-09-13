@@ -2,7 +2,7 @@ import { singInWithGoogle, signInWithEmail } from '../lib/firebase';
 
 function home(navigateTo) {
   const sectionHome = document.createElement('section');
-  sectionHome.classList.add('contenedor_home');
+  sectionHome.classList.add('section_home');
 
   const logo = document.createElement('img');
   logo.classList.add('img_logo');

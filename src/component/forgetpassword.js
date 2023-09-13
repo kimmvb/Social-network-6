@@ -4,9 +4,9 @@ function forgetPass(navigateTo) {
   const section = document.createElement('section');
   section.classList.add('reset_password_container');
 
-  const logo = document.createElement('img');
-  logo.classList.add('img_logo');
-  logo.src = '../asset/icons/Logo.tripify.svg';
+  const logoForget = document.createElement('img');
+  logoForget.classList.add('img_logo');
+  logoForget.src = '../asset/icons/Logo.tripify.svg';
 
   const title = document.createElement('h1');
   title.classList.add('reset_password_title');
@@ -50,9 +50,9 @@ function forgetPass(navigateTo) {
   title.textContent = 'Cambio de contraseña';
   emailSent.textContent = '¡Correo enviado exitosamente!';
   emailSentError.textContent = 'Error al enviar el correo de restablecimiento de contraseña';
-  changePass.textContent = 'Escribe tu correo electrónico y te haremos llegar un email para que puedas cambiar tu contraseña.';
+  changePass.textContent = 'Te haremos llegar un email para cambiar tu contraseña.';
 
-  email.setAttribute('placeholder', 'Tu email...');
+  email.setAttribute('placeholder', 'Ingresa tu email...');
   backHome.textContent = 'Volver a inicio';
   backHome.addEventListener('click', (e) => {
     e.preventDefault();
@@ -78,7 +78,7 @@ function forgetPass(navigateTo) {
 
   formEmail.append(changePass, email, buttonSendEmail);
   smallContainer.append(formEmail, emailSent, emailSentError);
-  section.append(logo, title, smallContainer, backHome);
+  section.append(logoForget, title, smallContainer, backHome);
 
   return section;
 }
