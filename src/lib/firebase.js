@@ -29,9 +29,7 @@ const db = getFirestore(app);
 
 export const signInWithEmail = async (email, password) => {
   try {
-    const user = await signInWithEmailAndPassword(auth, email, password);
-    // eslint-disable-next-line no-console
-    console.log(user);
+    await signInWithEmailAndPassword(auth, email, password);
   } catch (error) {
     throw new Error(error);
   }

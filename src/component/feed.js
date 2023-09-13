@@ -2,7 +2,7 @@ import { userSignOut } from '../lib/firebase';
 
 function feed(navigateTo) {
   const sectionFeed = document.createElement('section');
-  sectionFeed.classList('feed_section');
+  sectionFeed.classList.add('feed_section');
 
   const divFeed = `<div class="container_feed">
   <header id="header_feed">
@@ -20,7 +20,7 @@ function feed(navigateTo) {
   <div class="perfil_post">
     <img src="../asset/icons/user-circle.png" alt="random image">
   </div>
-  <div class="container_text}">
+  <div class="container_text">
     <h3>Sr. Fox</h3> 
     <h4>12 January 2019</h4>
     <p>The position property specifies the type of positioning method used for an element (static, relative, absolute, fixed, or sticky).</p>
