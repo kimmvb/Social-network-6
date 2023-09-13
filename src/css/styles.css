@@ -363,10 +363,7 @@ a {
     font-size: 1.1rem;
 }
 
-.contenedor_account {
-    display: grid;
-    grid-template-columns: 1fr;
-    background-color: var(--var-fondoHome);
+.container_account {
     text-align: center;
     justify-content: center;
     justify-items: center;

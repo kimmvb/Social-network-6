@@ -27,16 +27,18 @@ function forgetPass(navigateTo) {
   changePass.classList.add('reset_password_label');
   changePass.setAttribute('for', 'input_reset_password');
 
-  const resetEmail = document.createElement('form');
-  resetEmail.classList.add('reset_password_form');
+  /* const resetEmail = document.createElement('form');
+  resetEmail.className = styles.reset_password_form;
   resetEmail.setAttribute('id', 'input_reset_password');
 
   const emailForm = document.createElement('input');
   emailForm.classList.add('reset_password_email');
   emailForm.setAttribute('id', 'email');
+  */
   const formEmail = document.createElement('form');
   formEmail.classList.add('reset_password_form');
   formEmail.setAttribute('id', 'input_reset_password');
+
   const email = document.createElement('input');
   email.type = 'email';
   email.classList.add('reset_password_email');
