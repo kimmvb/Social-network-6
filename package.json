@@ -9,13 +9,16 @@
     "firebase",
     "jest"
   ],
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
   "license": "MIT",
   "scripts": {
     "htmlhint": "htmlhint dist/*.html ",
     "eslint": "eslint --ext .js src/ test/",
     "stylelint": "stylelint --aei src/**/*.css",
     "pretest": "npm run htmlhint && npm run eslint && npm run stylelint",
-    "test": "jest --env=jsdom --coverage",
+    "test": "jest --coverage",
     "dev": "vite dev src",
     "start": "npm run dev",
     "build": "vite build",
@@ -32,7 +35,8 @@
     "regenerator-runtime": "^0.13.1",
     "stylelint": "^14.1.0",
     "stylelint-config-recommended": "^6.0.0",
-    "vite": "^3.2.7"
+    "vite": "^3.2.7",
+    "@testing-library/dom": "^9.3.1"
   },
   "engines": {
     "node": ">=16.x"

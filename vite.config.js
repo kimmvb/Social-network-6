@@ -19,10 +19,10 @@ export default defineConfig(({ command }) => {
         minify: false,
         rollupOptions: {
           output: {
-            dir: './dist',
-          },
-        },
-      },
+            dir: './dist'
+          }
+        }
+      }
     };
   }
   return {};
