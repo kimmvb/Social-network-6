@@ -2,7 +2,7 @@ import styles from '../css/new.account.module.css';
 import iconLogo from '../asset/icons/Logo.tripify.svg';
 import { createAccount } from '../lib/firebase';
 
-function newAccount(navigateTo) {
+export function newAccount(navigateTo) {
   const sectionAccount = document.createElement('section');
   sectionAccount.className = styles.contenedor_account;
 
@@ -124,4 +124,4 @@ function newAccount(navigateTo) {
   return sectionAccount;
 }
 
-export default newAccount;
+// export default newAccount;

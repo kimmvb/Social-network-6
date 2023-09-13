@@ -1,6 +1,6 @@
 import home from './component/home.js';
 import error from './component/error.js';
-import newAccount from './component/newaccount.js';
+import { newAccount } from './component/newaccount.js';
 import feed from './component/feed.js';
 import forgetpassword from './component/forgetpassword.js';
 

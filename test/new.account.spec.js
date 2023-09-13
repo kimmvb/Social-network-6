@@ -1,66 +1,47 @@
-import { newAccount } from '../src/component/newaccount';
-// import { createAccount } from '../src/lib/firebase';
+// newAccount.test.js
 
+// Importa la función que deseamos probar desde newAccount.js
+// Importa la función createUserWithEmailAndPassword y setDoc de Firebase (simularemos Firebase)
+import { createAccount } from '../src/lib/firebase';
+import { newAccount } from '../src/component/newaccount.js';
+// Mockear la función createUserWithEmailAndPassword y setDoc para simular Firebase
+/* test('should create a new account', async () => {
+const register =
+});
+*/
 jest.mock('../src/lib/firebase', () => ({
   createAccount: jest.fn(),
 }));
 
+const mockNavigateTo = jest.fn();
+
 describe('Botón de Crear Cuenta', () => {
-  // let btnAccount;
-  let inputEmail;
-  let inputUserName;
-  let inputPass;
-  let inputRepeatPass;
+  it('debería llamar a createAccount al hacer clic en el botón', async () => {
+    // Crear un elemento HTML simulado para el botón
+    const btnAccount = document.createElement('button');
 
-  beforeEach(() => {
-    // Configurar elementos del DOM simulados antes de cada prueba
-    document.body.innerHTML = `
-        <button id="createAccountButton">Crear Cuenta</button>
-        <input id="inputEmail" />
-        <input id="inputUserName" />
-        <input id="inputPass" />
-        <input id="inputRepeatPass" />
-      `;
+    // Llamar a la función `newAccount` con el botón y la función `navigateTo`
+    const sectionAccount = newAccount(mockNavigateTo);
 
-    // Asignar elementos del DOM a las variables
-    // btnAccount = document.getElementById('createAccountButton');
-    inputEmail = document.getElementById('inputEmail');
-    inputUserName = document.getElementById('inputUserName');
-    inputPass = document.getElementById('inputPass');
-    inputRepeatPass = document.getElementById('inputRepeatPass');
-  });
+    // Agregar el botón al DOM simulado
+    sectionAccount.appendChild(btnAccount);
 
-  it('debería crear una cuenta y redirigir al usuario si los datos son válidos', async () => {
-    // Simular datos válidos
-    inputEmail.value = 'usuario@ejemplo.com';
-    inputUserName.value = 'usuario123';
-    inputPass.value = 'Password1';
-    inputRepeatPass.value = 'Password1';
+    // Simular datos válidos en los campos (puedes agregar campos simulados si es necesario)
 
-    // Configurar el mock de createAccount para simular una creación exitosa de cuenta
-    const mockUser = { id: 1, username: 'usuario123' };
-    require('../src/lib/firebase').createAccount.mockResolvedValue(mockUser);
-
-    // Configurar el mock de navigateTo para hacer seguimiento de las llamadas
-    // const navigateToMock = jest.fn();
-    // require('../src/main').navigateTo = navigateToMock;
+    // Simular una llamada exitosa a `createAccount`
+    createAccount.mockResolvedValue({ name: 'Usuario', email: 'usuario@example.com' });
 
     // Disparar un evento clic en el botón
     btnAccount.click();
 
-    // Verificar que el mock de createAccount se llamó con los datos correctos
-    expect(require('../src/lib/firebase').createAccount).toHaveBeenCalledWith(
-      'usuario123',
-      'usuario@ejemplo.com',
-      'Password1',
-    );
+    // Verificar que `createAccount` se llamó con los datos correctos
+    expect(createAccount).toHaveBeenCalledWith('nombreDeUsuario', 'usuario@example.com', 'contraseña'); // Ajusta los valores según tu caso
 
-    // Verificar que el mock de navigateTo se llamó con la ruta correcta
-    // expect(navigateTo('/')).toHaveBeenCalledWith('/');
+    // Verificar que `navigateTo` se llamó después de la creación del usuario
+    expect(mockNavigateTo).toHaveBeenCalledWith('/');
 
     // Verificar que no se mostraron alertas de error
+    // (puedes agregar esto si manejas alertas en tu código)
     expect(window.alert).not.toHaveBeenCalled();
   });
-
-  // Escribe pruebas similares para otros casos, como validaciones de campos y manejo de errores
 });
