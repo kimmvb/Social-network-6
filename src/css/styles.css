@@ -81,12 +81,35 @@ input[type=password] {
     align-items: center;
 }
 
-.buscador {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 10%;
+.nav_container_up {
     background-color: #e8868d81;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.buscador {
+    margin-left: 13px;
+    align-self: center;
+    width: 100%;
+    height: 60px;
+}
+
+.logout {
+    width: 68px;
+    grid-area: 1/ 2;
+    align-self: center;
+    justify-self: center;
+}
+
+.btn_logout {
+    border-radius: 12px;
+    border: 1px solid #cccc;
+    font-size: 0.8rem;
+    width: 100px;
+    margin-right: 22px;
 }
 
 #input_busqueda {
@@ -99,22 +122,31 @@ input[type=password] {
 }
 
 .perfil {
-    height: 65px;
-    width: 68px;
-    background-color: #fff;
+    height: 53px;
+    width: 56px;
     background-image: url(../asset/icons/user-circle.png);
     background-repeat: no-repeat;
-    background-size: contain;
     box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
     border-radius: 100%;
     position: absolute;
     left: 5%;
+    display: flex;
+    justify-content: center;
+}
+
+#myfile {
+    display: none;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
 }
 
 .img_logo {
     width: 100%;
 }
-
 
 #main_feed {
     display: grid;
@@ -125,7 +157,6 @@ input[type=password] {
     padding: 2rem;
     min-width: 100%;
 }
-
 
 .icon_perfil {
     background: #fff;
@@ -371,6 +402,7 @@ a {
     justify-items: center;
     padding-bottom: 40px;
     min-height: 100vh;
+    background-color: var(--var-fondoHome);
 }
 
 .grilla_form {
@@ -420,6 +452,38 @@ a {
         background-color: transparent;
     }
 
+    #main_feed {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 0.6fr;
+    }
+
+    .nav_container_up {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    }
+
+    .buscador {
+        /* justify-self: center;
+        height: 60px;
+        grid-area: 1/ 2; */
+        display: flex;
+        justify-content: center;
+    }
+
+    #input_busqueda {
+        border: 1px solid #F1B33C;
+        outline: none;
+        box-shadow: 0 0 10px #F1B33C;
+        width: 200px;
+        margin-left: 117px;
+    }
+
+    .logout {
+        grid-area: 1/ 3;
+        margin-right: 100px;
+    }
+
     .grilla_form label {
         font-size: 1.1rem;
         color: var(--var_colorfuente);
@@ -432,4 +496,5 @@ a {
     .img_logo {
         width: 40%;
     }
+
 }

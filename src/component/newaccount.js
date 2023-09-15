@@ -1,6 +1,7 @@
 import { createAccount } from '../lib/firebase';
 
 function newAccount(navigateTo) {
+  document.body.classList.remove('no-bg');
   const sectionAccount = document.createElement('section');
   sectionAccount.classList.add('container_account');
 

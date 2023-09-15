@@ -1,6 +1,7 @@
 import { resetEmail } from '../lib/firebase';
 
 function forgetPass(navigateTo) {
+  document.body.classList.remove('no-bg');
   const section = document.createElement('section');
   section.classList.add('reset_password_container');
 
