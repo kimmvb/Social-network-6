@@ -73,7 +73,11 @@ function home(navigateTo) {
   });
 
   forgetPass.textContent = '¿Olvidaste tu contraseña?';
-  forgetPass.setAttribute('href', '/forgetpassword');
+  forgetPass.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigateTo('/forget_password');
+  });
+  forgetPass.setAttribute('href', '');
 
   newAccount.textContent = 'Crear nueva cuenta';
   newAccount.addEventListener('click', (e) => {

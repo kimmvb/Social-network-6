@@ -1,4 +1,4 @@
-import { reseatEmail } from '../lib/firebase';
+import { resetEmail } from '../lib/firebase';
 
 function forgetPass(navigateTo) {
   const section = document.createElement('section');
@@ -27,14 +27,6 @@ function forgetPass(navigateTo) {
   changePass.classList.add('reset_password_label');
   changePass.setAttribute('for', 'input_reset_password');
 
-  /* const resetEmail = document.createElement('form');
-  resetEmail.className = styles.reset_password_form;
-  resetEmail.setAttribute('id', 'input_reset_password');
-
-  const emailForm = document.createElement('input');
-  emailForm.classList.add('reset_password_email');
-  emailForm.setAttribute('id', 'email');
-  */
   const formEmail = document.createElement('form');
   formEmail.classList.add('reset_password_form');
   formEmail.setAttribute('id', 'input_reset_password');
@@ -62,11 +54,11 @@ function forgetPass(navigateTo) {
   });
 
   buttonSendEmail.textContent = 'Enviar';
+
   formEmail.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const emailInput = document.getElementById('email');
-    const finalEmail = emailInput.value;
-    reseatEmail(finalEmail)
+    const finalEmail = email.value;
+    resetEmail(finalEmail)
       .then(() => {
         changePass.style.display = 'none';
         formEmail.style.display = 'none';

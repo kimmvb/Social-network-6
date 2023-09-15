@@ -10,7 +10,7 @@ describe('Create new account', () => {
   it('should return a section element with a class name called "container_account"', () => {
     expect(newAccount().className).toBe('container_account');
   });
-  it('should navigate to "/" when click "¿Olvidaste tu contraseña"', () => {
+  it('should navigate to "/" when click "Inicia sesión"', () => {
     const navigateTo = jest.fn();
     const section = newAccount(navigateTo);
     const singIn = section.querySelector('a');
@@ -31,7 +31,7 @@ describe('Create new account', () => {
     expect(createAccount).toHaveBeenCalledWith('userName', 'usuario@example.com', 'Pass1234');
     window.alert = alert;
   });
-  it('should show an error alerts due to invalid email', () => {
+  it('should show an error alert due to invalid email', () => {
     const alert = window.alert;
     window.alert = () => {};
     const createAccount = jest.fn();
@@ -61,7 +61,7 @@ describe('Create new account', () => {
     alertSpy.mockRestore();
     window.alert = alert;
   });
-  it('should show an error alerts due to invalid username', () => {
+  it('should show an error alert due to invalid username', () => {
     const alert = window.alert;
     window.alert = () => {};
     const createAccount = jest.fn();
@@ -91,7 +91,7 @@ describe('Create new account', () => {
     alertSpy.mockRestore();
     window.alert = alert;
   });
-  it('should show an error alerts due to invalid password', () => {
+  it('should show an error alert due to invalid password', () => {
     const alert = window.alert;
     window.alert = () => {};
     const createAccount = jest.fn();
@@ -121,7 +121,7 @@ describe('Create new account', () => {
     alertSpy.mockRestore();
     window.alert = alert;
   });
-  it('should show an error alerts due to invalid repeated password', () => {
+  it('should show an error alert due to invalid repeated password', () => {
     const alert = window.alert;
     window.alert = () => {};
     const createAccount = jest.fn();

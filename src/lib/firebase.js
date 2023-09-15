@@ -82,4 +82,4 @@ export const userSignOut = async () => {
   });
 };
 
-export const reseatEmail = async (email) => sendPasswordResetEmail(auth, email);
+export const resetEmail = async (email) => sendPasswordResetEmail(auth, email);
