@@ -8,14 +8,24 @@ function feed(navigateTo) {
   const divFeed = `
     <div class="container_feed">
       <header id="header_feed">
-        <div class="perfil"></div>
+        <div class="perfil">
+          <label class="custom-file-upload">
+            <input type="file" 
+                id="myfile">
+          </label>
+        </div>
         <div class="logo">
           <img src="../asset/icons/Logo.feed.png" alt=" image">
         </div>
       </header>
+    <nav class="nav_container_up">
+        <div class="logout">
+          <button class="btn_logout"> Cerrar Sesion</button>
+        </div>
       <div class="buscador">
-        <input id="input_busqueda" type="search" placeholder= "Buscar">
+          <input id="input_busqueda" type="search" placeholder= "Buscar">
       </div>
+    </nav>
       <main id="main_feed">
         <div class="div_post">
           <div class="icon_perfil"'
@@ -45,18 +55,17 @@ function feed(navigateTo) {
       
     </footer>`;
 
-  const buttonLogOut = document.createElement('button');
-  buttonLogOut.textContent = 'Cerrar Sesión';
-  buttonLogOut.addEventListener('click', async () => {
+  sectionFeed.innerHTML = divFeed;
+  /* elementbyclass responde un arreglo por eso pongo el [0] */
+
+  sectionFeed.getElementsByClassName('btn_logout')[0].addEventListener('click', () => {
     try {
-      await userSignOut();
+      userSignOut();
       navigateTo('/');
     } catch (error) {
       throw new Error(error);
     }
   });
-
-  sectionFeed.innerHTML = divFeed;
 
   return sectionFeed;
 }

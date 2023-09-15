@@ -1,3 +1,4 @@
+import { onAuthStateChanged, getAuth } from 'firebase/auth';
 import home from './component/home.js';
 import error from './component/error.js';
 import newAccount from './component/newaccount.js';
@@ -15,9 +16,8 @@ const routes = [
 const defaultRoute = '/';
 const root = document.getElementById('root');
 
-function navigateTo(hash) {
+async function navigateTo(hash) {
   const route = routes.find((routeFound) => routeFound.path === hash);
-
   if (route && route.component) {
     window.history.pushState(
       {},
@@ -32,6 +32,14 @@ function navigateTo(hash) {
     navigateTo('/error');
   }
 }
+
+onAuthStateChanged(getAuth(), (user) => {
+  if (user) {
+    navigateTo(window.location.pathname);
+  } else {
+    navigateTo(defaultRoute);
+  }
+});
 
 window.onpopstate = () => {
   navigateTo(window.location.pathname);

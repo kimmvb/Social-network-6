@@ -1,6 +1,7 @@
 import { singInWithGoogle, signInWithEmail } from '../lib/firebase';
 
 function home(navigateTo) {
+  document.body.classList.remove('no-bg');
   const sectionHome = document.createElement('section');
   sectionHome.classList.add('section_home');
 
