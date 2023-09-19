@@ -8,7 +8,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { getFirestore, setDoc, doc } from 'firebase/firestore';
+import { getFirestore, setDoc, doc, addDoc, collection, getDocs, query, orderBy } from 'firebase/firestore';
 
 // configuracion incial de firebase
 const firebaseConfig = {
@@ -83,3 +83,23 @@ export const userSignOut = async () => {
 };
 
 export const resetEmail = async (email) => sendPasswordResetEmail(auth, email);
+
+export const newPost = async (userId, content) => {
+  const postRef = collection(db, 'posts');
+  await addDoc(postRef, {
+    userId,
+    content,
+    creationDate: new Date(),
+  });
+};
+
+export const publicPosts = async () => {
+  const postRef = collection(db, 'posts');
+  const q = query(postRef, orderBy('creationDate', 'desc'));
+  const querySnapshot = await getDocs(q);
+  const posts = [];
+  querySnapshot.forEach((document) => {
+    posts.push({ id: document.id, ...document.data() });
+  });
+  return posts;
+};

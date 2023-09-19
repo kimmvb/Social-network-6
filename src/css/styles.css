@@ -227,6 +227,12 @@ input[type=password] {
 
 } */
 
+#add-post {
+    position: fixed;
+    bottom: 8%;
+    right: 10%;
+    cursor: pointer;
+}
 
 
 /*  Reset pass */
@@ -427,6 +433,42 @@ a {
 .back_home {
     margin-top: 23px;
     color: var(--var_colorfuente);
+    font-size: 1.1rem;
+}
+
+/* Section New Post*/
+
+.nav_post {
+    width: 100%;
+    padding: 20px;
+    background-color: #834af48c;
+}
+
+.post_small_container {
+    display: flex;
+    padding: 15px;
+}
+
+#post_content {
+    resize: none;
+    font-size: 16px;
+}
+
+#post_form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#post_button {
+    background-color: #f1b33c;
+    border-radius: 24px;
+    margin-top: 20px;
+    height: 35px;
+    color: white;
+    border: var(--var_bordeinputblanco);
+    width: 50%;
+    align-self: flex-end;
     font-size: 1.1rem;
 }
 

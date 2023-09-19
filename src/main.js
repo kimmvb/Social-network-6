@@ -4,6 +4,12 @@ import error from './component/error.js';
 import newAccount from './component/newaccount.js';
 import feed from './component/feed.js';
 import forgetpassword from './component/forgetpassword.js';
+import createPost from './component/createpost.js';
+
+let userId = '';
+function getUserId() {
+  return userId;
+}
 
 const routes = [
   { path: '/', component: home },
@@ -11,6 +17,7 @@ const routes = [
   { path: '/feed', component: feed },
   { path: '/new_account', component: newAccount },
   { path: '/forget_password', component: forgetpassword },
+  { path: '/feed/post', component: createPost },
 ];
 
 const defaultRoute = '/';
@@ -27,7 +34,7 @@ async function navigateTo(hash) {
     if (root.firstChild) {
       root.removeChild(root.firstChild);
     }
-    root.appendChild(route.component(navigateTo));
+    root.appendChild(route.component(navigateTo, getUserId));
   } else {
     navigateTo('/error');
   }
@@ -35,8 +42,14 @@ async function navigateTo(hash) {
 
 onAuthStateChanged(getAuth(), (user) => {
   if (user) {
+    const id = user.uid;
+    userId = id;
+    console.log(id);
+    console.log(userId);
     navigateTo(window.location.pathname);
   } else {
+    userId = '';
+    console.log(userId);
     navigateTo(defaultRoute);
   }
 });

@@ -49,10 +49,21 @@ function feed(navigateTo) {
             <p>The position property specifies the type of positioning method used for an element (static, relative, absolute, fixed, or sticky).</p>
           </div>
         </div>
+        <div class="div_post">
+        <div class="icon_perfil"'
+          <div class="perfil_post">
+            <img src="../asset/icons/user-circle.png" alt="random image">
+          </div>
+        <div class="container_text">
+          <h3>Sr. Fox</h3> 
+          <h4>12 January 2019</h4>
+          <p>The position property specifies the type of positioning method used for an element (static, relative, absolute, fixed, or sticky).</p>
+        </div>
+      </div>
       </main>
     </div>
+    <i class="fa-solid fa-circle-plus fa-4x" id="add-post" style="color: #f1b33c;"></i>
     <footer>
-      
     </footer>`;
 
   sectionFeed.innerHTML = divFeed;
@@ -65,6 +76,10 @@ function feed(navigateTo) {
     } catch (error) {
       throw new Error(error);
     }
+  });
+
+  sectionFeed.querySelector('i').addEventListener('click', () => {
+    navigateTo('/feed/post');
   });
 
   return sectionFeed;

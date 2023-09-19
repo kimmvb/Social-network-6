@@ -15,11 +15,12 @@ describe('Forget password', () => {
   });
   it('should execute "resetEmail" with an email as argument when submitting the form', async () => {
     const navigateToMock = jest.fn();
-    const resetEmail = jest.fn();
+    const resetEmail = jest.fn().mockImplementation(() => Promise.resolve({}));
     const section = forgetPass(navigateToMock);
     const formEmail = section.querySelector('form');
     const inputEmail = section.querySelector('[type="email"]');
     const buttonSendEmail = section.querySelector('button');
+    // const changePass = section.querySelector('.reset_password_label');
 
     inputEmail.value = 'usuario@example.com';
 
@@ -28,6 +29,9 @@ describe('Forget password', () => {
     // Configura el manejador de eventos submit de forma asincrónica
     formEmail.addEventListener('submit', async () => {
       resetEmail(inputEmail.value);
+      /* .then(() => {
+        expect(changePass.style.display).toBe('none');
+      }); */
     });
 
     // Dispara el evento submit de forma asincrónica
