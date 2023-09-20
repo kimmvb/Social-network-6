@@ -77,7 +77,6 @@ input[type=password] {
     justify-content: center;
     background-color: #834af48c;
     width: 100%;
-    height: 15%;
     align-items: center;
 }
 
@@ -107,9 +106,12 @@ input[type=password] {
 .btn_logout {
     border-radius: 12px;
     border: 1px solid #cccc;
-    font-size: 0.8rem;
-    width: 100px;
+    font-size: 0.9rem;
+    width: 126px;
     margin-right: 22px;
+    height: 25px;
+    background-color: #e86972;
+    color: white;
 }
 
 #input_busqueda {
@@ -172,6 +174,7 @@ input[type=password] {
     border: var(--var_bordeinputoscuro);
     box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
     margin-bottom: 20px;
+    border-radius: 20px;
 }
 
 

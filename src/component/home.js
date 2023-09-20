@@ -1,6 +1,6 @@
 import { singInWithGoogle, signInWithEmail } from '../lib/firebase';
 
-function home(navigateTo) {
+export const home = async (navigateTo) => {
   document.body.classList.remove('no-bg');
   const sectionHome = document.createElement('section');
   sectionHome.classList.add('section_home');
@@ -100,6 +100,4 @@ function home(navigateTo) {
   sectionHome.append(logo, errorLogin, formGrilla);
 
   return sectionHome;
-}
-
-export default home;
+};

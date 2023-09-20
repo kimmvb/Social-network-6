@@ -48,6 +48,7 @@ export const feed = async (navigateTo) => {
     <i class="fa-solid fa-circle-plus fa-4x" id="add-post" style="color: #f1b33c;"></i>
     <footer>
     </footer>`;
+
   sectionFeed.innerHTML = divFeed;
   sectionFeed.getElementsByClassName('btn_logout')[0].addEventListener('click', () => {
     try {

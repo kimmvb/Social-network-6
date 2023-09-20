@@ -1,5 +1,5 @@
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
-import home from './component/home.js';
+import { home } from './component/home.js';
 import error from './component/error.js';
 import newAccount from './component/newaccount.js';
 import { feed } from './component/feed.js';
@@ -22,21 +22,26 @@ const routes = [
 
 const defaultRoute = '/';
 const root = document.getElementById('root');
+let currentHash = '';
 
 async function navigateTo(hash) {
   const route = routes.find((routeFound) => routeFound.path === hash);
-  if (route && route.component) {
-    window.history.pushState(
-      {},
-      route.path,
-      window.location.origin + route.path,
-    );
-    if (root.firstChild) {
-      root.removeChild(root.firstChild);
+  if (currentHash !== hash) {
+    if (route && route.component) {
+      window.history.pushState(
+        {},
+        route.path,
+        window.location.origin + route.path,
+      );
+      if (root.firstChild) {
+        root.removeChild(root.firstChild);
+      }
+      root.appendChild(await route.component(navigateTo, getUserId));
+      currentHash = hash; // Actualiza currentHash aquí
+      console.log(root);
+    } else {
+      navigateTo('/error');
     }
-    root.appendChild(await route.component(navigateTo, getUserId));
-  } else {
-    navigateTo('/error');
   }
 }
 
