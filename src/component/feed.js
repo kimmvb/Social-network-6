@@ -1,6 +1,6 @@
 import { userSignOut, getPosts } from '../lib/firebase';
 
-export const feed = async (navigateTo) => {
+export const feed = async (navigateTo, getUserPhoto) => {
   document.body.classList.add('no-bg');
   const sectionFeed = document.createElement('section');
   sectionFeed.classList.add('feed_section');
@@ -8,14 +8,15 @@ export const feed = async (navigateTo) => {
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const posts = await getPosts();
   posts.forEach((post) => {
+    const photoUrl = post.photo || '../asset/icons/user-circle.png';
     HTMLPosts += `
     <div class="div_post">
       <div class="icon_perfil"'
         <div class="perfil_post">
-          <img src="../asset/icons/user-circle.png" alt="random image">
+          <img src="${photoUrl}" alt="random image">
         </div>
       <div class="container_text">
-        <h3>Sr. Fox</h3>
+        <h3>${post.name}</h3>
         <h4>${post.creationDate.toDate().toLocaleDateString('es-CL', options)}</h4>
         <p>${post.content}</p>
       </div>
@@ -23,13 +24,14 @@ export const feed = async (navigateTo) => {
     </div>`;
   });
 
+  const userPhoto = getUserPhoto();
+  const photoUrl = userPhoto || '../asset/icons/user-circle.png';
+
   const divFeed = `
     <div class="container_feed">
       <header id="header_feed">
         <div class="perfil">
-          <label class="custom-file-upload">
-            <input type="file" id="myfile">
-          </label>
+         <img src="${photoUrl}" alt="random image" id="profile_photo">
         </div>
         <div class="logo">
           <img src="../asset/icons/Logo.feed.png" alt=" image">
@@ -45,10 +47,15 @@ export const feed = async (navigateTo) => {
     </nav>
       <main id="main_feed">${HTMLPosts}</main>
     </div>
-    <i class="fa-solid fa-circle-plus fa-4x" id="add-post" style="color: #f1b33c;"></i>
+    <i class="fa-solid fa-circle-plus fa-4x" id="add_post" style="color: #f1b33c;"></i>
     <footer>
     </footer>`;
   sectionFeed.innerHTML = divFeed;
+
+  sectionFeed.querySelector('#profile_photo').addEventListener('click', () => {
+    navigateTo('/profile');
+  });
+
   sectionFeed.getElementsByClassName('btn_logout')[0].addEventListener('click', () => {
     try {
       userSignOut();

@@ -5,10 +5,15 @@ import newAccount from './component/newaccount.js';
 import { feed } from './component/feed.js';
 import forgetpassword from './component/forgetpassword.js';
 import createPost from './component/createpost.js';
+import { profile } from './component/profile.js';
 
 let userId = '';
 function getUserId() {
   return userId;
+}
+let userPhoto = '';
+function getUserPhoto() {
+  return userPhoto;
 }
 
 const routes = [
@@ -18,6 +23,7 @@ const routes = [
   { path: '/new_account', component: newAccount },
   { path: '/forget_password', component: forgetpassword },
   { path: '/create_post', component: createPost },
+  { path: '/profile', component: profile },
 ];
 
 const defaultRoute = '/';
@@ -34,7 +40,7 @@ async function navigateTo(hash) {
     if (root.firstChild) {
       root.removeChild(root.firstChild);
     }
-    root.appendChild(await route.component(navigateTo, getUserId));
+    root.appendChild(await route.component(navigateTo, getUserPhoto, getUserId));
   } else {
     navigateTo('/error');
   }
@@ -44,6 +50,8 @@ onAuthStateChanged(getAuth(), (user) => {
   if (user) {
     const id = user.uid;
     userId = id;
+    const photo = user.photoURL;
+    userPhoto = photo;
     navigateTo(window.location.pathname);
   } else {
     navigateTo(defaultRoute);

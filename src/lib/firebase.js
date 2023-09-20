@@ -7,6 +7,7 @@ import {
   sendPasswordResetEmail,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from 'firebase/auth';
 import {
   getFirestore,
@@ -69,6 +70,9 @@ export const createAccount = async (name, email, password) => {
   try {
     const response = await createUserWithEmailAndPassword(auth, email, password);
     const user = response.user;
+
+    await updateProfile(user, { displayName: name });
+
     await setDoc(doc(db, 'users', user.uid), {
       name,
       email,
@@ -96,8 +100,12 @@ export const userSignOut = async () => {
 export const resetEmail = async (email) => sendPasswordResetEmail(auth, email);
 
 export const newPost = async (userId, content) => {
+  const name = auth.currentUser.displayName;
+  const photo = auth.currentUser.photoURL;
   const postRef = collection(db, 'posts');
   await addDoc(postRef, {
+    name,
+    photo,
     userId,
     content,
     creationDate: new Date(),

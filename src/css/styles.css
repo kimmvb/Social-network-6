@@ -77,7 +77,6 @@ input[type=password] {
     justify-content: center;
     background-color: #834af48c;
     width: 100%;
-    height: 15%;
     align-items: center;
 }
 
@@ -107,9 +106,12 @@ input[type=password] {
 .btn_logout {
     border-radius: 12px;
     border: 1px solid #cccc;
-    font-size: 0.8rem;
-    width: 100px;
+    font-size: 0.9rem;
+    width: 126px;
     margin-right: 22px;
+    height: 25px;
+    background-color: #e86972;
+    color: white;
 }
 
 #input_busqueda {
@@ -121,17 +123,21 @@ input[type=password] {
     padding: 10px;
 }
 
+
+
 .perfil {
-    height: 53px;
-    width: 56px;
-    background-image: url(../asset/icons/user-circle.png);
-    background-repeat: no-repeat;
     box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
     border-radius: 100%;
     position: absolute;
     left: 5%;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+#profile_photo {
+    border-radius: 50px;
+    width: 60px;
 }
 
 #myfile {
@@ -445,12 +451,13 @@ a {
     padding: 15px;
 }
 
+
 #post_content {
     resize: none;
     font-size: 16px;
 }
 
-#add-post {
+#add_post {
     position: fixed;
     cursor: pointer;
     width: 60px;
@@ -458,8 +465,8 @@ a {
     background: #FFF;
     right: 0;
     bottom: 5px;
-    margin-right: 16px;
-    margin-bottom: 16px;
+    margin-right: 30px;
+    margin-bottom: 50px;
     border-radius: 30px;
 }
 
@@ -479,6 +486,21 @@ a {
     width: 50%;
     align-self: flex-end;
     font-size: 1.1rem;
+}
+
+/* Section Profile*/
+
+.nav_profile {
+    width: 100%;
+    padding: 20px;
+    background-color: #834af48c;
+}
+
+.edit_profile {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    background-color: #e8868d81;
 }
 
 @media (min-width: 768px) {
