@@ -15,7 +15,7 @@ describe('Forget password', () => {
   });
   it('should execute "resetEmail" with an email as argument when submitting the form', async () => {
     const navigateToMock = jest.fn();
-    const resetEmail = jest.fn().mockImplementation(() => Promise.resolve({}));
+    const resetEmail = jest.fn();
     const section = forgetPass(navigateToMock);
     const formEmail = section.querySelector('form');
     const inputEmail = section.querySelector('[type="email"]');
@@ -40,6 +40,39 @@ describe('Forget password', () => {
 
     // Realiza la comprobación después de esperar
     expect(resetEmail).toHaveBeenCalledTimes(1);
+  });
+  it('should change the display of four elements when "resetEmail" is executed successfully', async () => {
+    const navigateToMock = jest.fn();
+    const resetEmail = jest.fn().mockImplementation(() => Promise.resolve({}));
+    const section = forgetPass(navigateToMock);
+    const formEmail = section.querySelector('form');
+    const inputEmail = section.querySelector('[type="email"]');
+    const buttonSendEmail = section.querySelector('button');
+    const changePass = section.querySelector('.reset_password_label');
+    const emailSent = section.querySelector('.reset_password_paragraph');
+    const emailSentError = section.querySelector('.reset_password_paragraph')[1];
+
+    inputEmail.value = 'usuario@example.com';
+
+    formEmail.append(inputEmail, buttonSendEmail);
+
+    // Configura el manejador de eventos submit de forma asincrónica
+    formEmail.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      resetEmail(inputEmail.value)
+        .then(() => {
+          expect(changePass.style.display).toBe('none');
+          expect(formEmail.style.display).toBe('none');
+          expect(emailSent.style.display).toBe('block');
+          expect(emailSentError.style.display).toBe('none');
+        })
+        .catch(() => {
+        });
+    });
+
+    // Dispara el evento submit de forma asincrónica
+    const submitEvent = new Event('submit', { bubbles: true });
+    formEmail.dispatchEvent(submitEvent);
   });
   it('should navigate to "/" when click "Volver a inicio"', () => {
     const navigateToMock = jest.fn();

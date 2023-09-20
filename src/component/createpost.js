@@ -1,21 +1,25 @@
 import { newPost } from '../lib/firebase';
 
-function createPost(navigateTo, getUserId) {
+function createPost(navigateTo, getUserPhoto, getUserId) {
   const sectionPost = document.createElement('section');
   sectionPost.classList.add('post_section');
+
+  const userPhoto = getUserPhoto();
+  console.log(userPhoto);
+  const photoUrl = userPhoto || '../asset/icons/user-circle.png';
 
   const divPost = `
   <div class="post_big_container">
   <nav class="nav_post">
-   <i class="fa-solid fa-arrow-left fa-xl" style="color: #35285a;"></i>
+   <i class="fa-solid fa-arrow-left fa-xl" style="color: #35285a; cursor: pointer;"></i>
   </nav>
    <div class="post_small_container">
     <div class="icon_post"'
      <div class="profile_new_post">
-      <img src="../asset/icons/user-circle.png" alt="random image">
+      <img src="${photoUrl}" alt="random image id="profile_photo_post" style="border-radius: 50px; width: 60px;">
     </div>
     <form id="post_form">
-     <textarea id="post_content" placeholder="¿Dónde viajaste hoy? 💫" rows="6" cols="29" required></textarea>
+     <textarea id="post_content" placeholder="¿Dónde viajaste hoy? 💫" rows="6" cols="31" required></textarea>
      <input type="submit" value="Postear" id="post_button">
     </form>
    </div>

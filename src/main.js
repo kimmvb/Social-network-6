@@ -5,10 +5,15 @@ import newAccount from './component/newaccount.js';
 import { feed } from './component/feed.js';
 import forgetpassword from './component/forgetpassword.js';
 import createPost from './component/createpost.js';
+import { profile } from './component/profile.js';
 
 let userId = '';
 function getUserId() {
   return userId;
+}
+let userPhoto = '';
+function getUserPhoto() {
+  return userPhoto;
 }
 
 const routes = [
@@ -18,6 +23,7 @@ const routes = [
   { path: '/new_account', component: newAccount },
   { path: '/forget_password', component: forgetpassword },
   { path: '/create_post', component: createPost },
+  { path: '/profile', component: profile },
 ];
 
 const defaultRoute = '/';
@@ -26,22 +32,18 @@ let currentHash = '';
 
 async function navigateTo(hash) {
   const route = routes.find((routeFound) => routeFound.path === hash);
-  if (currentHash !== hash) {
-    if (route && route.component) {
-      window.history.pushState(
-        {},
-        route.path,
-        window.location.origin + route.path,
-      );
-      if (root.firstChild) {
-        root.removeChild(root.firstChild);
-      }
-      root.appendChild(await route.component(navigateTo, getUserId));
-      currentHash = hash; // Actualiza currentHash aquí
-      console.log(root);
-    } else {
-      navigateTo('/error');
+  if (route && route.component) {
+    window.history.pushState(
+      {},
+      route.path,
+      window.location.origin + route.path,
+    );
+    if (root.firstChild) {
+      root.removeChild(root.firstChild);
     }
+    root.appendChild(await route.component(navigateTo, getUserPhoto, getUserId));
+  } else {
+    navigateTo('/error');
   }
 }
 
@@ -49,6 +51,8 @@ onAuthStateChanged(getAuth(), (user) => {
   if (user) {
     const id = user.uid;
     userId = id;
+    const photo = user.photoURL;
+    userPhoto = photo;
     navigateTo(window.location.pathname);
   } else {
     navigateTo(defaultRoute);
