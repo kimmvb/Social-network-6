@@ -2,7 +2,7 @@ import { onAuthStateChanged, getAuth } from 'firebase/auth';
 import home from './component/home.js';
 import error from './component/error.js';
 import newAccount from './component/newaccount.js';
-import feed from './component/feed.js';
+import { feed } from './component/feed.js';
 import forgetpassword from './component/forgetpassword.js';
 import createPost from './component/createpost.js';
 
@@ -17,7 +17,7 @@ const routes = [
   { path: '/feed', component: feed },
   { path: '/new_account', component: newAccount },
   { path: '/forget_password', component: forgetpassword },
-  { path: '/feed/post', component: createPost },
+  { path: '/create_post', component: createPost },
 ];
 
 const defaultRoute = '/';
@@ -34,7 +34,7 @@ async function navigateTo(hash) {
     if (root.firstChild) {
       root.removeChild(root.firstChild);
     }
-    root.appendChild(route.component(navigateTo, getUserId));
+    root.appendChild(await route.component(navigateTo, getUserId));
   } else {
     navigateTo('/error');
   }
@@ -44,12 +44,8 @@ onAuthStateChanged(getAuth(), (user) => {
   if (user) {
     const id = user.uid;
     userId = id;
-    console.log(id);
-    console.log(userId);
     navigateTo(window.location.pathname);
   } else {
-    userId = '';
-    console.log(userId);
     navigateTo(defaultRoute);
   }
 });

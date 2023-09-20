@@ -227,12 +227,7 @@ input[type=password] {
 
 } */
 
-#add-post {
-    position: fixed;
-    bottom: 8%;
-    right: 10%;
-    cursor: pointer;
-}
+
 
 
 /*  Reset pass */
@@ -374,22 +369,23 @@ input[type=password] {
 
 .img_linea {
     width: 96%;
-    justify-self: center;
+    margin-top: 23px;
 }
 
 .button_google {
     border-radius: 12px;
-    background-color: white;
+    background-color: #FFFFFF;
     margin-top: 40px;
     height: 40px;
     color: var(--var_fontgoogle);
     border: var(--var_bordeinputoscuro);
-    background-image: url(../asset/icons/btn_google_signin_light_normal_web@2x.png);
+    background-image: url(/asset/icons/btn_google_signin_light_normal_web@2x.png);
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
-    width: 95%;
+    width: 83%;
     justify-self: center;
+    margin-bottom: 35px;
 }
 
 
@@ -436,7 +432,7 @@ a {
     font-size: 1.1rem;
 }
 
-/* Section New Post*/
+/* Section Create Post*/
 
 .nav_post {
     width: 100%;
@@ -452,6 +448,19 @@ a {
 #post_content {
     resize: none;
     font-size: 16px;
+}
+
+#add-post {
+    position: fixed;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background: #FFF;
+    right: 0;
+    bottom: 5px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    border-radius: 30px;
 }
 
 #post_form {
