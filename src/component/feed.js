@@ -20,7 +20,6 @@ export const feed = async (navigateTo, getUserPhoto) => {
         <h4>${post.creationDate.toDate().toLocaleDateString('es-CL', options)}</h4>
         <p>${post.content}</p>
       </div>
-      <a href="/feed/update_post/${post.id}">Editar</a>
     </div>`;
   });
 

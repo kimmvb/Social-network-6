@@ -1,13 +1,17 @@
 import { getPosts } from '../lib/firebase';
 
 // eslint-disable-next-line no-unused-vars
-export const profile = async (navigateTo, getUserPhoto) => {
+export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) => {
   const sectionProfile = document.createElement('section');
   sectionProfile.classList.add('profile_section');
   let HTMLPosts = '';
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+  const userId = getUserId();
   const posts = await getPosts();
-  posts.forEach((post) => {
+  const currentUserPosts = posts.filter((post) => post.userId === userId);
+
+  currentUserPosts.forEach((post) => {
     const photoUrl = post.photo || '../asset/icons/user-circle.png';
     HTMLPosts += `
     <div class="div_post">
@@ -23,6 +27,7 @@ export const profile = async (navigateTo, getUserPhoto) => {
       <a href="/feed/update_post/${post.id}">Editar</a>
     </div>`;
   });
+  const userName = getUserName();
   const userPhoto = getUserPhoto();
   const photoUrl = userPhoto || '../asset/icons/user-circle.png';
 
@@ -33,9 +38,9 @@ export const profile = async (navigateTo, getUserPhoto) => {
       </nav>
       <div class="edit_profile">
        <div>
-         <img src="${photoUrl}" alt="random image" id="profile_photo">
+         <img src="${photoUrl}" alt="random image" id="profile_photo_change" style="border-radius: 50px; width: 100px;">
        </div>
-        <p>Current User</p>
+        <p id="current_user_name" >${userName}</p>
       </div>
       <main id="main_feed">${HTMLPosts}</main>
     </div>
