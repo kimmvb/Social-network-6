@@ -16,6 +16,11 @@ function getUserPhoto() {
   return userPhoto;
 }
 
+let userName = '';
+function getUserName() {
+  return userName;
+}
+
 const routes = [
   { path: '/', component: home },
   { path: '/error', component: error },
@@ -40,7 +45,7 @@ async function navigateTo(hash) {
     if (root.firstChild) {
       root.removeChild(root.firstChild);
     }
-    root.appendChild(await route.component(navigateTo, getUserPhoto, getUserId));
+    root.appendChild(await route.component(navigateTo, getUserPhoto, getUserId, getUserName));
   } else {
     navigateTo('/error');
   }
@@ -52,6 +57,8 @@ onAuthStateChanged(getAuth(), (user) => {
     userId = id;
     const photo = user.photoURL;
     userPhoto = photo;
+    const name = user.displayName;
+    userName = name;
     navigateTo(window.location.pathname);
   } else {
     navigateTo(defaultRoute);

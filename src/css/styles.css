@@ -499,8 +499,16 @@ a {
 .edit_profile {
     display: flex;
     width: 100%;
-    padding: 20px;
+    padding: 20px 30px;
     background-color: #e8868d81;
+    gap: 30px;
+}
+
+#current_user_name {
+    display: flex;
+    align-items: center;
+    font-size: large;
+    font-weight: 600;
 }
 
 @media (min-width: 768px) {
