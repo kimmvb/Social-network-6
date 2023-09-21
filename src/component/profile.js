@@ -1,6 +1,5 @@
-import { getPosts } from '../lib/firebase';
+import { getPosts, deletePost } from '../lib/firebase';
 
-// eslint-disable-next-line no-unused-vars
 export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) => {
   const sectionProfile = document.createElement('section');
   sectionProfile.classList.add('profile_section');
@@ -11,21 +10,28 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
   const posts = await getPosts();
   const currentUserPosts = posts.filter((post) => post.userId === userId);
 
-  currentUserPosts.forEach((post) => {
+  currentUserPosts.forEach((post, index) => {
     const photoUrl = post.photo || '../asset/icons/user-circle.png';
-    HTMLPosts += `
+    const postElement = document.createElement('div');
+    postElement.innerHTML = `
     <div class="div_post">
-      <div class="icon_perfil"'
+      <div class="icon_perfil">
         <div class="perfil_post">
           <img src="${photoUrl}" alt="random image">
         </div>
+      </div>
       <div class="container_text">
         <h3>${post.name}</h3>
         <h4>${post.creationDate.toDate().toLocaleDateString('es-CL', options)}</h4>
         <p>${post.content}</p>
       </div>
+      <button class="eliminate_post" id="deleteButton-${index}">Borrar</button>
       <a href="/feed/update_post/${post.id}">Editar</a>
     </div>`;
+
+    HTMLPosts += postElement.innerHTML;
+    console.log(post.userId);
+    console.log(post.id);
   });
   const userName = getUserName();
   const userPhoto = getUserPhoto();
@@ -55,6 +61,22 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
 
   sectionProfile.querySelectorAll('i')[1].addEventListener('click', () => {
     navigateTo('/create_post');
+  });
+
+  console.log(sectionProfile.querySelector('#main_feed'));
+  sectionProfile.querySelector('#main_feed').addEventListener('click', async (event) => {
+    const target = event.target;
+    if (target.classList.contains('eliminate_post')) {
+      const index = target.id.split('-')[1];
+      await deletePost(currentUserPosts[index].id, currentUserPosts[index].userId)
+        .then(() => {
+          console.log(`Éxito: El post ${currentUserPosts[index].id} se ha eliminado correctamente.`);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error(`Error al eliminar el post ${currentUserPosts[index].id}:`, error);
+        });
+    }
   });
 
   return sectionProfile;

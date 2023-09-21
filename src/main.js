@@ -42,10 +42,14 @@ async function navigateTo(hash) {
       route.path,
       window.location.origin + route.path,
     );
-    if (root.firstChild) {
+    /* if (root.firstChild) {
       root.removeChild(root.firstChild);
     }
-    root.appendChild(await route.component(navigateTo, getUserPhoto, getUserId, getUserName));
+    root.appendChild(await route.component(navigateTo, getUserPhoto, getUserId, getUserName)); */
+    const newComponent = await route.component(navigateTo, getUserPhoto, getUserId, getUserName);
+    // Reemplaza el contenido de 'root' con el nuevo componente
+    root.innerHTML = '';
+    root.appendChild(newComponent);
   } else {
     navigateTo('/error');
   }
