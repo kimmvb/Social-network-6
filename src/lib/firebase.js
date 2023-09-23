@@ -15,7 +15,9 @@ import {
   doc,
   addDoc,
   collection,
+  getDoc,
   getDocs,
+  deleteDoc,
   query,
   orderBy,
   updateDoc,
@@ -135,3 +137,46 @@ export const updatePost = async (idPost, content) => {
     content,
   });
 };
+
+// 1. Asegúrate de que los usuarios estén autenticados.
+// Puedes hacerlo en tu código de autenticación de Firebase.
+
+// 2. Cuando un usuario quiera eliminar un post:
+export const deletePost = async (postId, userId) => {
+  // Verificar si el usuario está autorizado para eliminar el post según las reglas de seguridad
+  const postRef = doc(db, 'posts', postId);
+  const postSnapshot = await getDoc(postRef);
+
+  if (postSnapshot.exists() && postSnapshot.data().userId === userId) {
+    // El usuario está autorizado para eliminar el post
+    await deleteDoc(postRef);
+    console.log('El post se ha eliminado correctamente.');
+  } else {
+    console.log('No tienes permiso para eliminar este post.');
+  }
+};
+
+// Función para eliminar un post por el userId
+/* async function deletePostByUserId(userId) {
+  try {
+    // Realiza una consulta para encontrar un post con el userId proporcionado
+    const querySnapshot =
+    await getDocs(query(collection(db, 'posts'), where('userId', '==', userId)));
+
+    // Verifica si se encontró un post
+    if (!querySnapshot.empty) {
+      // Obtiene el primer post encontrado
+      const postDoc = querySnapshot.docs[0];
+      const postId = postDoc.id;
+
+      // Elimina el post utilizando el postId
+      await deleteDoc(doc(db, 'posts', postId));
+
+      console.log('El post se ha eliminado correctamente.');
+    } else {
+      console.log('No se encontró ningún post para el usuario.');
+    }
+  } catch (error) {
+    console.error('Error al eliminar el post:', error);
+  }
+} */

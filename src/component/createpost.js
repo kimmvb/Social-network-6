@@ -5,7 +5,6 @@ function createPost(navigateTo, getUserPhoto, getUserId) {
   sectionPost.classList.add('post_section');
 
   const userPhoto = getUserPhoto();
-  console.log(userPhoto);
   const photoUrl = userPhoto || '../asset/icons/user-circle.png';
 
   const divPost = `
