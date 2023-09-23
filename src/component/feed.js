@@ -46,7 +46,9 @@ export const feed = async (navigateTo, getUserPhoto) => {
     </nav>
       <main id="main_feed">${HTMLPosts}</main>
     </div>
-    <i class="fa-solid fa-circle-plus fa-4x" id="add_post" style="color: #f1b33c;"></i>
+
+    <i class="fa-solid fa-circle-plus fa-3x" id="add_post" style="color: #f1b33c;"></i>
+
     <footer>
     </footer>`;
 

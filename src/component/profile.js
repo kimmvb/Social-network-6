@@ -32,20 +32,33 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
   const photoUrl = userPhoto || '../asset/icons/user-circle.png';
 
   const divProfile = `
-    <div class="container_profile">
-      <nav class="nav_profile">
-       <i class="fa-solid fa-arrow-left fa-xl" style="color: #35285a; cursor: pointer;"></i>
-      </nav>
-      <div class="edit_profile">
-       <div>
-         <img src="${photoUrl}" alt="random image" id="profile_photo_change" style="border-radius: 50px; width: 100px;">
-       </div>
-        <p id="current_user_name" >${userName}</p>
+  <div class="container_profile">
+  <nav class="nav_profile">
+  <i class="fa-solid fa-arrow-left fa-xl" style="color: #FFFFFF; cursor: pointer;"></i>
+  </nav>
+  <div class="edit_profile">
+  <img src="${photoUrl}" alt="random image" id="profile_photo_change" style="border-radius: 50px; width: 100px;">
+  <button class = "btn_edit_profile">Editar Perfil</button>
+
+  <div class="info_perfil">
+  <p id="current_user_name" >${userName}</p>
+  <ul class="descripcion_perfil">
+              <li>datos de ejemplo</li>
+              <li>fecha de creacion</li>
+             <li>Region Metropolitana</li>
+              <li>Fecha de cumpleaños</li>
+          </ul>
       </div>
-      <main id="main_feed">${HTMLPosts}</main>
+  </div>
+
+
+  </div>
+
     </div>
-      <i class="fa-solid fa-circle-plus fa-4x" id="add_post" style="color: #f1b33c;"></i>
-    <footer></footer>`;
+  <main id="main_feed">${HTMLPosts}</main>
+</div>
+  <i class="fa-solid fa-circle-plus fa-4x" id="add_post" style="color: #f1b33c;"></i>
+<footer></footer>`;
 
   sectionProfile.innerHTML = divProfile;
 

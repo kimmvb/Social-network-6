@@ -8,6 +8,9 @@ export const home = async (navigateTo) => {
   const logo = document.createElement('img');
   logo.classList.add('img_logo');
 
+  const btnGoogle = document.createElement('img');
+  btnGoogle.classList.add('img_google');
+
   const errorLogin = document.createElement('p');
   errorLogin.setAttribute('id', 'incorrect_user');
   errorLogin.style.fontWeight = 'bolder';
@@ -27,7 +30,10 @@ export const home = async (navigateTo) => {
   inputPass.type = 'password';
 
   const buttonGoogle = document.createElement('button');
-  buttonGoogle.classList.add('button_google');
+  // buttonGoogle.textContent('');
+
+  buttonGoogle.id = 'button_google';
+  buttonGoogle.appendChild(btnGoogle);
 
   const lineaIcon = document.createElement('img');
   lineaIcon.classList.add('img_linea');
@@ -42,6 +48,7 @@ export const home = async (navigateTo) => {
 
   logo.src = '../asset/icons/Logo.tripify.svg';
   lineaIcon.src = '../asset/icons/linea.icon.svg';
+  btnGoogle.src = '../asset/icons/btn_google_signin_light_normal_web@2x.png';
 
   buttonLogin.textContent = 'Iniciar Sesión';
   buttonLogin.setAttribute('type', 'submit');
@@ -92,8 +99,8 @@ export const home = async (navigateTo) => {
     labelPass,
     inputPass,
     buttonLogin,
-    lineaIcon,
     buttonGoogle,
+    lineaIcon,
     forgetPass,
     newAccount,
   );
