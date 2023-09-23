@@ -11,10 +11,11 @@ export const feed = async (navigateTo, getUserPhoto) => {
     const photoUrl = post.photo || '../asset/icons/user-circle.png';
     HTMLPosts += `
     <div class="div_post">
-      <div class="icon_perfil"'
+      <div class="icon_perfil">
         <div class="perfil_post">
           <img src="${photoUrl}" alt="random image">
         </div>
+      </div>
       <div class="container_text">
         <h3>${post.name}</h3>
         <h4>${post.creationDate.toDate().toLocaleDateString('es-CL', options)}</h4>
