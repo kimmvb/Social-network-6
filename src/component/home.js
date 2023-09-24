@@ -1,12 +1,15 @@
 import { singInWithGoogle, signInWithEmail } from '../lib/firebase';
 
-function home(navigateTo) {
+export const home = async (navigateTo) => {
   document.body.classList.remove('no-bg');
   const sectionHome = document.createElement('section');
   sectionHome.classList.add('section_home');
 
   const logo = document.createElement('img');
   logo.classList.add('img_logo');
+
+  const btnGoogle = document.createElement('img');
+  btnGoogle.classList.add('img_google');
 
   const errorLogin = document.createElement('p');
   errorLogin.setAttribute('id', 'incorrect_user');
@@ -27,7 +30,10 @@ function home(navigateTo) {
   inputPass.type = 'password';
 
   const buttonGoogle = document.createElement('button');
-  buttonGoogle.classList.add('button_google');
+  // buttonGoogle.textContent('');
+
+  buttonGoogle.id = 'button_google';
+  buttonGoogle.appendChild(btnGoogle);
 
   const lineaIcon = document.createElement('img');
   lineaIcon.classList.add('img_linea');
@@ -42,6 +48,7 @@ function home(navigateTo) {
 
   logo.src = '../asset/icons/Logo.tripify.svg';
   lineaIcon.src = '../asset/icons/linea.icon.svg';
+  btnGoogle.src = '../asset/icons/btn_google_signin_light_normal_web@2x.png';
 
   buttonLogin.textContent = 'Iniciar Sesión';
   buttonLogin.setAttribute('type', 'submit');
@@ -92,14 +99,12 @@ function home(navigateTo) {
     labelPass,
     inputPass,
     buttonLogin,
-    lineaIcon,
     buttonGoogle,
+    lineaIcon,
     forgetPass,
     newAccount,
   );
   sectionHome.append(logo, errorLogin, formGrilla);
 
   return sectionHome;
-}
-
-export default home;
+};

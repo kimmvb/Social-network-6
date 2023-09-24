@@ -1,5 +1,5 @@
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
-import home from './component/home.js';
+import { home } from './component/home.js';
 import error from './component/error.js';
 import newAccount from './component/newaccount.js';
 import { feed } from './component/feed.js';
@@ -54,7 +54,6 @@ async function navigateTo(hash) {
     navigateTo('/error');
   }
 }
-
 onAuthStateChanged(getAuth(), (user) => {
   if (user) {
     const id = user.uid;
