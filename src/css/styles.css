@@ -392,7 +392,6 @@ input[type=password] {
 }
 
 /* Section home*/
-
 .section_home {
     display: grid;
     grid-template-columns: 1fr;
