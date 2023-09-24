@@ -155,7 +155,7 @@ body {
 }
 
 .img_logo {
-    width: 50%;
+    width: 100%;
 }
 
 #main_feed {
@@ -584,11 +584,21 @@ a {
         background-color: var(--var-fondoHome);
     }
 
+    .no-bg {
+        background-color: transparent;
+    }
+
     .section_home,
     .contenedor_account,
     .reset_password_container {
+        max-width: 40%;
         position: relative;
         margin: 0 auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-left: 30%;
+        background-color: transparent;
     }
 
     #main_feed {
