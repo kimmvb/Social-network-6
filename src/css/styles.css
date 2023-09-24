@@ -247,6 +247,7 @@ input[type=password] {
     border: none;
     background-color: transparent;
     resize: none;
+    min-height: 100px;
 }
 
 .container_text .input-text-area:focus,
@@ -392,6 +393,8 @@ input[type=password] {
 }
 
 /* Section home*/
+
+
 .section_home {
     display: grid;
     grid-template-columns: 1fr;
