@@ -1,6 +1,7 @@
 import { getPosts, deletePost } from '../lib/firebase';
 
 export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) => {
+  document.body.classList.add('no-bg');
   const sectionProfile = document.createElement('section');
   sectionProfile.classList.add('profile_section');
   let HTMLPosts = '';
@@ -22,7 +23,7 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
             <i class="fa-solid fa-ellipsis-vertical fa-2xl" style="color: #35285a;" id="drop_btn"></i>
             <div id="myDropdown" class="drop_down_content">
               <a href="" class ="delete_post" id="deleteButton-${index}">Borrar</a>
-              <a href="" class="edit_post">Editar</a>
+              <a href="" data-id="${post.id}" class="edit_post">Editar</a>
             </div>
           </div>
         </div>
@@ -30,7 +31,11 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
       <div class="container_text">
         <h3>${post.name}</h3>
         <h4>${post.creationDate.toDate().toLocaleDateString('es-CL', options)}</h4>
-        <p>${post.content}</p>
+        <p><textarea readonly id="text-${post.id}" class="input-text-area">${post.content}</textarea></p>
+        <div class="buttons-edit" id="buttons-${post.id}">
+          <button class="button-edit">Actualizar post</button>
+          <button class="button-cancel">Cancelar</button>
+        </div>
       </div>
     </div>`;
 
@@ -73,22 +78,40 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
     navigateTo('/create_post');
   });
 
-  sectionProfile.querySelector('#main_feed').addEventListener('click', async (event) => {
-    const target = event.target;
-    const closestPost = target.closest('.div_post');
+  sectionProfile.querySelectorAll('.drop_down').forEach((element) => {
+    element.addEventListener('click', () => {
+      element.querySelector('.drop_down_content').classList.toggle('show');
+    });
+  });
 
-    // Comprueba si el clic se hizo dentro de un elemento .div_post
-    if (closestPost) {
-      const dropdown = closestPost.querySelector('.drop_down_content');
-
-      if (target.id === 'drop_btn') {
-        if (dropdown) {
-          dropdown.classList.toggle('show');
-        }
-      } else {
-        dropdown.classList.remove('show');
-      }
+  sectionProfile.addEventListener('click', (event) => {
+    if (!event.target.classList.contains('fa-ellipsis-vertical')) {
+      sectionProfile.querySelectorAll('.drop_down').forEach((element) => {
+        element.querySelector('.drop_down_content').classList.remove('show');
+      });
     }
+  });
+
+  sectionProfile.querySelectorAll('.edit_post').forEach((element) => {
+    element.addEventListener('click', (event) => {
+      event.preventDefault();
+      const containerButtons = `#buttons-${element.getAttribute('data-id')}`;
+      const textAreaEdit = `#text-${element.getAttribute('data-id')}`;
+      sectionProfile.querySelector(containerButtons).style.display = 'block';
+      sectionProfile.querySelector(textAreaEdit).classList.add('textarea-edit');
+      sectionProfile.querySelector(textAreaEdit).removeAttribute('readonly');
+      sectionProfile.querySelector(textAreaEdit).focus();
+      sectionProfile.querySelector('.button-edit').addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('funciona');
+      });
+      sectionProfile.querySelector('.button-cancel').addEventListener('click', (e) => {
+        e.preventDefault();
+        sectionProfile.querySelector(textAreaEdit).classList.remove('textarea-edit');
+        sectionProfile.querySelector(containerButtons).style.display = 'none';
+        sectionProfile.querySelector(textAreaEdit).setAttribute('readonly', true);
+      });
+    });
   });
 
   sectionProfile.querySelector('#main_feed').addEventListener('click', async (event) => {

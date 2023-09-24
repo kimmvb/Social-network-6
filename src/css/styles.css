@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+button {
+    cursor: pointer;
+}
+
 /* ::-webkit-scrollbar {
     width: 15px;
 }
@@ -214,8 +218,6 @@ input[type=password] {
     margin-top: 55px;
 }
 
-
-
 .container_text h4 {
     margin: 0 0 0.5rem 0;
     color: #999;
@@ -232,10 +234,51 @@ input[type=password] {
 }
 
 .container_text p {
-    margin: 0 0 4.5rem 0;
+    margin: 0 0 0.5rem 0;
     line-height: 1.45;
     color: #333;
     font-size: 1rem;
+    max-width: 300px;
+    word-wrap: break-word;
+}
+
+.container_text .input-text-area {
+    width: 300px;
+    border: none;
+    background-color: transparent;
+    resize: none;
+}
+
+.container_text .input-text-area:focus,
+.container_text .input-text-area:active {
+    width: 300px;
+    border: none;
+    background-color: transparent;
+    outline-width: 0;
+}
+
+.textarea-edit {
+    width: 300px;
+    border: 1px solid #ccc !important;
+    background-color: #fff !important;
+    outline-width: auto;
+}
+
+.buttons-edit {
+    display: none;
+    justify-content: space-around;
+}
+
+.button-edit {
+    border: none;
+    padding: 10px 20px;
+    background-color: #999;
+}
+
+.button-cancel {
+    border: none;
+    padding: 10px 20px;
+    background-color: #fff;
 }
 
 /* footer {
@@ -682,5 +725,10 @@ a {
         height: auto;
         display: flex;
         justify-self: center;
+    }
+
+    .container_text p {
+        max-width: 500px;
+        word-wrap: break-word;
     }
 }
