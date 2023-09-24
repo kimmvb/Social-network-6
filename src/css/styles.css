@@ -243,10 +243,11 @@ input[type=password] {
 }
 
 .container_text .input-text-area {
-    width: 300px;
     border: none;
     background-color: transparent;
     resize: none;
+    min-height: 100px;
+    min-width: 300px;
 }
 
 .container_text .input-text-area:focus,
