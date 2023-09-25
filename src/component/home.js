@@ -42,6 +42,7 @@ export const home = async (navigateTo) => {
   buttonLogin.classList.add('button_login');
 
   const forgetPass = document.createElement('a');
+  forgetPass.classList.add('forget_password');
 
   const newAccount = document.createElement('button');
   newAccount.classList.add('btn_crear_cuenta');

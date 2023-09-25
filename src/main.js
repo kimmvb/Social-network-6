@@ -42,19 +42,15 @@ async function navigateTo(hash) {
       route.path,
       window.location.origin + route.path,
     );
-    /* if (root.firstChild) {
-      root.removeChild(root.firstChild);
-    }
-    root.appendChild(await route.component(navigateTo, getUserPhoto, getUserId, getUserName)); */
-    const newComponent = await route.component(navigateTo, getUserPhoto, getUserId, getUserName);
+    const component = await route.component(navigateTo, getUserPhoto, getUserId, getUserName);
     // Reemplaza el contenido de 'root' con el nuevo componente
     root.innerHTML = '';
-    root.appendChild(newComponent);
+    root.appendChild(component);
   } else {
     navigateTo('/error');
   }
 }
-onAuthStateChanged(getAuth(), (user) => {
+onAuthStateChanged(getAuth(), async (user) => {
   if (user) {
     const id = user.uid;
     userId = id;
@@ -67,7 +63,6 @@ onAuthStateChanged(getAuth(), (user) => {
     navigateTo(defaultRoute);
   }
 });
-
 window.onpopstate = () => {
   navigateTo(window.location.pathname);
 };
