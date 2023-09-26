@@ -41,8 +41,8 @@ function newAccount(navigateTo) {
 
   btnAccount.textContent = 'Crear Cuenta';
 
-  linkLogin.innerHTML = '¿Ya tienes una cuenta? <br>';
-  singIn.innerHTML = ' <br> Inicia sesión';
+  linkLogin.innerHTML = '¿Ya tienes una cuenta? ';
+  singIn.innerHTML = ' Inicia sesión';
   singIn.addEventListener('click', (e) => {
     e.preventDefault();
     navigateTo('/');

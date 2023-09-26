@@ -42,6 +42,7 @@ export const home = async (navigateTo) => {
   buttonLogin.classList.add('button_login');
 
   const forgetPass = document.createElement('a');
+  forgetPass.classList.add('forget_password');
 
   const newAccount = document.createElement('button');
   newAccount.classList.add('btn_crear_cuenta');
@@ -61,8 +62,11 @@ export const home = async (navigateTo) => {
       navigateTo('/feed');
     } catch (error) {
       errorLogin.style.display = 'block';
-      const cleanForm = document.getElementById('form_login');
-      cleanForm.reset();
+      // const cleanForm = document.getElementById('form_login');
+      // cleanForm.reset();
+      // las lineas comentadas no son necesarias ya que existe una
+      // constante con referencia al formulario
+      formGrilla.reset();
     }
   });
 
