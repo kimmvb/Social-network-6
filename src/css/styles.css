@@ -203,8 +203,7 @@ input[type=password] {
 .container_text h4 {
     margin: 0 0 0.5rem 0;
     color: #999;
-    font-size: 0.8bvgggggrem;
-
+    font-size: 0.8rem;
 }
 
 .container_text h3 {
@@ -639,6 +638,13 @@ a {
     display: block;
 }
 
+/* Alert delete post*/
+.swal-button--confirm {
+    background-color: #F1B33C;
+    border: #999;
+}
+
+
 @media (min-width: 768px) {
     body {
         background-color: var(--var-fondoHome);
@@ -673,9 +679,6 @@ a {
     }
 
     .buscador {
-        /* justify-self: center;
-        height: 60px;
-        grid-area: 1/ 2; */
         display: flex;
         justify-content: center;
     }
