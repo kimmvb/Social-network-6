@@ -20,24 +20,30 @@ describe('Profile', () => {
     const getUserId = jest.fn().mockResolvedValue('id-del-usuario');
     const getUserPhoto = jest.fn();
     const getUserName = jest.fn();
+    // eslint-disable-next-line no-shadow
     const getPosts = jest.fn().mockResolvedValue(
-      [{ id: 'post-1', userId: 'id-del-usuario', name: 'Post 1', creationDate: new Date(), content: 'Contenido del Post 1' },
-        { id: 'post-2', userId: 'otro-id', name: 'Post 2', creationDate: new Date(), content: 'Contenido del Post 2' }],
+      [
+        { id: 'post-1', userId: 'id-del-usuario', name: 'Post 1', creationDate: new Date(), content: 'Contenido del Post 1' },
+        { id: 'post-2', userId: 'otro-id', name: 'Post 2', creationDate: new Date(), content: 'Contenido del Post 2' },
+      ],
     );
-
     const section = await profile(navigateToMock, getUserPhoto, getUserId, getUserName);
-    let HTMLPosts = '';
     const divProfile = document.createElement('div');
     section.appendChild(divProfile);
-
     const userIdMock = await getUserId();
     const posts = await getPosts();
     const currentUserPosts = posts.filter((post) => post.userId === userIdMock);
-    HTMLPosts += currentUserPosts;
-    divProfile.appendChild(HTMLPosts);
-    console.log(posts);
-    /* expect(divProfile.textContent).toBe
-    ({ id: 'post-1', userId: 'id-del-usuario',
-    name: 'Post 1', creationDate: new Date(), content: 'Contenido del Post 1' }); */
+    let HTMLPosts = '';
+    currentUserPosts.forEach((post) => {
+      HTMLPosts += `
+        <div>
+          <h3>${post.name}</h3>
+          <p>${post.content}</p>
+        </div>
+      `;
+    });
+    divProfile.innerHTML = HTMLPosts;
+    expect(divProfile.innerHTML).toContain('Contenido del Post 1');
+    expect(divProfile.innerHTML).not.toContain('Contenido del Post 2');
   });
 });

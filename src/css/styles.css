@@ -5,6 +5,7 @@
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
 }
+
 button {
     cursor: pointer;
 }
@@ -18,6 +19,7 @@ input[type=password] {
 #incorrect_user {
     font-size: 1.3rem;
 }
+
 :root {
     --var_rosa: #E86972;
     --var_amarillo: #FFF479;
@@ -31,6 +33,7 @@ input[type=password] {
     --var_fontgeneral: #3A3A3D;
     --var_fontmedia: 1rem;
 }
+
 /* error */
 .error_container {
     display: grid;
@@ -40,9 +43,11 @@ input[type=password] {
     justify-items: center;
     padding-bottom: 40px
 }
+
 .error_title {
     color: var(--var_colorfuente)
 }
+
 .error_button {
     background-color: var(--var_amarillo);
     border-radius: 24px;
@@ -55,15 +60,18 @@ input[type=password] {
     font-size: 1.2rem;
     font-weight: bold;
 }
+
 /* section feed */
 .feed_section {
     min-height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr auto;
 }
+
 .container_feed {
     height: auto;
 }
+
 #header_feed {
     display: flex;
     justify-content: center;
@@ -71,6 +79,7 @@ input[type=password] {
     width: 100%;
     align-items: center;
 }
+
 .nav_container_up {
     background-color: #e8868d81;
     display: grid;
@@ -79,18 +88,21 @@ input[type=password] {
     justify-content: space-around;
     align-items: center;
 }
+
 .buscador {
     margin-left: 13px;
     align-self: center;
     width: 100%;
     height: 60px;
 }
+
 .logout {
     width: 68px;
     grid-area: 1/ 2;
     align-self: center;
     justify-self: center;
 }
+
 .btn_logout {
     border-radius: 12px;
     border: 1px solid #cccc;
@@ -102,6 +114,7 @@ input[type=password] {
 
     color: white;
 }
+
 #input_busqueda {
     height: 45%;
     align-items: center;
@@ -119,21 +132,27 @@ input[type=password] {
     justify-content: center;
     align-items: center;
 }
+
 #profile_photo {
     border-radius: 50px;
     width: 60px;
+    cursor: pointer;
 }
+
 #myfile {
     display: none;
 }
+
 .custom-file-upload {
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
 }
+
 .img_logo {
     width: 100%;
 }
+
 #main_feed {
     display: grid;
     grid-template-columns: 1fr;
@@ -143,6 +162,7 @@ input[type=password] {
     padding: 2rem;
     min-width: 100%;
 }
+
 .icon_perfil {
     max-width: 500px;
     border-radius: 10px;
@@ -152,6 +172,7 @@ input[type=password] {
     height: 53px;
 
 }
+
 .div_post {
     border: var(--var_bordeinputoscuro);
     box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
@@ -159,6 +180,7 @@ input[type=password] {
     border-radius: 20px;
     padding: 10px;
 }
+
 .icon_perfil img {
     height: 3.3rem;
     width: 3.3rem;
@@ -167,24 +189,28 @@ input[type=password] {
     z-index: 1;
     object-fit: cover;
 }
+
 .container_text {
     padding: 1rem 1rem 1rem 1rem;
     width: 100%;
     box-sizing: content-box;
     margin-top: 55px;
 }
+
 .container_text h4 {
     margin: 0 0 0.5rem 0;
     color: #999;
     font-size: 0.8rem;
 
 }
+
 .container_text h3 {
     margin: 0 0 1rem 0;
     font-size: 1rem;
     letter-spacing: 0.5px;
     color: #333;
 }
+
 .container_text p {
     margin: 0 0 0.5rem 0;
     line-height: 1.45;
@@ -194,6 +220,7 @@ input[type=password] {
     width: 300px;
 
 }
+
 .container_text .input-text-area {
     border: none;
     background-color: transparent;
@@ -201,32 +228,38 @@ input[type=password] {
     min-height: 100px;
     width: 100%;
 }
+
 .container_text .input-text-area:focus,
 .container_text .input-text-area:active {
     border: none;
     background-color: transparent;
     outline-width: 0;
 }
+
 .textarea-edit {
     border: 1px solid #ccc !important;
     background-color: #fff !important;
     outline-width: auto;
     min-height: 100px;
 }
+
 .buttons-edit {
     display: none;
     justify-content: space-around;
 }
+
 .button-edit {
     border: none;
     padding: 10px 20px;
     background-color: #999;
 }
+
 .button-cancel {
     border: none;
     padding: 10px 20px;
     background-color: #fff;
 }
+
 /* footer {
     display: flex;
     justify-content: space-around;
@@ -246,9 +279,11 @@ input[type=password] {
     padding-bottom: 40px;
     min-height: 100vh;
 }
+
 .reset_password_title {
     color: var(--var_colorfuente)
 }
+
 .reset_password_small_container {
     width: 85%;
     border: 1px solid rgba(241, 163, 255, 0.3);
@@ -258,6 +293,7 @@ input[type=password] {
     margin: 35px 50px;
     border-radius: 28px;
 }
+
 .reset_password_form input {
     border-radius: 12px;
     height: 40px;
@@ -266,6 +302,7 @@ input[type=password] {
     justify-self: center;
     margin-top: 15px;
 }
+
 .grilla_form input {
     border-radius: 12px;
     height: 40px;
@@ -275,11 +312,13 @@ input[type=password] {
     margin-bottom: 20px;
     margin-top: 10px;
 }
+
 .reset_password_form input:focus {
     border: 1px solid #F1B33C !important;
     outline: none !important;
     box-shadow: 0 0 10px #F1B33C;
 }
+
 .reset_password_button {
     background-color: var(--var_amarillo);
     border-radius: 24px;
@@ -292,15 +331,18 @@ input[type=password] {
     font-size: 1.2rem;
     font-weight: bold;
 }
+
 .reset_password_form label {
     color: var(--var_colorfuente);
     font-size: 1.3rem;
 }
+
 .reset_password_form button {
     background-color: var(--var_rosa);
     color: white;
     border: 0px;
 }
+
 .reset_password_paragraph {
     margin-top: 23px;
     margin-bottom: 23px;
@@ -309,10 +351,12 @@ input[type=password] {
     font-style: oblique;
     font-weight: bolder;
 }
+
 .logoForget {
     height: 50%;
     margin-top: 10px;
 }
+
 /* Section home*/
 
 
@@ -324,25 +368,24 @@ input[type=password] {
     justify-items: center;
     padding-bottom: 40px;
     min-height: 100vh;
+    margin-bottom: 100px;
 }
+
 .grilla_form input:focus {
     border: 1px solid #F1B33C !important;
     outline: none !important;
     box-shadow: 0 0 10px #F1B33C;
 }
+
 .grilla_form label {
     color: var(--var_colorfuente);
     margin-top: 23px;
     text-align: start;
-    width: 100%;
-    justify-self: center;
-    font-size: 1rem;
-    font-size: 1.4rem;
 }
+
 .button_login {
     background-color: var(--var_rosa);
     border-radius: 24px;
-    margin-top: 20px;
     height: 40px;
     color: white;
     border: var(--var_bordeinputblanco);
@@ -350,10 +393,12 @@ input[type=password] {
     justify-self: center;
     font-size: 1.3rem;
 }
+
 .img_linea {
     width: 96%;
-    margin-top: 23px;
+
 }
+
 #button_google {
     height: 40px;
     width: 75%;
@@ -362,6 +407,7 @@ input[type=password] {
     background: transparent;
     margin-top: 23px;
 }
+
 .img_google {
     height: 100%;
     width: 100%;
@@ -380,6 +426,7 @@ input[type=password] {
 a {
     color: var(--var_colorfuente);
 }
+
 .grilla_form {
     padding: 24px 40px;
     text-align: center;
@@ -398,6 +445,7 @@ a {
     width: 70%;
     justify-self: center;
 }
+
 .back_home {
     margin-top: 23px;
     color: var(--var_colorfuente);
@@ -405,37 +453,43 @@ a {
     text-align: center;
     padding-bottom: 20px;
 }
+
 /* Section Create Post*/
 .nav_post {
     width: 100%;
     padding: 20px;
     background-color: #834af48c;
 }
+
 .post_small_container {
     display: flex;
     padding: 15px;
 }
+
 #post_content {
     resize: none;
     font-size: 16px;
 }
+
 #add_post {
     position: fixed;
     cursor: pointer;
-    width: 47px;
+    width: 60px;
     height: 47px;
     background: #FFF;
     right: 0;
     bottom: 5px;
     margin-right: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 30px;
     border-radius: 30px;
 }
+
 #post_form {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
+
 #post_button {
     background-color: #F1B33C;
     border-radius: 24px;
@@ -447,20 +501,24 @@ a {
     align-self: flex-end;
     font-size: 1.1rem;
 }
+
 /* Section Profile*/
 .nav_profile {
     width: 100%;
     padding: 20px;
     background-color: #834af48c;
 }
+
 .nav_profile i {
     margin-top: 12px;
 }
+
 .edit_profile {
     width: 100%;
     padding: 20px 30px;
     background-color: #e8868d81;
 }
+
 .btn_edit_profile {
     width: 110px;
     height: 24px;
@@ -474,12 +532,15 @@ a {
     color: white;
     align-items: center;
 }
+
 .descripcion_perfil {
     list-style: none;
 }
+
 .info_perfil {
     align-self: center;
 }
+
 #current_user_name {
     align-items: center;
     font-size: large;
@@ -487,12 +548,15 @@ a {
     font-family: 'Lato', sans-serif;
     margin-bottom: 12px;
     margin-top: 12px;
+    color: var(--var_fontgeneral);
 }
+
 .perfil_post {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 /* Dropdown profile*/
 
 #drop_btn {
@@ -503,25 +567,24 @@ a {
     justify-content: center;
     align-items: center;
     border-radius: 100px;
-
+    color: var(--var_fontgeneral)
 }
 
 #myDropdown {
     border: 1px solid #ccc;
     border-radius: 12px;
 }
-#myDropdown {
-    border: 1px solid #ccc;
-    border-radius: 12px;
-}
+
 #drop_btn:hover,
 #drop_btn:focus {
     background-color: #35285a52;
 }
+
 .drop_down {
     position: relative;
     display: inline-block;
 }
+
 .drop_down_content {
     display: none;
     position: absolute;
@@ -531,6 +594,7 @@ a {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
+
 .drop_down_content a {
     margin: 0;
     color: black;
@@ -538,9 +602,11 @@ a {
     text-decoration: none;
     display: block;
 }
+
 .dropdown a:hover {
     background-color: #ddd;
 }
+
 .show {
     display: block;
 }
@@ -573,19 +639,23 @@ a {
         margin-left: 30%;
         background-color: transparent;
     }
+
     #main_feed {
         min-height: 100vh;
         display: grid;
         grid-template-columns: 0.6fr;
     }
+
     .nav_container_up {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
     }
+
     .buscador {
         display: flex;
         justify-content: center;
     }
+
     #input_busqueda {
         border: 1px solid #F1B33C;
         outline: none;
@@ -603,19 +673,42 @@ a {
         font-size: 1.1rem;
         color: var(--var_colorfuente);
     }
+
     .btn_crear_cuenta {
         font-size: 1.0rem;
     }
+
     .img_logo {
         width: 40%;
     }
+
     .div_post {
-        width: 75%;
+        width: 70%;
         height: auto;
         display: flex;
         justify-self: center;
     }
+
     .container_text p {
         width: 500px;
+    }
+
+    /* Estilo botones & input Desktop*/
+    .grilla_form input {
+        width: 82%;
+    }
+
+    .button_login,
+    .btn_crear_cuenta {
+        width: 50%;
+    }
+
+    #button_google {
+        width: 60%;
+    }
+
+    .forget_password {
+        width: 51%;
+        font-size: 1.1rem;
     }
 }

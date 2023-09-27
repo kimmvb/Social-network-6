@@ -20,7 +20,7 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
         <div class="perfil_post">
           <img src="${photoUrl}" alt="random image">
           <div class="drop_down">
-            <i class="fa-solid fa-ellipsis-vertical fa-2xl" style="color: #35285a;" id="drop_btn"></i>
+            <i class="fa-solid fa-ellipsis-vertical fa-2xl" id="drop_btn"></i>
             <div id="myDropdown" class="drop_down_content">
               <a href="" class ="delete_post" id="deleteButton-${index}">Borrar</a>
               <a href="" data-id="${post.id}" class="edit_post">Editar</a>
@@ -53,7 +53,7 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
       </nav>
       <div class="edit_profile">
        <div>
-         <img src="${photoUrl}" alt="random image" id="profile_photo_change" style="border-radius: 50px; width: 100px;">
+         <img src="${photoUrl}" alt="random image" id="profile_photo_change" style="border-radius: 50px; width: 65px;">
        </div>
         <p id="current_user_name" >${userName}</p>
       </div>
