@@ -221,13 +221,16 @@ input[type=password] {
 
 }
 
-.container_text .input-text-area {
+.input-text-area {
     border: none;
     background-color: transparent;
     resize: none;
     min-height: 100px;
     width: 100%;
+    overflow: hidden;
 }
+
+
 
 .container_text .input-text-area:focus,
 .container_text .input-text-area:active {
@@ -683,8 +686,8 @@ a {
     }
 
     .div_post {
-        width: 70%;
-        height: auto;
+        width: min-content;
+        height: fit-content;
         display: flex;
         justify-self: center;
     }

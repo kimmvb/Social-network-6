@@ -1,4 +1,4 @@
-import { getPosts, deletePost } from '../lib/firebase';
+import { getPosts, deletePost, updatePost } from '../lib/firebase';
 
 export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) => {
   document.body.classList.add('no-bg');
@@ -23,7 +23,7 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
             <i class="fa-solid fa-ellipsis-vertical fa-2xl" id="drop_btn"></i>
             <div id="myDropdown" class="drop_down_content">
               <a href="" class ="delete_post" id="deleteButton-${index}">Borrar</a>
-              <a href="" data-id="${post.id}" class="edit_post">Editar</a>
+              <a href="" data-content="${post.content}" data-id="${post.id}" class="edit_post">Editar</a>
             </div>
           </div>
         </div>
@@ -31,7 +31,7 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
       <div class="container_text">
         <h3>${post.name}</h3>
         <h4>${post.creationDate.toDate().toLocaleDateString('es-CL', options)}</h4>
-        <p><textarea readonly id="text-${post.id}" class="input-text-area">${post.content}</textarea></p>
+        <p><textarea readonly id="text-${post.id}" class="input-text-area" contenteditable >${post.content}</textarea></p>
         <div class="buttons-edit" id="buttons-${post.id}">
           <button class="button-edit">Actualizar post</button>
           <button class="button-cancel">Cancelar</button>
@@ -97,16 +97,35 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
       event.preventDefault();
       const containerButtons = `#buttons-${element.getAttribute('data-id')}`;
       const textAreaEdit = `#text-${element.getAttribute('data-id')}`;
+      const currentContent = `#text-${element.getAttribute('data-content')}`;
       sectionProfile.querySelector(containerButtons).style.display = 'block';
       sectionProfile.querySelector(textAreaEdit).classList.add('textarea-edit');
       sectionProfile.querySelector(textAreaEdit).removeAttribute('readonly');
       sectionProfile.querySelector(textAreaEdit).focus();
       sectionProfile.querySelector('.button-edit').addEventListener('click', (e) => {
         e.preventDefault();
-        console.log('funciona');
+        updatePost(element.getAttribute('data-id'), sectionProfile.querySelector(textAreaEdit).value).then(() => {
+          // eslint-disable-next-line no-undef
+          swal({
+            title: 'Perfecto!',
+            text: 'El post fue editado con exito',
+            icon: 'success',
+          });
+          sectionProfile.querySelector(textAreaEdit).classList.remove('textarea-edit');
+          sectionProfile.querySelector(containerButtons).style.display = 'none';
+          sectionProfile.querySelector(textAreaEdit).setAttribute('readonly', true);
+        }, () => {
+          // eslint-disable-next-line no-undef
+          swal({
+            title: 'Ups!',
+            text: 'El post no pudo ser editado',
+            icon: 'warning',
+          });
+        });
       });
       sectionProfile.querySelector('.button-cancel').addEventListener('click', (e) => {
         e.preventDefault();
+        sectionProfile.querySelector(textAreaEdit).value = currentContent;
         sectionProfile.querySelector(textAreaEdit).classList.remove('textarea-edit');
         sectionProfile.querySelector(containerButtons).style.display = 'none';
         sectionProfile.querySelector(textAreaEdit).setAttribute('readonly', true);
