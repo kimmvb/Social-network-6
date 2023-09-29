@@ -18,7 +18,9 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
     <div class="div_post">
       <div class="icon_perfil">
         <div class="perfil_post">
-          <img src="${photoUrl}" alt="random image">
+         ${photoUrl
+    ? ` <img src="${photoUrl}" alt="random image">`
+    : ''}
           <div class="drop_down">
             <i class="fa-solid fa-ellipsis-vertical fa-2xl" id="drop_btn"></i>
             <div id="myDropdown" class="drop_down_content">
