@@ -7,9 +7,12 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
   let HTMLPosts = '';
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
-  const userId = getUserId();
+  const userId = await getUserId();
+  console.log(userId);
   const posts = await getPosts();
+  console.log(posts);
   const currentUserPosts = posts.filter((post) => post.userId === userId);
+  console.log(currentUserPosts);
 
   currentUserPosts.forEach((post, index) => {
     const photoUrl = post.photo || '../asset/icons/user-circle.png';
@@ -80,11 +83,20 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
 
   sectionProfile.querySelectorAll('.drop_down').forEach((element) => {
     element.addEventListener('click', () => {
-      console.log(element.querySelector('.drop_down_content'));
+      // console.log(element.querySelector('.drop_down_content'));
       element.querySelector('.drop_down_content').classList.toggle('show');
-      console.log(element.outerHTML);
+      // console.log(element.outerHTML);
     });
   });
+  // const pruebaShow = (element) => {
+  //   const dropElement = element.querySelector('.drop_down_content').classList.toggle('show');
+  //   return dropElement.classList.contains('show');
+  // };
+  // sectionProfile.querySelectorAll('.drop_down').forEach((element) => {
+  //   element.addEventListener('click', () =>
+  //     pruebaShow(element),
+  //   );
+  // });
 
   sectionProfile.addEventListener('click', (event) => {
     if (!event.target.classList.contains('fa-ellipsis-vertical')) {
