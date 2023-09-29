@@ -74,7 +74,7 @@ describe('Forget password', () => {
     const submitEvent = new Event('submit', { bubbles: true });
     formEmail.dispatchEvent(submitEvent);
   });
-  it('should navigate to "/" when click "Volver a inicio"', () => {
+  it('should navigate to "/" when click to "Volver a inicio"', () => {
     const navigateToMock = jest.fn();
     const section = forgetPass(navigateToMock);
     const backHome = section.querySelectorAll('.reset_password_button')[1];

@@ -19,7 +19,7 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
       <div class="icon_perfil">
         <div class="perfil_post">
           <img src="${photoUrl}" alt="random image">
-          <div class="drop_down">
+          <div class="drop_down" data-id="${post.id}">
             <i class="fa-solid fa-ellipsis-vertical fa-2xl" style="color: #35285a;" id="drop_btn"></i>
             <div id="myDropdown" class="drop_down_content">
               <a href="" class ="delete_post" id="deleteButton-${index}">Borrar</a>
@@ -80,7 +80,9 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
 
   sectionProfile.querySelectorAll('.drop_down').forEach((element) => {
     element.addEventListener('click', () => {
+      console.log(element.querySelector('.drop_down_content'));
       element.querySelector('.drop_down_content').classList.toggle('show');
+      console.log(element.outerHTML);
     });
   });
 
