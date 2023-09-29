@@ -132,7 +132,7 @@ export const getPost = async (idPost) => {
 };
 
 export const updatePost = async (idPost, content) => {
-  const postRef = collection(db, 'posts', idPost);
+  const postRef = doc(db, 'posts', idPost);
   await updateDoc(postRef, {
     content,
   });
