@@ -7,6 +7,7 @@ import {
   sendPasswordResetEmail,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
   updateProfile,
 } from 'firebase/auth';
 import {
@@ -40,6 +41,25 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider(app);
 const db = getFirestore(app);
+
+// Función para verificar si hay un usuario conectado
+// eslint-disable-next-line no-unused-vars
+const checkIfUserIsLoggedIn = (callback) => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Usuario conectado
+      callback(user);
+    } else {
+      // Usuario desconectado
+      callback(null);
+    }
+  });
+
+  // Devuelve la función unsubscribe para detener la escucha cuando sea necesario
+  return unsubscribe;
+};
+
+// Resto de tu código...
 
 export const signInWithEmail = async (email, password) => {
   try {

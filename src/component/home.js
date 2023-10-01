@@ -32,11 +32,11 @@ export const home = async (navigateTo) => {
   const buttonGoogle = document.createElement('button');
   // buttonGoogle.textContent('');
 
-  buttonGoogle.id = 'button_google';
-  buttonGoogle.appendChild(btnGoogle);
-
   const lineaIcon = document.createElement('img');
   lineaIcon.classList.add('img_linea');
+
+  buttonGoogle.id = 'button_google';
+  buttonGoogle.appendChild(btnGoogle);
 
   const buttonLogin = document.createElement('button');
   buttonLogin.classList.add('button_login');
@@ -49,7 +49,7 @@ export const home = async (navigateTo) => {
 
   logo.src = '../asset/icons/Logo.tripify.svg';
   lineaIcon.src = '../asset/icons/linea.icon.svg';
-  btnGoogle.src = '../asset/icons/btn_google_signin_light_normal_web@2x.png';
+  btnGoogle.src = '../asset/icons/g-logo.png';
 
   buttonLogin.textContent = 'Iniciar Sesión';
   buttonLogin.setAttribute('type', 'submit');
@@ -103,8 +103,8 @@ export const home = async (navigateTo) => {
     labelPass,
     inputPass,
     buttonLogin,
-    buttonGoogle,
     lineaIcon,
+    buttonGoogle,
     forgetPass,
     newAccount,
   );

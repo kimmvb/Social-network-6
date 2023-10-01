@@ -38,7 +38,7 @@ export const feed = async (navigateTo, getUserPhoto) => {
         </div>
       </header>
     <nav class="nav_container_up">
-      <div class="logout">
+      <div id="logout">
         <button class="btn_logout"> Cerrar Sesion</button>
       </div>
       <div class="buscador">

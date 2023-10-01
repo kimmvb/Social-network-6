@@ -43,14 +43,15 @@ async function navigateTo(hash) {
       window.location.origin + route.path,
     );
     const component = await route.component(navigateTo, getUserPhoto, getUserId, getUserName);
-    // Reemplaza el contenido de 'root' con el nuevo componente
     root.innerHTML = '';
+    console.log('angelo');
     root.appendChild(component);
   } else {
     navigateTo('/error');
   }
 }
 onAuthStateChanged(getAuth(), async (user) => {
+  console.log(user);
   if (user) {
     const id = user.uid;
     userId = id;
