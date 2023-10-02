@@ -298,7 +298,7 @@ a {
     height: 60px;
 }
 
-.logout {
+#logout {
     width: 68px;
     grid-area: 1/ 2;
     align-self: center;
@@ -310,10 +310,8 @@ a {
     border: 1px solid #cccc;
     font-size: 0.9rem;
     width: 126px;
-    margin-left: 22px;
     height: 25px;
-    background-color: #e86972;
-
+    background-color: #E86972;
     color: white;
 }
 
@@ -368,7 +366,6 @@ a {
     position: absolute;
     width: 75%;
     height: 53px;
-
 }
 
 .div_post {
@@ -399,7 +396,6 @@ a {
     margin: 0 0 0.5rem 0;
     color: #999;
     font-size: 0.9rem;
-
 }
 
 .container_text h3 {
@@ -416,7 +412,6 @@ a {
     font-size: 1.3rem;
     word-wrap: break-word;
     width: 300px;
-
 }
 
 .input-text-area {
@@ -427,8 +422,6 @@ a {
     width: 100%;
     overflow: hidden;
 }
-
-
 
 .container_text .input-text-area:focus,
 .container_text .input-text-area:active {
@@ -473,6 +466,8 @@ a {
 .post_small_container {
     display: flex;
     padding: 15px;
+    align-items: center;
+    justify-content: center;
 }
 
 #post_content {
@@ -509,6 +504,15 @@ a {
     width: 50%;
     align-self: flex-end;
     font-size: 1.1rem;
+}
+
+.icon_post {
+    align-self: flex-start;
+}
+
+#profile_photo_post {
+    border-radius: 50px;
+    width: 60px;
 }
 
 /* Section Profile*/
@@ -663,14 +667,10 @@ a {
     }
 
     .nav_container_up {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr;
+        grid-template-columns: 1fr 2fr;
     }
 
-    .buscador {
-        display: flex;
-        justify-content: center;
-    }
+
 
     #input_busqueda {
         border: 1px solid #F1B33C;
@@ -680,9 +680,14 @@ a {
         margin-left: 117px;
     }
 
-    .logout {
+    #logout {
         grid-area: 1/ 3;
-        margin-right: 100px;
+        margin-right: 180px;
+    }
+
+    .buscador {
+        grid-area: 1/ 2;
+        margin-left: 80px;
     }
 
     .grilla_form label {
@@ -729,5 +734,15 @@ a {
         font-size: 1.1rem;
         display: flex;
         justify-content: center;
+    }
+
+    #post_content {
+        width: 400px;
+        height: 200px;
+    }
+
+    #profile_photo_post {
+        border-radius: 50px;
+        width: 100px;
     }
 }
