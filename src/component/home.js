@@ -49,7 +49,7 @@ export const home = async (navigateTo) => {
 
   logo.src = '../asset/icons/Logo.tripify.svg';
   lineaIcon.src = '../asset/icons/linea.icon.svg';
-  btnGoogle.src = '../asset/icons/btn_google_signin_light_normal_web@2x.png';
+  btnGoogle.src = '../asset/icons/g-logo.png';
 
   buttonLogin.textContent = 'Iniciar Sesión';
   buttonLogin.setAttribute('type', 'submit');
