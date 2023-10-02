@@ -15,7 +15,7 @@ function createPost(navigateTo, getUserPhoto, getUserId) {
    <div class="post_small_container">
     <div class="icon_post"'
      <div class="profile_new_post">
-      <img src="${photoUrl}" alt="random image id="profile_photo_post" style="border-radius: 50px; width: 60px;">
+      <img src="${photoUrl}" alt="random image" id="profile_photo_post" >
     </div>
     <form id="post_form">
      <textarea id="post_content" placeholder="¿Dónde viajaste hoy? 💫" rows="6" cols="31" required></textarea>
