@@ -1,4 +1,5 @@
-function error(navigateTo) {
+// eslint-disable-next-line no-unused-vars
+function error(navigateTo, getUserPhoto, getUserId) {
   const section = document.createElement('section');
   section.classList.add('error_container');
 
@@ -14,10 +15,16 @@ function error(navigateTo) {
 
   title.textContent = 'Error 404: página no encontrada';
 
+  const userId = getUserId();
+
   backHome.textContent = 'Volver a inicio';
   backHome.addEventListener('click', (e) => {
     e.preventDefault();
-    navigateTo('/');
+    if (!userId) {
+      navigateTo('/');
+    } else {
+      navigateTo('/feed');
+    }
   });
 
   section.append(logo, title, backHome);

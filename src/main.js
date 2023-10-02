@@ -35,6 +35,7 @@ const defaultRoute = '/';
 const root = document.getElementById('root');
 
 async function navigateTo(hash) {
+  console.log('Navegando a la ruta:', hash);
   const route = routes.find((routeFound) => routeFound.path === hash);
   if (route && route.component) {
     window.history.pushState(
@@ -42,28 +43,47 @@ async function navigateTo(hash) {
       route.path,
       window.location.origin + route.path,
     );
-    const component = await route.component(navigateTo, getUserPhoto, getUserId, getUserName);
-    root.innerHTML = '';
-    console.log('angelo');
-    root.appendChild(component);
+    while (root.firstChild) {
+      root.removeChild(root.firstChild);
+    }
+    root.appendChild(await route.component(navigateTo, getUserPhoto, getUserId, getUserName));
   } else {
     navigateTo('/error');
   }
 }
+
 onAuthStateChanged(getAuth(), async (user) => {
   console.log(user);
   if (user) {
+    console.log('Usuario autenticado');
     const id = user.uid;
     userId = id;
     const photo = user.photoURL;
     userPhoto = photo;
     const name = user.displayName;
     userName = name;
-    navigateTo(window.location.pathname);
+    const allowedRoutes = ['/feed', '/profile', '/create_post'];
+    const currentRoute = window.location.pathname;
+
+    if (allowedRoutes.includes(currentRoute)) { /* empty */ } else if (currentRoute === '/error') {
+      navigateTo('/error');
+    } else {
+      navigateTo('/feed');
+    }
   } else {
-    navigateTo(defaultRoute);
+    console.log('Usuario no autenticado, redirigiendo a inicio de sesión');
+    const currentRoute = window.location.pathname;
+    const allowedRoutes = ['/', '/new_account', '/forget_password'];
+
+    if (allowedRoutes.includes(currentRoute)) { /* empty */ } else if (currentRoute === '/error') {
+      navigateTo('/error');
+    } else {
+      await new Promise((resolve) => setTimeout(resolve, 2500));
+      navigateTo('/');
+    }
   }
 });
+
 window.onpopstate = () => {
   navigateTo(window.location.pathname);
 };

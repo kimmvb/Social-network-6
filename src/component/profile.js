@@ -47,8 +47,8 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
     HTMLPosts += postElement.innerHTML;
   });
 
-  const userName = getUserName();
-  const userPhoto = getUserPhoto();
+  const userName = await getUserName();
+  const userPhoto = await getUserPhoto();
   const photoUrl = userPhoto || '../asset/icons/user-circle.png';
 
   const divProfile = `
