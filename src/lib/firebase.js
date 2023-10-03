@@ -63,7 +63,8 @@ const checkIfUserIsLoggedIn = (callback) => {
 
 export const signInWithEmail = async (email, password) => {
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    const response = await signInWithEmailAndPassword(auth, email, password);
+    sessionStorage.setItem('userId', response.user.uid);
     sessionStorage.setItem('loggedEmail', email);
   } catch (error) {
     throw new Error(error);
@@ -73,6 +74,7 @@ export const signInWithEmail = async (email, password) => {
 export const singInWithGoogle = async () => {
   try {
     const response = await signInWithPopup(auth, provider);
+    sessionStorage.setItem('userId', response.user.uid);
     sessionStorage.setItem('loggedEmail', response.user.email);
     await setDoc(doc(db, 'users', response.user.uid), {
       name: response.user.displayName,
@@ -111,6 +113,7 @@ export const createAccount = async (name, email, password) => {
 
 export const userSignOut = async () => {
   signOut(auth).then(() => {
+    sessionStorage.removeItem('userId');
     sessionStorage.removeItem('loggedEmail');
   }).catch((error) => {
     throw new Error(error);
@@ -174,27 +177,29 @@ export const deletePost = async (postId, userId) => {
   }
 };
 
-// Función para eliminar un post por el userId
-/* async function deletePostByUserId(userId) {
-  try {
-    // Realiza una consulta para encontrar un post con el userId proporcionado
-    const querySnapshot =
-    await getDocs(query(collection(db, 'posts'), where('userId', '==', userId)));
-
-    // Verifica si se encontró un post
-    if (!querySnapshot.empty) {
-      // Obtiene el primer post encontrado
-      const postDoc = querySnapshot.docs[0];
-      const postId = postDoc.id;
-
-      // Elimina el post utilizando el postId
-      await deleteDoc(doc(db, 'posts', postId));
-
-      console.log('El post se ha eliminado correctamente.');
-    } else {
-      console.log('No se encontró ningún post para el usuario.');
-    }
-  } catch (error) {
-    console.error('Error al eliminar el post:', error);
+export const likePost = async (postId, userId) => {
+  const likeRef = doc(db, 'likes', postId);
+  const likesSnapshot = await getDoc(likeRef);
+  if (likesSnapshot.exists()) {
+    likesSnapshot.forEach((element) => {
+      if (element.userId === userId) {
+        // eliminar el like de firebase
+        deleteDoc(likeRef);
+      } else {
+        // guarda en firebase
+        const addLike = collection(db, 'likes');
+        addDoc(addLike, {
+          userId,
+          postId,
+        });
+      }
+    });
+  } else {
+    // guarda en firebase
+    const addLike = collection(db, 'likes');
+    addDoc(addLike, {
+      userId,
+      postId,
+    });
   }
-} */
+};

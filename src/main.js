@@ -65,7 +65,6 @@ async function navigateTo(hash) {
   }
 }
 onAuthStateChanged(getAuth(), async (user) => {
-  console.log(user);
   if (user) {
     console.log('Usuario autenticado');
     const id = user.uid;
@@ -75,6 +74,7 @@ onAuthStateChanged(getAuth(), async (user) => {
     const name = user.displayName;
     userName = name;
   } else {
+    sessionStorage.removeItem('userId');
     sessionStorage.removeItem('loggedEmail');
   }
 });

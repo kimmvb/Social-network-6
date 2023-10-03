@@ -1,11 +1,12 @@
-import { userSignOut, getPosts } from '../lib/firebase';
+import { userSignOut, getPosts, likePost } from '../lib/firebase';
 
-export const feed = async (navigateTo, getUserPhoto) => {
+export const feed = async (navigateTo, getUserPhoto, getUserId) => {
   document.body.classList.add('no-bg');
   const sectionFeed = document.createElement('section');
   sectionFeed.classList.add('feed_section');
   let HTMLPosts = '';
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const userId = await getUserId();
   const posts = await getPosts();
   posts.forEach((post) => {
     const photoUrl = post.photo || '../asset/icons/user-circle.png';
@@ -21,7 +22,8 @@ export const feed = async (navigateTo, getUserPhoto) => {
         <h4>${post.creationDate.toDate().toLocaleDateString('es-CL', options)}</h4>
         <p>${post.content}</p>
       </div>
-    </div>`;
+      <i class="fa-regular fa-star fa-md like_star" style="color: #2f3032;cursor:pointer;" data-idpost="${post.id}"></i>
+  </div>`;
   });
 
   const userPhoto = getUserPhoto();
@@ -69,8 +71,15 @@ export const feed = async (navigateTo, getUserPhoto) => {
     }
   });
 
-  sectionFeed.querySelector('i').addEventListener('click', () => {
+  sectionFeed.querySelector('i.fa-circle-plus').addEventListener('click', () => {
     navigateTo('/create_post');
+  });
+
+  sectionFeed.querySelectorAll('i.like_star').forEach((element) => {
+    element.addEventListener('click', () => {
+      const postId = element.getAttribute('data-idpost');
+      likePost(postId, userId);
+    });
   });
 
   return sectionFeed;
