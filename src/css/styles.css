@@ -66,12 +66,6 @@ label {
     margin-bottom: 40px;
 }
 
-.grilla_form input:focus {
-    border: 1px solid #F1B33C !important;
-    outline: none !important;
-    box-shadow: 0 0 10px #F1B33C;
-}
-
 .grilla_form input {
     border-radius: 12px;
     height: 40px;
@@ -207,6 +201,12 @@ label {
     margin-top: 10px;
 }
 
+
+.grilla_form input:focus {
+    border: 1px solid #F1B33C !important;
+    outline: none !important;
+    box-shadow: 0 0 10px #F1B33C;
+}
 
 /* Section New Account*/
 
@@ -699,6 +699,7 @@ a {
     width: 50%;
     align-self: flex-end;
     font-size: 1.1rem;
+    cursor: pointer;
 }
 
 .icon_post {
@@ -886,7 +887,8 @@ a {
 
     .buscador {
         grid-area: 1/2;
-        margin-left: 80px;
+        margin-left: 60px;
+        width: 360px;
     }
 
     .grilla_form label {

@@ -15,12 +15,10 @@ let userPhoto = '';
 function getUserPhoto() {
   return userPhoto;
 }
-
 let userName = '';
 function getUserName() {
   return userName;
 }
-
 const routes = [
   { path: '/', component: home },
   { path: '/error', component: error },
@@ -30,28 +28,42 @@ const routes = [
   { path: '/create_post', component: createPost },
   { path: '/profile', component: profile },
 ];
-
 const defaultRoute = '/';
 const root = document.getElementById('root');
-
 async function navigateTo(hash) {
-  console.log('Navegando a la ruta:', hash);
   const route = routes.find((routeFound) => routeFound.path === hash);
-  if (route && route.component) {
-    window.history.pushState(
-      {},
-      route.path,
-      window.location.origin + route.path,
-    );
-    while (root.firstChild) {
-      root.removeChild(root.firstChild);
+  const allowedRoutes = ['/new_account', '/error', '/forget_password', '/'];
+  if (allowedRoutes.includes(hash)) {
+    if (route && route.component) {
+      window.history.pushState(
+        {},
+        route.path,
+        window.location.origin + route.path,
+      );
+      while (root.firstChild) {
+        root.removeChild(root.firstChild);
+      }
+      root.appendChild(await route.component(navigateTo, getUserPhoto, getUserId, getUserName));
+    } else {
+      navigateTo('/error');
     }
-    root.appendChild(await route.component(navigateTo, getUserPhoto, getUserId, getUserName));
   } else {
-    navigateTo('/error');
+    console.log(sessionStorage.getItem('loggedEmail'));
+    if (sessionStorage.getItem('loggedEmail') !== null) {
+      window.history.pushState(
+        {},
+        route.path,
+        window.location.origin + route.path,
+      );
+      while (root.firstChild) {
+        root.removeChild(root.firstChild);
+      }
+      root.appendChild(await route.component(navigateTo, getUserPhoto, getUserId, getUserName));
+    } else {
+      navigateTo(defaultRoute);
+    }
   }
 }
-
 onAuthStateChanged(getAuth(), async (user) => {
   console.log(user);
   if (user) {
@@ -62,30 +74,11 @@ onAuthStateChanged(getAuth(), async (user) => {
     userPhoto = photo;
     const name = user.displayName;
     userName = name;
-    const allowedRoutes = ['/feed', '/profile', '/create_post'];
-    const currentRoute = window.location.pathname;
-
-    if (allowedRoutes.includes(currentRoute)) { /* empty */ } else if (currentRoute === '/error') {
-      navigateTo('/error');
-    } else {
-      navigateTo('/feed');
-    }
   } else {
-    console.log('Usuario no autenticado, redirigiendo a inicio de sesión');
-    const currentRoute = window.location.pathname;
-    const allowedRoutes = ['/', '/new_account', '/forget_password'];
-
-    if (allowedRoutes.includes(currentRoute)) { /* empty */ } else if (currentRoute === '/error') {
-      navigateTo('/error');
-    } else {
-      await new Promise((resolve) => setTimeout(resolve, 2500));
-      navigateTo('/');
-    }
+    sessionStorage.removeItem('loggedEmail');
   }
 });
-
 window.onpopstate = () => {
   navigateTo(window.location.pathname);
 };
-
 navigateTo(window.location.pathname || defaultRoute);

@@ -5,16 +5,45 @@ describe('Error', () => {
     expect(typeof error).toBe('function');
   });
   it('should return a HTML element', () => {
-    expect(error()).toBeInstanceOf(HTMLElement);
+    const navigateTo = jest.fn();
+    const getUserPhoto = jest.fn();
+    const getUserId = jest.fn();
+    expect(error(navigateTo, getUserPhoto, getUserId)).toBeInstanceOf(HTMLElement);
   });
   it('should return a section element with a class name called "error_container"', () => {
-    expect(error().className).toBe('error_container');
+    const navigateTo = jest.fn();
+    const getUserPhoto = jest.fn();
+    const getUserId = jest.fn();
+    expect(error(navigateTo, getUserPhoto, getUserId).className).toBe('error_container');
   });
-  it('should navigate to "/" when click "Volver a inicio"', () => {
-    const navigateToMock = jest.fn();
-    const section = error(navigateToMock);
+  it('should navigate to "/" when there is not an user ID present', () => {
+    const navigateTo = jest.fn();
+    const getUserPhoto = jest.fn();
+    const getUserId = jest.fn();
+    const section = error(navigateTo, getUserPhoto, getUserId);
+
+    const root = document.createElement('div');
+    root.id = 'root';
+    root.appendChild(section);
+    document.body.appendChild(root);
+
     const backHome = section.querySelector('button');
     backHome.click();
-    expect(navigateToMock).toHaveBeenCalledWith('/');
+    expect(navigateTo).toHaveBeenCalledWith('/');
+  });
+  it('should navigate to "/feed" when there is an user ID present', () => {
+    const navigateTo = jest.fn();
+    const getUserPhoto = jest.fn();
+    const getUserId = jest.fn().mockResolvedValue('id-del-usuario');
+    const section = error(navigateTo, getUserPhoto, getUserId);
+
+    const root = document.createElement('div');
+    root.id = 'root';
+    root.appendChild(section);
+    document.body.appendChild(root);
+
+    const backHome = section.querySelector('button');
+    backHome.click();
+    expect(navigateTo).toHaveBeenCalledWith('/feed');
   });
 });
