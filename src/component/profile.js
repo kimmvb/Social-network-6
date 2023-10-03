@@ -1,3 +1,4 @@
+import swal from 'sweetalert';
 import { getPosts, deletePost, updatePost } from '../lib/firebase';
 
 export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) => {
@@ -8,11 +9,8 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
   const userId = await getUserId();
-  console.log(userId);
   const posts = await getPosts();
-  console.log(posts);
   const currentUserPosts = posts.filter((post) => post.userId === userId);
-  console.log(currentUserPosts);
 
   currentUserPosts.forEach((post, index) => {
     const photoUrl = post.photo || '../asset/icons/user-circle.png';
@@ -85,20 +83,9 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
 
   sectionProfile.querySelectorAll('.drop_down').forEach((element) => {
     element.addEventListener('click', () => {
-      // console.log(element.querySelector('.drop_down_content'));
       element.querySelector('.drop_down_content').classList.toggle('show');
-      // console.log(element.outerHTML);
     });
   });
-  // const pruebaShow = (element) => {
-  //   const dropElement = element.querySelector('.drop_down_content').classList.toggle('show');
-  //   return dropElement.classList.contains('show');
-  // };
-  // sectionProfile.querySelectorAll('.drop_down').forEach((element) => {
-  //   element.addEventListener('click', () =>
-  //     pruebaShow(element),
-  //   );
-  // });
 
   sectionProfile.addEventListener('click', (event) => {
     if (!event.target.classList.contains('fa-ellipsis-vertical')) {
@@ -121,7 +108,6 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
       sectionProfile.querySelector('.button-edit').addEventListener('click', (e) => {
         e.preventDefault();
         updatePost(element.getAttribute('data-id'), sectionProfile.querySelector(textAreaEdit).value).then(() => {
-          // eslint-disable-next-line no-undef
           swal({
             title: 'Perfecto!',
             text: 'El post fue editado con exito',
@@ -131,7 +117,6 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
           sectionProfile.querySelector(containerButtons).style.display = 'none';
           sectionProfile.querySelector(textAreaEdit).setAttribute('readonly', true);
         }, () => {
-          // eslint-disable-next-line no-undef
           swal({
             title: 'Ups!',
             text: 'El post no pudo ser editado',
@@ -154,7 +139,6 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
     const target = event.target;
     if (target.classList.contains('delete_post')) {
       const index = target.id.split('-')[1];
-      // eslint-disable-next-line no-undef
       swal({
         title: '¿Estás seguro?',
         text: 'Una vez eliminado, no podrás recuperar este post',
@@ -167,7 +151,6 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
             deletePost(currentUserPosts[index].id, currentUserPosts[index].userId)
               .then(() => {
                 console.log(`Éxito: El post ${currentUserPosts[index].id} se ha eliminado correctamente.`);
-                // eslint-disable-next-line no-undef
                 swal('!Poof! !Tu post fue eliminado', {
                   icon: 'success',
                 })
@@ -179,7 +162,6 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
                 console.error(`Error al eliminar el post ${currentUserPosts[index].id}:`, error);
               });
           } else {
-            // eslint-disable-next-line no-undef
             swal('!Tu post está guardado!');
           }
         });

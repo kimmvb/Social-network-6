@@ -87,11 +87,11 @@ function newAccount(navigateTo) {
 
       try {
         // await createAccount(inputUserName.value, inputEmail.value, inputPass.value);
-        console.log(await createAccount(inputUserName.value, inputEmail.value, inputPass.value));
+        await createAccount(inputUserName.value, inputEmail.value, inputPass.value);
         navigateTo('/');
       } catch (error) {
         // eslint-disable-next-line no-alert
-        alert(`No se ha podido crear el usuario ${error.message}`);
+        alert('No se ha podido crear el usuario');
       }
     } else {
       // eslint-disable-next-line no-alert

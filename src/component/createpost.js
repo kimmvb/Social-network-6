@@ -36,7 +36,6 @@ function createPost(navigateTo, getUserPhoto, getUserId) {
 
     const content = sectionPost.querySelector('#post_content').value;
     const userId = getUserId();
-    console.log(userId);
 
     if (content.trim() !== '') {
       await newPost(userId, content);

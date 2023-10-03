@@ -59,12 +59,13 @@ export const feed = async (navigateTo, getUserPhoto) => {
     navigateTo('/profile');
   });
 
-  sectionFeed.getElementsByClassName('btn_logout')[0].addEventListener('click', () => {
+  sectionFeed.getElementsByClassName('btn_logout')[0].addEventListener('click', async () => {
     try {
-      userSignOut();
+      await userSignOut();
       navigateTo('/');
     } catch (error) {
-      throw new Error(error);
+      // throw new Error(error);
+      alert('No se ha podido cerrar sesión');
     }
   });
 

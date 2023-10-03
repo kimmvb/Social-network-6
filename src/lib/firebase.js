@@ -44,15 +44,16 @@ const db = getFirestore(app);
 export const signInWithEmail = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
+    sessionStorage.setItem('loggedEmail', email);
   } catch (error) {
     throw new Error(error);
   }
 };
-
 // funcion que ejecuta el login con google, muestra el pop up de gmail
 export const singInWithGoogle = async () => {
   try {
     const response = await signInWithPopup(auth, provider);
+    sessionStorage.setItem('loggedEmail', response.user.email);
     await setDoc(doc(db, 'users', response.user.uid), {
       name: response.user.displayName,
       email: response.user.email,
@@ -72,9 +73,7 @@ export const createAccount = async (name, email, password) => {
   try {
     const response = await createUserWithEmailAndPassword(auth, email, password);
     const user = response.user;
-
     await updateProfile(user, { displayName: name });
-
     await setDoc(doc(db, 'users', user.uid), {
       name,
       email,
@@ -92,8 +91,7 @@ export const createAccount = async (name, email, password) => {
 
 export const userSignOut = async () => {
   signOut(auth).then(() => {
-    // eslint-disable-next-line no-console
-    console.log('User signed out');
+    sessionStorage.removeItem('loggedEmail');
   }).catch((error) => {
     throw new Error(error);
   });
