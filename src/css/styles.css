@@ -659,6 +659,10 @@ a {
     background-color: #fff;
 }
 
+.star-filled {
+    color: #bdbd3f !important;
+}
+
 /* Section Create Post*/
 
 .nav_post {

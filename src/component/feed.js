@@ -1,15 +1,22 @@
-import { userSignOut, getPosts, likePost } from '../lib/firebase';
+import { userSignOut, getPosts, likePost, getLikes } from '../lib/firebase';
 
-export const feed = async (navigateTo, getUserPhoto, getUserId) => {
+export const feed = async (navigateTo, getUserPhoto) => {
   document.body.classList.add('no-bg');
   const sectionFeed = document.createElement('section');
   sectionFeed.classList.add('feed_section');
   let HTMLPosts = '';
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  const userId = await getUserId();
   const posts = await getPosts();
+  const likes = await getLikes();
   posts.forEach((post) => {
     const photoUrl = post.photo || '../asset/icons/user-circle.png';
+    const hasLike = likes.find((like) => like.postId === post.id);
+    let starFilledClass = 'fa-regular';
+    let idLikeFirebase = '';
+    if (hasLike !== undefined) {
+      starFilledClass = 'fa-solid star-filled';
+      idLikeFirebase = hasLike.id;
+    }
     HTMLPosts += `
     <div class="div_post">
       <div class="icon_perfil">
@@ -22,7 +29,8 @@ export const feed = async (navigateTo, getUserPhoto, getUserId) => {
         <h4>${post.creationDate.toDate().toLocaleDateString('es-CL', options)}</h4>
         <p>${post.content}</p>
       </div>
-      <i class="fa-regular fa-star fa-md like_star" style="color: #2f3032;cursor:pointer;" data-idpost="${post.id}"></i>
+      <i class="fa-star fa-md like_star ${starFilledClass}"
+      style="color: #2f3032;cursor:pointer;" data-idpost="${post.id}" data-idfirebase="${idLikeFirebase}"></i>
   </div>`;
   });
 
@@ -77,8 +85,14 @@ export const feed = async (navigateTo, getUserPhoto, getUserId) => {
 
   sectionFeed.querySelectorAll('i.like_star').forEach((element) => {
     element.addEventListener('click', () => {
-      const postId = element.getAttribute('data-idpost');
-      likePost(postId, userId);
+      element.classList.toggle('star-filled');
+      element.classList.toggle('fa-regular');
+      element.classList.toggle('fa-solid');
+      likePost(
+        element.getAttribute('data-idpost'),
+        sessionStorage.getItem('userId'),
+        element.getAttribute('data-idfirebase'),
+      );
     });
   });
 

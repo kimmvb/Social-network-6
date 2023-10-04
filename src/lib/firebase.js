@@ -177,29 +177,25 @@ export const deletePost = async (postId, userId) => {
   }
 };
 
-export const likePost = async (postId, userId) => {
-  const likeRef = doc(db, 'likes', postId);
-  const likesSnapshot = await getDoc(likeRef);
-  if (likesSnapshot.exists()) {
-    likesSnapshot.forEach((element) => {
-      if (element.userId === userId) {
-        // eliminar el like de firebase
-        deleteDoc(likeRef);
-      } else {
-        // guarda en firebase
-        const addLike = collection(db, 'likes');
-        addDoc(addLike, {
-          userId,
-          postId,
-        });
-      }
-    });
-  } else {
-    // guarda en firebase
+export const likePost = async (postId, userId, id) => {
+  if (id === '') {
     const addLike = collection(db, 'likes');
     addDoc(addLike, {
       userId,
       postId,
     });
+  } else {
+    deleteDoc(doc(db, 'likes', id));
   }
+};
+
+export const getLikes = async () => {
+  const likeRef = collection(db, 'likes');
+  const q = query(likeRef, where('userId', '==', sessionStorage.getItem('userId')));
+  const querySnapshot = await getDocs(q);
+  const likes = [];
+  querySnapshot.forEach((document) => {
+    likes.push({ id: document.id, ...document.data() });
+  });
+  return likes;
 };
