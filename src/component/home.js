@@ -32,11 +32,11 @@ export const home = async (navigateTo) => {
   const buttonGoogle = document.createElement('button');
   // buttonGoogle.textContent('');
 
-  buttonGoogle.id = 'button_google';
-  buttonGoogle.appendChild(btnGoogle);
-
   const lineaIcon = document.createElement('img');
   lineaIcon.classList.add('img_linea');
+
+  buttonGoogle.id = 'button_google';
+  buttonGoogle.appendChild(btnGoogle);
 
   const buttonLogin = document.createElement('button');
   buttonLogin.classList.add('button_login');

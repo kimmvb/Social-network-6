@@ -1,14 +1,22 @@
-import { userSignOut, getPosts } from '../lib/firebase';
+import { userSignOut, getPosts, likePost, getLikes } from '../lib/firebase';
 
 export const feed = async (navigateTo, getUserPhoto) => {
   document.body.classList.add('no-bg');
   const sectionFeed = document.createElement('section');
   sectionFeed.classList.add('feed_section');
   let HTMLPosts = '';
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
   const posts = await getPosts();
+  const likes = await getLikes();
   posts.forEach((post) => {
     const photoUrl = post.photo || '../asset/icons/user-circle.png';
+    const hasLike = likes.find((like) => like.postId === post.id);
+    let starFilledClass = 'fa-regular';
+    let idLikeFirebase = '';
+    if (hasLike !== undefined) {
+      starFilledClass = 'fa-solid star-filled';
+      idLikeFirebase = hasLike.id;
+    }
     HTMLPosts += `
     <div class="div_post">
       <div class="icon_perfil">
@@ -21,7 +29,9 @@ export const feed = async (navigateTo, getUserPhoto) => {
         <h4>${post.creationDate.toDate().toLocaleDateString('es-CL', options)}</h4>
         <p>${post.content}</p>
       </div>
-    </div>`;
+      <i class="fa-star fa-md like_star ${starFilledClass}"
+      style="color: #F1B33C;;cursor:pointer;" id="like_star" data-idpost="${post.id}" data-idfirebase="${idLikeFirebase}"></i>
+  </div>`;
   });
 
   const userPhoto = getUserPhoto();
@@ -48,7 +58,7 @@ export const feed = async (navigateTo, getUserPhoto) => {
       <main id="main_feed">${HTMLPosts}</main>
     </div>
 
-    <i class="fa-solid fa-circle-plus fa-4x" id="add_post" style="color: #f1b33c;"></i>
+    <i class="fa-solid fa-circle-plus fa-3x" id="add_post" style="color: #f1b33c;"></i>
 
     <footer>
     </footer>`;
@@ -69,8 +79,21 @@ export const feed = async (navigateTo, getUserPhoto) => {
     }
   });
 
-  sectionFeed.querySelector('i').addEventListener('click', () => {
+  sectionFeed.querySelector('i.fa-circle-plus').addEventListener('click', () => {
     navigateTo('/create_post');
+  });
+
+  sectionFeed.querySelectorAll('i.like_star').forEach((element) => {
+    element.addEventListener('click', () => {
+      element.classList.toggle('star-filled');
+      element.classList.toggle('fa-regular');
+      element.classList.toggle('fa-solid');
+      likePost(
+        element.getAttribute('data-idpost'),
+        sessionStorage.getItem('userId'),
+        element.getAttribute('data-idfirebase'),
+      );
+    });
   });
 
   return sectionFeed;

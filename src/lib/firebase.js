@@ -7,6 +7,7 @@ import {
   sendPasswordResetEmail,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
   updateProfile,
 } from 'firebase/auth';
 import {
@@ -41,9 +42,29 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider(app);
 const db = getFirestore(app);
 
+// Función para verificar si hay un usuario conectado
+// eslint-disable-next-line no-unused-vars
+const checkIfUserIsLoggedIn = (callback) => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Usuario conectado
+      callback(user);
+    } else {
+      // Usuario desconectado
+      callback(null);
+    }
+  });
+
+  // Devuelve la función unsubscribe para detener la escucha cuando sea necesario
+  return unsubscribe;
+};
+
+// Resto de tu código...
+
 export const signInWithEmail = async (email, password) => {
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    const response = await signInWithEmailAndPassword(auth, email, password);
+    sessionStorage.setItem('userId', response.user.uid);
     sessionStorage.setItem('loggedEmail', email);
   } catch (error) {
     throw new Error(error);
@@ -53,6 +74,7 @@ export const signInWithEmail = async (email, password) => {
 export const singInWithGoogle = async () => {
   try {
     const response = await signInWithPopup(auth, provider);
+    sessionStorage.setItem('userId', response.user.uid);
     sessionStorage.setItem('loggedEmail', response.user.email);
     await setDoc(doc(db, 'users', response.user.uid), {
       name: response.user.displayName,
@@ -91,6 +113,7 @@ export const createAccount = async (name, email, password) => {
 
 export const userSignOut = async () => {
   signOut(auth).then(() => {
+    sessionStorage.removeItem('userId');
     sessionStorage.removeItem('loggedEmail');
   }).catch((error) => {
     throw new Error(error);
@@ -154,27 +177,25 @@ export const deletePost = async (postId, userId) => {
   }
 };
 
-// Función para eliminar un post por el userId
-/* async function deletePostByUserId(userId) {
-  try {
-    // Realiza una consulta para encontrar un post con el userId proporcionado
-    const querySnapshot =
-    await getDocs(query(collection(db, 'posts'), where('userId', '==', userId)));
-
-    // Verifica si se encontró un post
-    if (!querySnapshot.empty) {
-      // Obtiene el primer post encontrado
-      const postDoc = querySnapshot.docs[0];
-      const postId = postDoc.id;
-
-      // Elimina el post utilizando el postId
-      await deleteDoc(doc(db, 'posts', postId));
-
-      console.log('El post se ha eliminado correctamente.');
-    } else {
-      console.log('No se encontró ningún post para el usuario.');
-    }
-  } catch (error) {
-    console.error('Error al eliminar el post:', error);
+export const likePost = async (postId, userId, id) => {
+  if (id === '') {
+    const addLike = collection(db, 'likes');
+    addDoc(addLike, {
+      userId,
+      postId,
+    });
+  } else {
+    deleteDoc(doc(db, 'likes', id));
   }
-} */
+};
+
+export const getLikes = async () => {
+  const likeRef = collection(db, 'likes');
+  const q = query(likeRef, where('userId', '==', sessionStorage.getItem('userId')));
+  const querySnapshot = await getDocs(q);
+  const likes = [];
+  querySnapshot.forEach((document) => {
+    likes.push({ id: document.id, ...document.data() });
+  });
+  return likes;
+};

@@ -74,6 +74,7 @@ onAuthStateChanged(getAuth(), async (user) => {
     const name = user.displayName;
     userName = name;
   } else {
+    sessionStorage.removeItem('userId');
     sessionStorage.removeItem('loggedEmail');
   }
 });
