@@ -574,10 +574,10 @@ a {
 
 #like_star {
     display: flex;
-    align-items: baseline;
     flex-direction: row-reverse;
-    margin-right: 15px;
     padding-bottom: 10px;
+    margin-right: 16px;
+
 }
 
 
@@ -600,11 +600,10 @@ a {
 .container_text h4 {
     margin: 0 0 0.5rem 0;
     color: #999;
-    font-size: 0.9rem;
+    font-size: 12px;
 }
 
 .container_text h3 {
-    margin: 0 0 1rem 0;
     font-size: 1.1rem;
     letter-spacing: 0.5px;
     color: #333;
@@ -626,6 +625,7 @@ a {
     min-height: 100px;
     width: 100%;
     overflow: hidden;
+    font-size: 1.2rem;
 }
 
 .container_text .input-text-area:focus,
@@ -660,7 +660,7 @@ a {
 }
 
 .star-filled {
-    color: #bdbd3f !important;
+    color: #F1B33C !important;
 }
 
 /* Section Create Post*/
@@ -686,14 +686,13 @@ a {
 #add_post {
     position: fixed;
     cursor: pointer;
-    width: 60px;
-    height: 47px;
+    height: 46px;
     background: #FFF;
     right: 0;
     bottom: 5px;
-    margin-right: 12px;
-    margin-bottom: 30px;
-    border-radius: 30px;
+    border-radius: 30px 30px 30px 30px;
+    border: #F1B33C 1px solid;
+    transform: translate(-10px, -26px);
 }
 
 #post_form {
@@ -741,6 +740,10 @@ a {
     background-color: #834af48c;
 }
 
+#go_back {
+    color: #636060;
+}
+
 .nav_profile i {
     margin-top: 12px;
 }
@@ -775,12 +778,12 @@ a {
 
 #current_user_name {
     align-items: center;
-    font-size: large;
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 1.2rem;
     font-family: 'Lato', sans-serif;
     margin-bottom: 12px;
     margin-top: 12px;
-    color: var(--var_fontgeneral);
+    color: #636060;
 }
 
 .perfil_post {
@@ -798,7 +801,7 @@ a {
     justify-content: center;
     align-items: center;
     border-radius: 100px;
-    color: var(--var_fontgeneral)
+    color: #636060;
 }
 
 #myDropdown {
@@ -926,6 +929,11 @@ a {
 
     .container_text p {
         width: 500px;
+        font-size: 1.1rem;
+    }
+
+    .container_text h3 {
+        font-size: 0.9rem;
     }
 
     /* Estilo botones & input Desktop*/
@@ -946,6 +954,25 @@ a {
     .forget_password {
         font-size: 1.1rem;
     }
+
+    #like_star {
+        display: flex;
+        flex-direction: column-reverse;
+        padding-bottom: 10px;
+        margin-right: 16px;
+    }
+
+    #add_post {
+        position: fixed;
+        cursor: pointer;
+        height: 46px;
+        background: #FFF;
+        right: 0;
+        bottom: 5px;
+        border-radius: 30px 30px 30px 30px;
+        border: #F1B33C 1px solid;
+        transform: translate(-90px, -30px);
+    }
 }
 
 @media (900px < width < 1200px) {
@@ -962,5 +989,4 @@ a {
         width: 12%;
         object-fit: cover;
     }
-
 }

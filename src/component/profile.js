@@ -52,7 +52,7 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
   const divProfile = `
     <div class="container_profile">
       <nav class="nav_profile">
-       <i class="fa-solid fa-arrow-left fa-xl" style="color: #35285a; cursor: pointer;" id="go_back"></i>
+       <i class="fa-solid fa-arrow-left fa-xl" style="color: #636060; cursor: pointer;" id="go_back"></i>
       </nav>
       <div class="edit_profile">
        <div>
@@ -68,7 +68,7 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
     </div>
   <main id="main_feed">${HTMLPosts}</main>
 </div>
-  <i class="fa-solid fa-circle-plus fa-4x" id="add_post" style="color: #f1b33c;"></i>
+  <i class="fa-solid fa-circle-plus fa-3x" id="add_post" style="color: #f1b33c;"></i>
 <footer></footer>`;
 
   sectionProfile.innerHTML = divProfile;

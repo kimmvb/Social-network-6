@@ -5,7 +5,7 @@ export const feed = async (navigateTo, getUserPhoto) => {
   const sectionFeed = document.createElement('section');
   sectionFeed.classList.add('feed_section');
   let HTMLPosts = '';
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
   const posts = await getPosts();
   const likes = await getLikes();
   posts.forEach((post) => {
@@ -30,7 +30,7 @@ export const feed = async (navigateTo, getUserPhoto) => {
         <p>${post.content}</p>
       </div>
       <i class="fa-star fa-md like_star ${starFilledClass}"
-      style="color: #2f3032;cursor:pointer;" data-idpost="${post.id}" data-idfirebase="${idLikeFirebase}"></i>
+      style="color: #F1B33C;;cursor:pointer;" id="like_star" data-idpost="${post.id}" data-idfirebase="${idLikeFirebase}"></i>
   </div>`;
   });
 
@@ -58,7 +58,7 @@ export const feed = async (navigateTo, getUserPhoto) => {
       <main id="main_feed">${HTMLPosts}</main>
     </div>
 
-    <i class="fa-solid fa-circle-plus fa-4x" id="add_post" style="color: #f1b33c;"></i>
+    <i class="fa-solid fa-circle-plus fa-3x" id="add_post" style="color: #f1b33c;"></i>
 
     <footer>
     </footer>`;
