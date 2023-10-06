@@ -8,3 +8,5 @@ export const getPosts = jest.fn();
 export const getPost = jest.fn();
 export const updatePost = jest.fn();
 export const deletePost = jest.fn();
+export const likePost = jest.fn();
+export const getLikes = jest.fn();
