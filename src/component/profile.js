@@ -156,7 +156,7 @@ export const profile = async (navigateTo, getUserPhoto, getUserId, getUserName) 
                   icon: 'success',
                 })
                   .then(() => {
-                    window.location.reload();
+                    navigateTo('/profile');
                   });
               })
               .catch((error) => {
