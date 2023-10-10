@@ -57,7 +57,7 @@ function forgetPass(navigateTo) {
 
   buttonSendEmail.textContent = 'Enviar';
 
-  formEmail.addEventListener('submit', async (e) => {
+  buttonSendEmail.addEventListener('click', async (e) => {
     e.preventDefault();
     const finalEmail = email.value;
     resetEmail(finalEmail)
