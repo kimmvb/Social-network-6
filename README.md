@@ -127,4 +127,3 @@ https://github.com/kimmvb/Social-network-6/assets/137528066/940c2427-21ce-4361-b
 - Limitar la navegación para el usuario activo.
 - Añadir funcionalidad a barra de búsqueda.
 
-
